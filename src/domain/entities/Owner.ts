@@ -1,9 +1,9 @@
 import { UserProps, UserType } from "./User";
 
-export type AdminProps = UserProps;
+export type OwnerProps = UserProps;
 
-export class Admin {
-    public readonly role: typeof UserType.ADMIN;
+export class Owner {
+    public readonly role: typeof UserType.OWNER;
     public readonly id: string;
     public readonly name: string;
     public readonly username: string;
@@ -14,8 +14,7 @@ export class Admin {
     public readonly updatedAt: Date;
     public readonly isEmailVerified: boolean;
 
-    constructor(props: AdminProps) {
-        this.role = UserType.ADMIN;
+    constructor(props: OwnerProps) {
         this.id = props.id;
         this.name = props.name;
         this.username = props.username;
@@ -25,6 +24,6 @@ export class Admin {
         this.createdAt = props.createdAt;
         this.updatedAt = props.updatedAt;
         this.isEmailVerified = props.isEmailVerified;
-
+        this.role = UserType.OWNER;
     }
 }
