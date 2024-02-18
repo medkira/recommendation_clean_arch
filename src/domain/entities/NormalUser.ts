@@ -24,8 +24,6 @@ export class NormalUser {
     public readonly createdAt: Date;
     public readonly updatedAt: Date;
     public readonly isEmailVerified: boolean;
-
-
     public readonly gender: boolean;
     public readonly age: number;
     public readonly zone: string;
