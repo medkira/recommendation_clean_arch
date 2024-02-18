@@ -19,10 +19,10 @@
     "express": "^4.18.2",
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.2",
-    "socket.io": "^4.7.4",
-    "typescript": "^5.3.3"
+    "socket.io": "^4.7.4"
   },
   "devDependencies": {
-    "tsx": "^4.7.1"
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3"
   }
 }
