@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const adminSchema = new Schema({
+  id: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
@@ -37,8 +41,9 @@ const adminSchema = new Schema({
     type: String,
     required: true,
   },
+  // Add any other admin-specific properties here
 });
 
-const adminModel = mongoose.model("admin", adminSchema);
+const adminModel = mongoose.model("Admin", adminSchema);
 
 export default adminModel;

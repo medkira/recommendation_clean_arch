@@ -7,13 +7,7 @@ const placeSchema = new Schema({
   type: {
     type: String,
     required: true,
-    enum: [
-      placeType.cafe,
-      placeType.cafeRestaurant,
-      placeType.restaurant,
-      placeType.adventure,
-      placeType.hotel,
-    ],
+    enum: [placeType.cafe, placeType.cafeRestaurant, placeType.restaurant],
     default: placeType.restaurant,
   },
 
@@ -32,8 +26,14 @@ const placeSchema = new Schema({
     required: true,
   },
 
+  Menu: {
+    type: String,
+    required: true,
+  },
+
   foods: {
-    type: Number,
+    type: mongoose.Schema.ObjectId,
+    ref: "food",
     required: true,
   },
 
