@@ -1,6 +1,9 @@
+import { Place, PlaceProps } from "./Place";
 import { UserProps, UserType } from "./User";
 
-export type OwnerProps = UserProps;
+export type OwnerProps = UserProps & {
+    places: PlaceProps[];
+}
 
 export class Owner {
     public readonly role: typeof UserType.OWNER;
@@ -14,6 +17,7 @@ export class Owner {
     public readonly updatedAt: Date;
     public readonly isEmailVerified: boolean;
 
+    public readonly places: Place[];
     constructor(props: OwnerProps) {
         this.id = props.id;
         this.name = props.name;
@@ -25,5 +29,6 @@ export class Owner {
         this.updatedAt = props.updatedAt;
         this.isEmailVerified = props.isEmailVerified;
         this.role = UserType.OWNER;
+        this.places = props.places;
     }
 }

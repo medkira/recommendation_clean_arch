@@ -1,6 +1,5 @@
-import { NormalUser, NormalUserProps } from "@domain/entities/NormalUser";
-import { Owner, OwnerProps } from "@domain/entities/Owner";
-import { UserProps } from "@domain/entities/User";
+import { NormalUserProps } from "@domain/entities/NormalUser";
+import { OwnerProps } from "@domain/entities/Owner";
 
 export interface LoadUserIdByEmailRepository {
     loadUserIdByEmail(
