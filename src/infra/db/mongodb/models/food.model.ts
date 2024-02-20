@@ -3,10 +3,6 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const foodSchema = new Schema({
-  id: {
-    type: Number,
-    required: true,
-  },
   name: {
     type: String,
     required: true,
@@ -19,13 +15,8 @@ const foodSchema = new Schema({
     type: Number,
     required: true,
   },
-  foodId: {
-    type: Number,
-    required: true,
-  },
-  belongsTo: {
-    type: mongoose.Schema.ObjectId,
-    ref: "Place",
+  place_id: {
+    type: String,
     required: true,
   },
 });
