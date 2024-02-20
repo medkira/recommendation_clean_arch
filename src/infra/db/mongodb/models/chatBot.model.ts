@@ -3,24 +3,20 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const chatBotSchema = new Schema({
-  id: {
-    type: String,
-  },
-  question: {
-    type: String,
-    required: true,
-  },
-  answer: {
-    type: String,
-    required: true,
-  },
   client_id: {
-    type: mongoose.Schema.ObjectId,
+    type: String,
     required: true,
-    ref: "user",
+  },
+  conversationsHistory: {
+    type: Number,
+    default: 0,
+  },
+  suggestedPlans: {
+    type: Number,
+    default: 0,
   },
 });
 
-const chatBotModel = mongoose.model("Chats", chatBotSchema);
+const chatBotModel = mongoose.model("Chatbot", chatBotSchema);
 
 export default chatBotModel;
