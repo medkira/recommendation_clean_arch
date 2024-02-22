@@ -1,3 +1,3 @@
 export interface JWTGenerator {
-  generate(payload: string): Promise<string>;
+  generate(payload: any): Promise<string>;
 }

@@ -1,12 +1,12 @@
 import { Place, PlaceProps } from "./Place";
-import { UserProps, UserType } from "./User";
+import { UserProps, UserRole } from "./User";
 
 export type OwnerProps = UserProps & {
     places: PlaceProps[];
 }
 
 export class Owner {
-    public readonly role: typeof UserType.OWNER;
+    public readonly role: UserRole;
     public readonly id: string;
     public readonly name: string;
     public readonly username: string;
@@ -28,7 +28,7 @@ export class Owner {
         this.createdAt = props.createdAt;
         this.updatedAt = props.updatedAt;
         this.isEmailVerified = props.isEmailVerified;
-        this.role = UserType.OWNER;
+        this.role = props.role;
         this.places = props.places;
     }
 }

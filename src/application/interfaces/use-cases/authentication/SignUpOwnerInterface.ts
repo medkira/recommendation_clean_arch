@@ -1,4 +1,4 @@
-import { OwnerProps } from "@domain/entities/Owner";
+import { Owner, OwnerProps } from "@domain/entities/Owner";
 import { UseCase } from "../UseCase";
 import { EmailInUseError } from "@application/errors/EmailInUseError";
 
@@ -8,6 +8,6 @@ export interface SignUpOwnerInterface extends UseCase<SignUpOwnerInterface.Reque
 
 
 export namespace SignUpOwnerInterface {
-    export type Request = Omit<OwnerProps, 'id' | 'createdAt' | 'updatedAt'>
-    export type Response = Pick<OwnerProps, 'id'> | EmailInUseError;
+    export type Request = Omit<Owner, 'id' | 'createdAt' | 'updatedAt' | 'isEmailVerified'>;
+    export type Response = Pick<Owner, 'id'> | EmailInUseError;
 }

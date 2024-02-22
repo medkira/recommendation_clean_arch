@@ -4,6 +4,7 @@ export type UserProps = {
     name: string;
     username: string;
     email: string;
+    role: UserRole;
     phoneNumber: string;
     password: string;
     createdAt: Date;
@@ -11,8 +12,13 @@ export type UserProps = {
     isEmailVerified: boolean;
 };
 
-export const UserType = {
-    NORMAL: 'normal',
-    ADMIN: 'admin',
-    OWNER: 'owner',
-} as const;
+// export const UserType = {
+//     NORMAL: 'normal',
+//     ADMIN: 'admin',
+//     OWNER: 'owner',
+// } as const;
+export enum UserRole {
+    NORMAL = 'normal',
+    ADMIN = 'admin',
+    OWNER = 'owner',
+}

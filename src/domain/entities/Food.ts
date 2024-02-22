@@ -26,3 +26,5 @@ export class Food {
         this.belongsTo = props.belongsTo;
     }
 }
+
+

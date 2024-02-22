@@ -3,9 +3,9 @@ import { JWTVerifier } from "@application/interfaces/cryptography/JWTVerifier.js
 import jwt from "jsonwebtoken";
 
 export class JWTAdapter implements JWTGenerator, JWTVerifier {
-  constructor(private readonly secret: string) {}
+  constructor(private readonly secret: string) { }
 
-  async generate(payload: string): Promise<string> {
+  async generate(payload: any): Promise<string> {
     return jwt.sign(payload, this.secret);
   }
 

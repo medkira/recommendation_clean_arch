@@ -1,4 +1,4 @@
-import { UserProps, UserType } from "./User";
+import { UserProps, UserRole } from "./User";
 
 export type NormalUserProps = UserProps & {
     gender: boolean;
@@ -14,7 +14,7 @@ export type NormalUserProps = UserProps & {
 };
 
 export class NormalUser {
-    public readonly role: typeof UserType.NORMAL;
+    public readonly role: UserRole;
     public readonly id: string;
     public readonly name: string;
     public readonly username: string;
@@ -36,7 +36,7 @@ export class NormalUser {
     public readonly parent: boolean;
 
     constructor(props: NormalUserProps) {
-        this.role = UserType.NORMAL;
+        this.role = props.role;
         this.id = props.id;
         this.name = props.name;
         this.username = props.username;

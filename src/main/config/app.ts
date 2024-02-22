@@ -7,9 +7,9 @@ export const setupApp = (): Express => {
     const app = express();
     // ? put anything that the express will use
     setupSocket(app);
+    setupMiddleware(app);
     setupRoutes(app);
 
-    setupMiddleware(app);
 
     return app;
 }

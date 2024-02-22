@@ -22,11 +22,6 @@ const placeSchema = new Schema({
     required: true,
   },
 
-  rate: {
-    type: Number,
-    required: true,
-  },
-
   location: {
     type: String,
     required: true,

@@ -81,6 +81,10 @@ const normalUserSchema = new Schema({
     type: String,
     required: false,
   },
+  isEmailVerified: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const normalUserModel = mongoose.model("normalUser", normalUserSchema);

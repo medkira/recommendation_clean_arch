@@ -11,10 +11,6 @@ const foodSchema = new Schema({
     type: Number,
     required: true,
   },
-  rate: {
-    type: Number,
-    required: true,
-  },
   place_id: {
     type: String,
     required: true,
@@ -24,3 +20,4 @@ const foodSchema = new Schema({
 const foodModel = mongoose.model("food", foodSchema);
 
 export default foodModel;
+

@@ -31,7 +31,7 @@ const ownerSchema = new Schema({
   },
   isEmailVerified: {
     type: Boolean,
-    required: true,
+    default: false,
   },
   role: {
     type: String,
@@ -42,6 +42,6 @@ const ownerSchema = new Schema({
   },
 });
 
-const adminModel = mongoose.model("owner", ownerSchema);
+const ownerModel = mongoose.model("owner", ownerSchema);
 
-export default adminModel;
+export default ownerModel;

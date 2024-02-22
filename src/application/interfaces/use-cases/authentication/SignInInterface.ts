@@ -9,5 +9,5 @@ export interface SignInInterface extends UseCase<SignInInterface.Request, SignIn
 
 export namespace SignInInterface {
     export type Request = Pick<UserProps, 'email' | 'password'>  // { email: string, password: string };
-    export type Response = Pick<UserProps, 'id'> | UnauthorizedError;
+    export type Response = string | UnauthorizedError;
 }

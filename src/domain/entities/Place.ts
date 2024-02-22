@@ -4,7 +4,6 @@ export type PlaceProps = {
     id: number;
     type: string;
     name: string;
-    rate: number;
     location: string;
     menu: string;
     foods: Food[]; // Assuming Food is a type representing food items
@@ -16,7 +15,6 @@ export class Place {
     public readonly id: number;
     public readonly type: string;
     public readonly name: string;
-    public readonly rate: number;
     public readonly location: string;
     public readonly menu: string;
     public readonly foods: Food[]; // Assuming Food is a type representing food items
@@ -27,7 +25,6 @@ export class Place {
         this.id = props.id;
         this.type = props.type;
         this.name = props.name;
-        this.rate = props.rate;
         this.location = props.location;
         this.menu = props.menu;
         this.foods = props.foods;
