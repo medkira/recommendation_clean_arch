@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { placeType } from "../const/placeType";
+import { placeTypes } from "../const/placeTypes";
 const { Schema } = mongoose;
 
 const postSchema = new Schema({
@@ -24,14 +24,14 @@ const postSchema = new Schema({
     type: String,
     enum: {
       values: [
-        placeType.adventure,
-        placeType.cafe,
-        placeType.cafeRestaurant,
-        placeType.hotel,
-        placeType.restaurant,
+        placeTypes.adventure,
+        placeTypes.cafe,
+        placeTypes.cafeRestaurant,
+        placeTypes.hotel,
+        placeTypes.restaurant,
       ],
     },
-    default: placeType.restaurant,
+    default: placeTypes.restaurant,
     required: true,
   },
   likes: {
