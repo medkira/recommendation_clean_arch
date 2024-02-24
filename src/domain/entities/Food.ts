@@ -1,30 +1,38 @@
-import { Place } from './Place'; // Assuming Place is another entity or type definition
-
 export type FoodProps = {
-    id: number;
+    id: string;
+    place_id: string;
     name: string;
     price: number;
-    rate: number;
-    foodId: number;
-    belongsTo: Place; // Assuming Place is the type representing a place
+    // food_type: foodTypes;
 };
 
 export class Food {
-    public readonly id: number;
+    public readonly id: string;
+    public readonly place_id: string;
     public readonly name: string;
     public readonly price: number;
-    public readonly rate: number;
-    public readonly foodId: number;
-    public readonly belongsTo: Place; // Assuming Place is the type representing a place
-
+    // public readonly food_type: foodTypes;
     constructor(props: FoodProps) {
         this.id = props.id;
+        this.place_id = props.place_id;
         this.name = props.name;
         this.price = props.price;
-        this.rate = props.rate;
-        this.foodId = props.foodId;
-        this.belongsTo = props.belongsTo;
+        // this.food_type = props.food_type;
     }
 }
 
 
+
+// we can remove the food type , but how the user will find something he want like
+// spaghetti e.g , we can do that with the search.
+// => search in the databse withh all food name thats have e.g spaghetti.
+
+export enum foodTypes {
+    Appetizer = 'Appetizer',
+    MainCourse = 'Main Course',
+    Dessert = 'Dessert',
+    Beverage = 'Beverage',
+    // Add more food types as needed
+}
+// we can add more attribute here like drink , sweets etc..
+// this could help when the user talk to the chat bot

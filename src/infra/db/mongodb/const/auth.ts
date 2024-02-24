@@ -1,4 +1,5 @@
-export const authorizationRoles = {
-  owner: "owner",
-  user: "user",
-};
+export enum UserRole {
+  NORMAL = 'normal',
+  ADMIN = 'admin',
+  OWNER = 'owner',
+}
