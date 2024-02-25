@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const menuSchema = new Schema({
-  foods_id: {
-    type: [String],
+  food_ids: {
+    type: String,
     required: true,
   },
   place_id: {

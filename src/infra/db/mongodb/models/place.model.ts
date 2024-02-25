@@ -27,11 +27,6 @@ const placeSchema = new Schema({
     required: true,
   },
 
-  foods: {
-    type: Number,
-    required: true,
-  },
-
   description: {
     type: String,
     required: true,
@@ -42,6 +37,8 @@ const placeSchema = new Schema({
     required: true,
   },
 });
+
+
 
 const placeModel = mongoose.model("place", placeSchema);
 

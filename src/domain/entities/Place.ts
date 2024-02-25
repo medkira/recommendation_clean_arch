@@ -1,23 +1,17 @@
-import { Food } from "./Food"; // Assuming Food is another entity or type definition
-
 export type PlaceProps = {
   id: string;
-  type: string;
   name: string;
+  type: placeTypes;
   location: string;
-  menu: string;
-  foods: Food[]; // Assuming Food is a type representing food items
   description: string;
   url: string;
 };
 
 export class Place {
   public readonly id: string;
-  public readonly type: string;
   public readonly name: string;
+  public readonly type: placeTypes;
   public readonly location: string;
-  public readonly menu: string;
-  public readonly foods: Food[]; // Assuming Food is a type representing food items
   public readonly description: string;
   public readonly url: string;
 
@@ -26,9 +20,18 @@ export class Place {
     this.type = props.type;
     this.name = props.name;
     this.location = props.location;
-    this.menu = props.menu;
-    this.foods = props.foods;
     this.description = props.description;
     this.url = props.url;
+    this.type = props.type;
   }
 }
+
+
+export enum placeTypes {
+  restaurant = "restaurant",
+  cafeRestaurant = "cafeRestaurant",
+  cafe = "cafe",
+  hotel = "hotel",
+  adventure = "adventure",
+};
+

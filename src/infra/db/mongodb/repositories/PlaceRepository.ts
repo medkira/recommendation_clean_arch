@@ -11,21 +11,22 @@ import {
   stringToObjectId,
 } from "../helpers/mappers";
 import { isValidObjectId } from "mongoose";
-import { placeTypes } from "../const/placeTypes";
+
+
+
 export class PlaceRepository
   implements
-    CreatePlaceRepository,
-    GetPlaceByIdRepository,
-    UpdatePlaceRepository,
-    GetPlaceByTypeRepository,
-    DeletePlaceRepository
-{
+  CreatePlaceRepository,
+  GetPlaceByIdRepository,
+  UpdatePlaceRepository,
+  GetPlaceByTypeRepository,
+  DeletePlaceRepository {
+
+
   async getPlaceByType(
     placeType: GetPlaceByTypeRepository.Request
   ): Promise<GetPlaceByTypeRepository.Response> {
-    if (!Object.values(placeTypes).includes(placeType as any)) {
-      return null;
-    }
+
     const rawplace = await placeModel.findOne(placeType);
     return rawplace && mapDocument(rawplace);
   }
