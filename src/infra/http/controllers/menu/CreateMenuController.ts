@@ -8,13 +8,16 @@ import { GetFoodByIdInterface } from "@application/interfaces/use-cases/foods/Ge
 import { PlaceNotFoundError } from "@application/errors/PlaceNotFoundError";
 import { FoodNotFoundError } from "@application/errors/FoodNotFoundError";
 import { ok, notFound } from "@infra/http/helpers/https";
+import { Food } from "@domain/entities/Food";
+import { CreateFoodInterface } from "@application/interfaces/use-cases/foods/CreateFoodInterface";
 
 export class CreateMenuController extends BaseController {
   constructor(
     private readonly createMenuValidation: Validation,
     private readonly getPlaceById: GetPlaceByIdInterface,
     private readonly getFoodsById: GetFoodByIdInterface,
-    private readonly createMenu: CreateMenuInterface
+    private readonly createMenu: CreateMenuInterface,
+    private readonly createFood: CreateFoodInterface,
   ) {
     super(createMenuValidation);
   }
@@ -22,28 +25,36 @@ export class CreateMenuController extends BaseController {
   async execute(
     httpRequest: CreateMenuController.Request
   ): Promise<CreateMenuController.Response> {
-    const { place_id, foods_id } = httpRequest.body!;
+
+    const { place_id, foods } = httpRequest.body!;
 
     const placeOrError = await this.getPlaceById.execute({ id: place_id });
+
     if (placeOrError instanceof PlaceNotFoundError) {
       return notFound(placeOrError);
     }
 
-    for (let food_id in foods_id) {
-      let food = await this.getFoodsById.execute({ id: food_id });
-      if (food instanceof FoodNotFoundError) {
-        return notFound(food);
-      }
-    }
+    let food_ids: string[] = [];
 
-    const id = await this.createMenu.execute({ place_id, foods_id });
+
+    foods.forEach(async (food) => {
+
+      let food_id = await this.createFood.execute(food);
+
+      food_ids.push(food_id);
+
+    });
+
+    const id = await this.createMenu.execute({ place_id, food_ids });
 
     return ok({ id });
   }
 }
 
 export namespace CreateMenuController {
-  export type Request = HttpRequest<CreateMenuInterface.Request>;
+  // export type Request = HttpRequest<CreateMenuInterface.Request>;
+  export type Request = HttpRequest<{ place_id: string, foods: Pick<Food, 'name' | 'price'>[] }>
+
   export type Response = HttpResponse<
     { MenuId: string } | PlaceNotFoundError | FoodNotFoundError
   >;
