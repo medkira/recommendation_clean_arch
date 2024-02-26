@@ -15,7 +15,7 @@ export class FoodRepository
     });
     const savedFood = await food.save();
     const foodId = objectIdToString(savedFood._id);
-    return { id: foodId };
+    return foodId;
   }
   async getFoodById(
     FoodId: GetFoodByIdRepository.Request

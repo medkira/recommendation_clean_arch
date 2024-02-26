@@ -1,3 +1,4 @@
+import { PlaceNotFoundError } from "@application/errors/PlaceNotFoundError";
 import { Place, PlaceProps } from "@domain/entities/Place";
 
 export interface GetPlaceByIdRepository {
@@ -8,5 +9,5 @@ export interface GetPlaceByIdRepository {
 
 export namespace GetPlaceByIdRepository {
   export type Request = Pick<PlaceProps, "id">;
-  export type Response = Place | null;
+  export type Response = Place | PlaceNotFoundError;
 }
