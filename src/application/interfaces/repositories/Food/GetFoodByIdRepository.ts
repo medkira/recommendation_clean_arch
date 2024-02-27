@@ -9,5 +9,5 @@ export interface GetFoodByIdRepository {
 
 export namespace GetFoodByIdRepository {
   export type Request = Pick<FoodProps, "id">;
-  export type Response = Food | FoodNotFoundError | null;
+  export type Response = Food | null;
 }

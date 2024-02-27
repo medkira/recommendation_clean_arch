@@ -8,6 +8,6 @@ export interface GetPlaceByIdRepository {
 }
 
 export namespace GetPlaceByIdRepository {
-  export type Request = Pick<PlaceProps, "id">;
-  export type Response = Place | PlaceNotFoundError;
+  export type Request = string;
+  export type Response = Place | null;
 }
