@@ -1,11 +1,17 @@
-import { PostProps } from "@domain/entities/Post.js";
-import { UseCase } from "../UseCase.js";
+import { PostProps } from "@domain/entities/Post";
+import { UseCase } from "../UseCase";
 
-export interface CreatePostInterface extends UseCase<CreatePostInterface.Request, CreatePostInterface.Response> {
-    execute(postData: CreatePostInterface.Request): Promise<CreatePostInterface.Response>;
+export interface CreatePostInterface
+  extends UseCase<CreatePostInterface.Request, CreatePostInterface.Response> {
+  execute(
+    postData: CreatePostInterface.Request
+  ): Promise<CreatePostInterface.Response>;
 }
 
 export namespace CreatePostInterface {
-    export type Request = Omit<PostProps, 'id' | 'totalComments' | 'createdAt' | 'updatedAt'>
-    export type Response = string;
+  export type Request = Omit<
+    PostProps,
+    "id" | "totalComments" | "createdAt" | "updatedAt"
+  >;
+  export type Response = string;
 }

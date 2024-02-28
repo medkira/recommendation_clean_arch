@@ -6,6 +6,8 @@ export class CreateMenu implements CreateMenuInterface {
   async execute(
     MenuData: CreateMenuInterface.Request
   ): Promise<CreateMenuInterface.Response> {
-    return this.CreateMenuRepository.createMenu(MenuData);
+    return this.CreateMenuRepository.createMenu({
+      ...MenuData,
+    });
   }
 }

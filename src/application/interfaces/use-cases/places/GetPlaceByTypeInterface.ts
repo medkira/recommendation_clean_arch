@@ -1,5 +1,6 @@
 import { PlaceProps, Place } from "@domain/entities/Place";
 import { UseCase } from "../UseCase";
+import { PlaceNotFoundError } from "@application/errors/PlaceNotFoundError";
 
 export interface GetPlaceByTypeInterface
   extends UseCase<
@@ -12,6 +13,6 @@ export interface GetPlaceByTypeInterface
 }
 
 export namespace GetPlaceByTypeInterface {
-  export type Request = Pick<PlaceProps, "type">;
+  export type Request = string;
   export type Response = Place | null;
 }

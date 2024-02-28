@@ -1,5 +1,6 @@
 export type PlaceProps = {
   id: string;
+  user_id: string;
   name: string;
   type: placeTypes;
   location: string;
@@ -9,6 +10,7 @@ export type PlaceProps = {
 
 export class Place {
   public readonly id: string;
+  public readonly user_id: string;
   public readonly name: string;
   public readonly type: placeTypes;
   public readonly location: string;
@@ -17,15 +19,14 @@ export class Place {
 
   constructor(props: PlaceProps) {
     this.id = props.id;
-    this.type = props.type;
+    this.user_id = props.user_id;
     this.name = props.name;
+    this.type = props.type;
     this.location = props.location;
     this.description = props.description;
     this.url = props.url;
-    this.type = props.type;
   }
 }
-
 
 export enum placeTypes {
   restaurant = "restaurant",
@@ -33,5 +34,4 @@ export enum placeTypes {
   cafe = "cafe",
   hotel = "hotel",
   adventure = "adventure",
-};
-
+}

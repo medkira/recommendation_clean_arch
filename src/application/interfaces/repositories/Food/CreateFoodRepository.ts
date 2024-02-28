@@ -10,3 +10,4 @@ export namespace CreateFoodRepository {
     export type Response = string;
 
 }
+

@@ -20,20 +20,6 @@ const postSchema = new Schema({
     type: String,
     required: true,
   },
-  category: {
-    type: String,
-    enum: {
-      values: [
-        placeTypes.adventure,
-        placeTypes.cafe,
-        placeTypes.cafeRestaurant,
-        placeTypes.hotel,
-        placeTypes.restaurant,
-      ],
-    },
-    default: placeTypes.restaurant,
-    required: true,
-  },
   likes: {
     type: Number,
     required: true,

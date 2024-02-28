@@ -3,7 +3,7 @@ import { DeletePlaceRepository } from "@application/interfaces/repositories/plac
 import { GetPlaceByIdRepository } from "@application/interfaces/repositories/place/GetPlaceByIdRepository";
 import { UpdatePlaceRepository } from "@application/interfaces/repositories/place/UpdatePlaceRepository";
 import { GetPlaceByTypeRepository } from "@application/interfaces/repositories/place/GetPlaceByTypeRepository";
-import { Place } from "@domain/entities/Place";
+import { Place, PlaceProps, placeTypes } from "@domain/entities/Place";
 import placeModel from "../models/place.model";
 import {
   mapDocument,
@@ -12,22 +12,19 @@ import {
 } from "../helpers/mappers";
 import { isValidObjectId } from "mongoose";
 
-
-
 export class PlaceRepository
   implements
-  CreatePlaceRepository,
-  GetPlaceByIdRepository,
-  UpdatePlaceRepository,
-  GetPlaceByTypeRepository,
-  DeletePlaceRepository {
-
-
+    CreatePlaceRepository,
+    GetPlaceByIdRepository,
+    UpdatePlaceRepository,
+    GetPlaceByTypeRepository,
+    DeletePlaceRepository
+{
   async getPlaceByType(
     placeType: GetPlaceByTypeRepository.Request
   ): Promise<GetPlaceByTypeRepository.Response> {
-
-    const rawplace = await placeModel.findOne(placeType);
+    console.log("hhhhhhhh");
+    const rawplace = await placeModel.findOne({ type: placeType });
     return rawplace && mapDocument(rawplace);
   }
 

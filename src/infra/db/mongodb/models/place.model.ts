@@ -38,8 +38,6 @@ const placeSchema = new Schema({
   },
 });
 
-
-
 const placeModel = mongoose.model("place", placeSchema);
 
 export default placeModel;

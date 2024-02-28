@@ -10,7 +10,7 @@ export interface UpdatePlaceInterface
 }
 
 export namespace UpdatePlaceInterface {
-  export type placeDataType = Omit<PlaceProps, "id">;
+  export type placeDataType = Omit<PlaceProps, "id" | "user_id">;
   export type Request = {
     placeId: string;
     placeData: placeDataType;
