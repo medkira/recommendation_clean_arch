@@ -1,13 +1,10 @@
-import { FoodNotFoundError } from "@application/errors/FoodNotFoundError";
-import { FoodProps, Food } from "@domain/entities/Food";
+import { Food } from "@domain/entities/Food";
 
 export interface GetFoodByIdRepository {
-  getFoodById(
-    FoodId: GetFoodByIdRepository.Request
-  ): Promise<GetFoodByIdRepository.Response>;
+    getFoodById(foodId: GetFoodByIdRepository.Request): Promise<GetFoodByIdRepository.Response>;
 }
 
 export namespace GetFoodByIdRepository {
-  export type Request = Pick<FoodProps, "id">;
-  export type Response = Food | null;
+    export type Request = string;
+    export type Response = Food | null;
 }

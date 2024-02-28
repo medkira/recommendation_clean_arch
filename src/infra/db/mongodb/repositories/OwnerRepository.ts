@@ -17,9 +17,7 @@ export class OwnerRepository implements CreateOwnerRepository, LoadOwnerByEmailR
             ...userData,
             createdAt: new Date(),
         });
-        console.log(user);
         const savedUser = await user.save();
-        console.log("hi")
         const userId = objectIdToString(savedUser._id);
 
         return { id: userId };
