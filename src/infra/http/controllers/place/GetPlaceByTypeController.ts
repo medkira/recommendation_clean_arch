@@ -4,7 +4,6 @@ import { BaseController } from "../BaseController";
 import { GetPlaceByTypeInterface } from "@application/interfaces/use-cases/places/GetPlaceByTypeInterface";
 import { PlaceNotFoundError } from "@application/errors/PlaceNotFoundError";
 import { notFound, ok } from "@infra/http/helpers/https";
-import { Place, placeTypes } from "@domain/entities/Place";
 
 export class GetPlaceByTypeController extends BaseController {
   constructor(private readonly getPlaceByType: GetPlaceByTypeInterface) {
@@ -15,7 +14,7 @@ export class GetPlaceByTypeController extends BaseController {
   ): Promise<GetPlaceByTypeController.Response> {
     const { type } = httpRequest.params!;
     console.log(type);
-    const placeOrError = await this.getPlaceByType.execute(type);
+    const placeOrError = await this.getPlaceByType.execute({ type });
     console.log(placeOrError);
     if (placeOrError instanceof PlaceNotFoundError) {
       return notFound(placeOrError);
@@ -26,7 +25,7 @@ export class GetPlaceByTypeController extends BaseController {
 
 export namespace GetPlaceByTypeController {
   export type Request = HttpRequest<
-    GetPlaceByTypeInterface.Request | undefined
+    undefined, GetPlaceByTypeInterface.Request
   >;
   export type Response = HttpResponse<
     GetPlaceByTypeInterface.Response | PlaceNotFoundError

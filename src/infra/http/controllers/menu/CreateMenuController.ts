@@ -28,7 +28,7 @@ export class CreateMenuController extends BaseController {
 
     const { place_id, foods } = httpRequest.body!;
 
-    const placeOrError = await this.getPlaceById.execute({ id: place_id });
+    const placeOrError = await this.getPlaceById.execute(place_id);
 
     if (placeOrError instanceof PlaceNotFoundError) {
       return notFound(placeOrError);
