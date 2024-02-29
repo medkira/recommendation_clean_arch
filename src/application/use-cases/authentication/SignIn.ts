@@ -43,7 +43,7 @@ export class SignIn implements SignInInterface {
             return new UnauthorizedError();
         }
 
-        return this.jwtGenerator.generate({ userId: user.id, role: user.role });
+        return this.jwtGenerator.generate({ userId: user.id, userRole: user.role });
     }
 
 }

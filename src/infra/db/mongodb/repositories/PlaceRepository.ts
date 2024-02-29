@@ -14,17 +14,17 @@ import { isValidObjectId } from "mongoose";
 
 export class PlaceRepository
   implements
-    CreatePlaceRepository,
-    GetPlaceByIdRepository,
-    UpdatePlaceRepository,
-    GetPlaceByTypeRepository,
-    DeletePlaceRepository
-{
+  CreatePlaceRepository,
+  GetPlaceByIdRepository,
+  UpdatePlaceRepository,
+  GetPlaceByTypeRepository,
+  DeletePlaceRepository {
+
   async getPlaceByType(
     placeType: GetPlaceByTypeRepository.Request
   ): Promise<GetPlaceByTypeRepository.Response> {
-    console.log("hhhhhhhh");
-    const rawplace = await placeModel.findOne({ type: placeType });
+    console.log(placeType);
+    const rawplace = await placeModel.findOne(placeType);
     return rawplace && mapDocument(rawplace);
   }
 

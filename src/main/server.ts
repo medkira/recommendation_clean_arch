@@ -5,7 +5,6 @@ dotenv.config({ path: 'src/main/config/env/.env' });
 
 const databaseUrl = process.env.DB_HOST;
 const port = process.env.PORT;
-console.log(databaseUrl)
 dbConnection.connect(databaseUrl!).then(() => {
     const app = setupApp();
     app.listen(port, () => {

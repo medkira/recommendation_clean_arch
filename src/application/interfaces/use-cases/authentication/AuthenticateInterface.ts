@@ -10,5 +10,5 @@ export interface AuthenticateInterface extends UseCase<AuthenticateInterface.Req
 
 export namespace AuthenticateInterface {
     export type Request = string;
-    export type Response = Pick<DecodedTokenProps, 'payload'> | ForbiddenError;
+    export type Response = Pick<DecodedToken, 'payload'> | ForbiddenError;
 }

@@ -7,6 +7,6 @@ export interface GetPlaceByTypeRepository {
 }
 
 export namespace GetPlaceByTypeRepository {
-  export type Request = string;
+  export type Request = Pick<PlaceProps, 'type'>;
   export type Response = Place | null;
 }

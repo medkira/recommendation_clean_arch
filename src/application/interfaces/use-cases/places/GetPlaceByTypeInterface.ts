@@ -13,6 +13,6 @@ export interface GetPlaceByTypeInterface
 }
 
 export namespace GetPlaceByTypeInterface {
-  export type Request = string;
-  export type Response = Place | null;
+  export type Request = Pick<PlaceProps, 'type'>;
+  export type Response = Place | PlaceNotFoundError;
 }

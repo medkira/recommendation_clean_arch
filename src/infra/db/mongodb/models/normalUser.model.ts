@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { authorizationRoles } from "../const/auth";
 import { gender } from "../const/gender";
 
 const { Schema } = mongoose;
@@ -54,7 +53,7 @@ const normalUserSchema = new Schema({
 
   profileImage: {
     type: String,
-    required: true,
+    required: false,
   },
 
   mobileNumber: {

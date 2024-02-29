@@ -2,7 +2,8 @@ import { HttpRequest } from "@infra/http/interfaces/http/HttpRequest";
 import { HttpResponse } from "@infra/http/interfaces/http/HttpResponse";
 import { BaseController } from "../BaseController"
 import { SignInInterface } from "@application/interfaces/use-cases/authentication/SignInInterface";
-import { ok } from "@infra/http/helpers/https";
+import { ok, unauthorized } from "@infra/http/helpers/https";
+import { UnauthorizedError } from "@application/errors/UnautorizedError";
 
 export class SignInController extends BaseController {
 
@@ -19,8 +20,8 @@ export class SignInController extends BaseController {
 
         const authenticationTokenOrError = await this.signIn.execute({ email, password });
 
-        if (authenticationTokenOrError instanceof Error) {
-            throw authenticationTokenOrError;
+        if (authenticationTokenOrError instanceof UnauthorizedError) {
+            return unauthorized(authenticationTokenOrError);
         }
         return ok({
             authenticationToken: authenticationTokenOrError
