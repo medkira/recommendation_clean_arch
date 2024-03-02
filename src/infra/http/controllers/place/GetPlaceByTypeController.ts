@@ -13,9 +13,10 @@ export class GetPlaceByTypeController extends BaseController {
     httpRequest: GetPlaceByTypeController.Request
   ): Promise<GetPlaceByTypeController.Response> {
     const { type } = httpRequest.params!;
-    console.log(type);
+
     const placeOrError = await this.getPlaceByType.execute({ type });
-    console.log(placeOrError);
+
+
     if (placeOrError instanceof PlaceNotFoundError) {
       return notFound(placeOrError);
     }

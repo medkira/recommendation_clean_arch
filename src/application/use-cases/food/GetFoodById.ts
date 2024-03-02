@@ -3,7 +3,7 @@ import { GetFoodByIdInterface } from "@application/interfaces/use-cases/foods/Ge
 import { GetFoodByIdRepository } from "@application/interfaces/repositories/Food/GetFoodByIdRepository";
 
 export class GetFoodById implements GetFoodByIdInterface {
-  constructor(private readonly GetFoodByIdRepository: GetFoodByIdRepository) {}
+  constructor(private readonly GetFoodByIdRepository: GetFoodByIdRepository) { }
   async execute(
     FoodId: GetFoodByIdInterface.Request
   ): Promise<GetFoodByIdInterface.Response> {
