@@ -3,27 +3,56 @@ import { DeletePlaceRepository } from "@application/interfaces/repositories/plac
 import { GetPlaceByIdRepository } from "@application/interfaces/repositories/place/GetPlaceByIdRepository";
 import { UpdatePlaceRepository } from "@application/interfaces/repositories/place/UpdatePlaceRepository";
 import { GetPlaceByTypeRepository } from "@application/interfaces/repositories/place/GetPlaceByTypeRepository";
-import { Place, PlaceProps, placeTypes } from "@domain/entities/Place";
 import placeModel from "../models/place.model";
 import {
+  mapCollection,
   mapDocument,
   objectIdToString,
   stringToObjectId,
 } from "../helpers/mappers";
 import { isValidObjectId } from "mongoose";
+import { GetLatestPlacesRepository } from "@application/interfaces/repositories/place/GetLatestPlacesRepository";
+import { paginateModel } from "../helpers/utils/pagination-util";
 
+import { Document } from 'mongoose';
+import { Place } from "@domain/entities/Place";
 export class PlaceRepository
   implements
   CreatePlaceRepository,
   GetPlaceByIdRepository,
   UpdatePlaceRepository,
   GetPlaceByTypeRepository,
-  DeletePlaceRepository {
+  DeletePlaceRepository,
+  GetLatestPlacesRepository {
+
+  async getLatestPlaces(params: GetLatestPlacesRepository.Request): Promise<GetLatestPlacesRepository.Response> {
+
+
+    return paginateModel(placeModel, params.page, params.paginationLimit, params.query);
+
+
+
+    // const { page, paginationLimit } = params;
+    // const offset = (page - 1) * paginationLimit;
+    // const rawPlaces = await placeModel
+    //   .find({})
+    //   .sort({ createdAt: -1 })
+    //   .skip(offset)
+    //   .limit(paginationLimit)
+    //   .exec()
+    // const places = mapCollection(rawPlaces);
+    // const total = await placeModel.countDocuments({});
+    // const totalPages = Math.ceil(total / paginationLimit);
+    // return {
+    //   data: places, page, total, totalPages,
+    // };
+  }
+
+
 
   async getPlaceByType(
     placeType: GetPlaceByTypeRepository.Request
   ): Promise<GetPlaceByTypeRepository.Response> {
-    console.log(placeType);
     const rawplace = await placeModel.findOne(placeType);
     return rawplace && mapDocument(rawplace);
   }
@@ -62,4 +91,6 @@ export class PlaceRepository
   async deletePlace(placeId: DeletePlaceRepository.Request): Promise<void> {
     await placeModel.findOneAndDelete(stringToObjectId(placeId));
   }
+
+
 }
