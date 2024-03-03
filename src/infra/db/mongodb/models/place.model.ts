@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
 import { placeTypes } from "../const/placeTypes";
+import { PlaceProps } from "@domain/entities/Place";
 
 const { Schema } = mongoose;
 
-const placeSchema = new Schema({
+const placeSchema = new Schema<PlaceProps>({
+
   type: {
     type: String,
     required: true,
