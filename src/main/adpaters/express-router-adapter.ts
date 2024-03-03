@@ -8,10 +8,12 @@ export const expressRouterAdapter = (
     const httpRequest: HttpRequest = {
         body: req.body,
         params: req.params,
+        query: req.query,
         headers: req.headers,
         userId: req.userId,
         userRole: req.userRole,
     }
+
 
     const httpResponse = await controller.handle(httpRequest);
 

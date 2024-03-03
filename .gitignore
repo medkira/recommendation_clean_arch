@@ -1,2 +1,5 @@
+
+src/main/config/env/.env
+src/main/config/env/process-env.d.ts
 node_modules/
-src/main/config/env
+

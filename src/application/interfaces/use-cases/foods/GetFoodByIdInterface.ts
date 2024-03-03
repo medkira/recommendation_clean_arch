@@ -10,6 +10,6 @@ export interface GetFoodByIdInterface
 }
 
 export namespace GetFoodByIdInterface {
-  export type Request = Pick<FoodProps, "id">;
+  export type Request = string;
   export type Response = Food | FoodNotFoundError;
 }
