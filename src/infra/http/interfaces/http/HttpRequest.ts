@@ -1,10 +1,11 @@
 import { UserRole } from "@domain/entities/User";
 
-export type HttpRequest<TBody = any, TParams = any, TQuery = any, THeaders = any> = {
+export type HttpRequest<TBody = any, TParams = any, TQuery = any, THeaders = any, TFiles = any> = {
     body?: TBody;
     params?: TParams;
     query?: TQuery,
     headers?: THeaders;
+    files?: TFiles;
     userId?: string;
     userRole?: UserRole;
 };

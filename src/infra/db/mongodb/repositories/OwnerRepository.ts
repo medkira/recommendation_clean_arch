@@ -12,7 +12,7 @@ export class OwnerRepository implements CreateOwnerRepository, LoadOwnerByEmailR
     }
 
     async createOwner(userData: CreateOwnerRepository.Request): Promise<CreateOwnerRepository.Response> {
-
+        // console.log(userData);
         const user = new ownerModel({
             ...userData,
             createdAt: new Date(),

@@ -1,6 +1,6 @@
 import { Place, PlaceProps } from "./Place";
 import { UserProps, UserRole } from "./User";
-
+import { FileType } from "@domain/entities/File";
 export type OwnerProps = UserProps & {
     places: PlaceProps[];
 }
@@ -10,6 +10,8 @@ export class Owner {
     public readonly id: string;
     public readonly name: string;
     public readonly username: string;
+    public readonly image: FileType[] | string; // ! need to fix this.
+
     public readonly email: string;
     public readonly phoneNumber: string;
     public readonly password: string;
@@ -22,6 +24,8 @@ export class Owner {
         this.id = props.id;
         this.name = props.name;
         this.username = props.username;
+        this.image = props.image
+
         this.email = props.email;
         this.phoneNumber = props.phoneNumber;
         this.password = props.password;

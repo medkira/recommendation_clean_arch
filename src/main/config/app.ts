@@ -2,9 +2,11 @@ import express, { Express } from "express";
 import { setupSocket } from "./socket";
 import { setupRoutes } from "./routes";
 import { setupMiddleware } from "./middleware";
+import bodyParser from "body-parser";
 
 export const setupApp = (): Express => {
     const app = express();
+
     // ? put anything that the express will use
     setupSocket(app);
     setupMiddleware(app);

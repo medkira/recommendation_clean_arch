@@ -11,6 +11,9 @@ const ownerSchema = new Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: Array
+  },
   email: {
     type: String,
     required: true,

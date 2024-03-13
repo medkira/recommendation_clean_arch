@@ -5,6 +5,7 @@ export type UserProps = {
     username: string;
     email: string;
     role: UserRole;
+    image: Express.Multer.File[] | string; // ! need to fix this
     phoneNumber: string;
     password: string;
     createdAt: Date;

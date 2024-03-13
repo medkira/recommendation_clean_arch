@@ -7,7 +7,6 @@ export class ValidationComposite implements Validation {
     ) { }
     validate(request: any): Error | null {
         const input = request[this.segment];
-
         return this.validations.reduce(
             (error: Error | null, validation: Validation) => error || validation.validate(input), null
         );
