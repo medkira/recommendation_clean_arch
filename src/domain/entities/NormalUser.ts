@@ -1,4 +1,5 @@
 import { UserProps, UserRole } from "./User";
+import { File } from "@domain/entities/File";
 
 export type NormalUserProps = UserProps & {
   gender: boolean;
@@ -17,7 +18,7 @@ export class NormalUser {
   public readonly id: string;
   public readonly name: string;
   public readonly username: string;
-  public readonly image: Express.Multer.File[] | string; // ! need to fix this
+  public readonly image: File[] | string; // ! need to fix this
   public readonly email: string;
   public readonly phoneNumber: string;
   public readonly password: string;

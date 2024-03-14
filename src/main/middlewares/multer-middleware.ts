@@ -29,6 +29,7 @@ const upload = multer({
 
 // export const multerMiddleware = upload.single('image');
 
+// ! need to fix arrayOfFields: any
 export const multerMiddleware = (arrayOfFields: any) =>
     upload.fields(arrayOfFields);
 

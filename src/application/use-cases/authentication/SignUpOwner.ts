@@ -6,7 +6,7 @@ import { LoadOwnerByEmailRepository } from "@application/interfaces/repositories
 import { UploadImage } from "@application/interfaces/upload/UploadImage";
 
 import { SignUpOwnerInterface } from "@application/interfaces/use-cases/authentication/SignUpOwnerInterface";
-import { FileType } from "@domain/entities/File";
+import { File } from "@domain/entities/File";
 
 export class SignUpOwner implements SignUpOwner {
 
@@ -20,25 +20,24 @@ export class SignUpOwner implements SignUpOwner {
     async execute(userData: SignUpOwnerInterface.Request): Promise<SignUpOwnerInterface.Response> {
         const { email, password, phoneNumber, name, places, role, username, image } = userData;
 
-        console.log("from signup owner image", image);
+        // console.log("from signup owner image", image);
 
         const existingUser = await this.loadUserByEmailRepository.loadUserByEmail(email);
         if (existingUser) {
             return new EmailInUseError()
         }
 
-
-
-        const fileImage = image as FileType[];
-
-        // console.log("BUFER ", fileImage[0].buffer)
-        const imageBuffer = await this.imageProcess.ProfileImageProcess(fileImage[0].buffer);
-
-        const imageUrl = await this.uploadImage.uploadImage(imageBuffer);
-
-
+        // ! fix this it doesnt look right. 
+        const fileImage = image as File[];
+        let imageUrl = "";
+        if (image) {
+            // console.log("BUFER ", fileImage[0].buffer)
+            const imageBuffer = await this.imageProcess.ProfileImageProcess(fileImage[0].buffer);
+            imageUrl = await this.uploadImage.uploadImage(imageBuffer);
+        }
 
         const hashedPassword = await this.hashGenerator.hash(password);
+
         return this.createOwnerRepository.createOwner({
             phoneNumber,
             name,

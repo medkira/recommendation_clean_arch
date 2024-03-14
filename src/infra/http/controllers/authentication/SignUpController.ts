@@ -8,8 +8,8 @@ import { Validation } from "@infra/http/interfaces/validation/validations";
 import { UserRole } from "@domain/entities/User";
 import { forbidden, ok } from "@infra/http/helpers/https";
 import { SignInInterface } from "@application/interfaces/use-cases/authentication/SignInInterface";
+import { File } from "@domain/entities/File";
 
-import { FileType } from "@domain/entities/File";
 // import { Multer } from 'multer';
 // type File = Express.Multer.File;
 export class SignUpController extends BaseController {
@@ -28,7 +28,7 @@ export class SignUpController extends BaseController {
     async execute(httpRequest: SignUpController.Request): Promise<HttpResponse> {
         const { role, email, password, image = httpRequest.files } = httpRequest.body!;
 
-        console.log("from signup controller", httpRequest.files?.profileImage);
+        // console.log("from signup controller", httpRequest.files?.profileImage);
 
 
         let idOrError;
@@ -61,7 +61,7 @@ export class SignUpController extends BaseController {
 
 export namespace SignUpController {
     export type Request = HttpRequest<SignUpNormalUserInterface.Request | SignUpOwnerInterface.Request,
-        undefined, undefined, undefined, { profileImage: FileType[] }>;
+        undefined, undefined, undefined, { profileImage: File[] }>;
     export type Response = HttpResponse<{ authenticationToken: string } | EmailInUseError>;
 }
 

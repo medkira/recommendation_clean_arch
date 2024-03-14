@@ -1,11 +1,13 @@
 // entities/User.ts
+import { File } from "@domain/entities/File";
+
 export type UserProps = {
     id: string;
     name: string;
     username: string;
     email: string;
     role: UserRole;
-    image: Express.Multer.File[] | string; // ! need to fix this
+    image: File[] | string; // ! need to fix this
     phoneNumber: string;
     password: string;
     createdAt: Date;
