@@ -1,5 +1,5 @@
-import { JWTGenerator } from "@application/interfaces/cryptography/JWTGenerator.js";
-import { JWTVerifier } from "@application/interfaces/cryptography/JWTVerifier.js";
+import { JWTGenerator } from "@application/interfaces/utils/cryptography/JWTGenerator.js";
+import { JWTVerifier } from "@application/interfaces/utils/cryptography/JWTVerifier.js";
 import { DecodedToken } from "@domain/entities/TokenPayload";
 import jwt from "jsonwebtoken";
 

@@ -1,7 +1,3 @@
-// ! i need to fix this 
-
-// export type FileType = Express.Multer.File;
-
 export type FileProps = {
     fieldname: string;
     name: string;

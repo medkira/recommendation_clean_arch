@@ -10,17 +10,13 @@ import { forbidden, ok } from "@infra/http/helpers/https";
 import { SignInInterface } from "@application/interfaces/use-cases/authentication/SignInInterface";
 import { File } from "@domain/entities/File";
 
-// import { Multer } from 'multer';
-// type File = Express.Multer.File;
 export class SignUpController extends BaseController {
     constructor(
-        // ! validation for either owner or normal user implementaion
         private readonly signUpValidation: Validation,
         private readonly signUpOwner: SignUpOwnerInterface,
         private readonly signUpNormalUser: SignUpNormalUserInterface,
         private readonly signIn: SignInInterface,
     ) {
-        // super();
         super(signUpValidation);
 
     }
@@ -28,7 +24,6 @@ export class SignUpController extends BaseController {
     async execute(httpRequest: SignUpController.Request): Promise<HttpResponse> {
         const { role, email, password, image = httpRequest.files } = httpRequest.body!;
 
-        // console.log("from signup controller", httpRequest.files?.profileImage);
 
 
         let idOrError;
@@ -64,23 +59,4 @@ export namespace SignUpController {
         undefined, undefined, undefined, { profileImage: File[] }>;
     export type Response = HttpResponse<{ authenticationToken: string } | EmailInUseError>;
 }
-
-
-
-
-
-// ! old , but part of it is right in case of array of photos 
-// ? this need to be a usecase that is responsible for uploading image to clodinary
-// console.log(httpRequest.files);
-// const test = httpRequest.files.images;
-//! this wrong cant forEach and async
-// test.forEach(async (element: any) => {
-
-//     // ? this used for local upload
-//     // await sharp(element!.buffer).resize({ width: 250, height: 250 }).png().toFile(`uploads/${element!.originalname}`);
-
-//     await sharp(element!.buffer).resize({ width: 250, height: 250 }).png().toFile(`uploads/${element!.originalname}`);
-
-
-// });
 

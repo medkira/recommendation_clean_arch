@@ -1,5 +1,5 @@
-import { HashComparer } from "@application/interfaces/cryptography/HashComparer.js";
-import { HashGenerator } from "@application/interfaces/cryptography/HashGenerator.js";
+import { HashComparer } from "@application/interfaces/utils/cryptography/HashComparer.js";
+import { HashGenerator } from "@application/interfaces/utils/cryptography/HashGenerator.js";
 import bcrypt from "bcrypt";
 
 export class BcryptAdapter implements HashGenerator, HashComparer {

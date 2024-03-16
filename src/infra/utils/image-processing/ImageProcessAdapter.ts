@@ -1,5 +1,5 @@
-import { PostImageProcess } from "@application/interfaces/image-processing/PostImageProcess";
-import { ProfileImageProcess } from "@application/interfaces/image-processing/ProfileImageProcess";
+import { PostImageProcess } from "@application/interfaces/utils/image-processing/PostImageProcess";
+import { ProfileImageProcess } from "@application/interfaces/utils/image-processing/ProfileImageProcess";
 import sharp from "sharp";
 
 export class ImageProcessAdapter implements ProfileImageProcess, PostImageProcess {

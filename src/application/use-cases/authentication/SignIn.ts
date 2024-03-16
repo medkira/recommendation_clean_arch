@@ -1,6 +1,6 @@
 import { UnauthorizedError } from "@application/errors/UnautorizedError";
-import { HashComparer } from "@application/interfaces/cryptography/HashComparer";
-import { JWTGenerator } from "@application/interfaces/cryptography/JWTGenerator";
+import { HashComparer } from "@application/interfaces/utils/cryptography/HashComparer";
+import { JWTGenerator } from "@application/interfaces/utils/cryptography/JWTGenerator";
 import { LoadNormalUserByEmailRepository } from "@application/interfaces/repositories/normalUser/LoadNormalUserByEmailRepository";
 import { LoadOwnerByEmailRepository } from "@application/interfaces/repositories/owner/LoadOwnerByEmailRepository";
 import { SignInInterface } from "@application/interfaces/use-cases/authentication/SignInInterface";

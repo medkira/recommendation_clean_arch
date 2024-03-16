@@ -1,15 +1,12 @@
 import { multerMiddleware } from "@main/middlewares/multer-middleware"
+import multer from "multer"
 
 export const makeProfileImageMulterMiddleware = () => {
-    const uploadFields = [{
+    const uploadFields: multer.Field[] = [{
         name: 'profileImage',
-        maxCount: 2,
-    },
-    {
-        name: 'image',
-        maxCount: 2
+        maxCount: 1,
     }
     ]
 
-    return multerMiddleware(uploadFields)
+    return multerMiddleware(uploadFields);
 }
