@@ -13,16 +13,23 @@ const postSchema = new Schema({
     required: true,
   },
   postImage: {
-    type: String,
-    required: true,
+    type: Array,
   },
-  author_id: {
+  userId: {
     type: String,
-    required: true,
+    required: false,
   },
   likes: {
     type: Number,
     required: true,
+  },
+  location: {
+    type: String,
+    require: false,
+  },
+  url: {
+    type: String,
+    required: false,
   },
   createdAt: {
     type: Date,

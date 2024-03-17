@@ -12,7 +12,7 @@ const ownerSchema = new Schema({
     required: true,
   },
   image: {
-    type: Array
+    type: Array,
   },
   email: {
     type: String,

@@ -1,4 +1,4 @@
-import { PostProps } from "@domain/entities/Post";
+import { Post } from "@domain/entities/Post";
 import { UseCase } from "../UseCase";
 
 export interface CreatePostInterface
@@ -9,6 +9,6 @@ export interface CreatePostInterface
 }
 
 export namespace CreatePostInterface {
-  export type Request = Omit<PostProps, "id" | "totalComments" | "createdAt" | "updatedAt">;
+  export type Request = Omit<Post, "id" | "createdAt" | "updatedAt">;
   export type Response = string;
 }

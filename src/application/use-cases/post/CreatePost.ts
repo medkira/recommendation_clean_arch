@@ -1,0 +1,38 @@
+import { PostImageProcess } from "@application/interfaces/image-processing/PostImageProcess";
+import { CreatePostRepository } from "@application/interfaces/repositories/post/CreatePostRepository";
+import { UploadImage } from "@application/interfaces/upload/UploadImage";
+import { CreatePostInterface } from "@application/interfaces/use-cases/posts/CreatePostInterface";
+import { File } from "@domain/entities/File";
+
+export class CreatePost implements CreatePostInterface {
+  constructor(
+    private readonly createPostRepository: CreatePostRepository,
+    private readonly uploadImage: UploadImage,
+    private readonly imageProcess: PostImageProcess
+  ) {}
+
+  async execute(postData: CreatePostInterface.Request): Promise<string> {
+    const { postImage, content, post_type, title, location, userId } = postData;
+    const fileImage = postImage as File[];
+    const imageUrls: string[] = [];
+
+    if (postImage) {
+      for (let i = 0; i < fileImage.length; i++) {
+        const imageBuffer = await this.imageProcess.PostImageProcess(
+          fileImage[i].buffer
+        );
+        const imageUrl = await this.uploadImage.uploadImage(imageBuffer);
+        imageUrls.push(imageUrl);
+      }
+    }
+    return this.createPostRepository.createPost({
+      userId,
+      content,
+      post_type,
+      title,
+      location,
+      likes: 0,
+      postImage: imageUrls,
+    });
+  }
+}

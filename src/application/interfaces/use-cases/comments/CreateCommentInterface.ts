@@ -1,5 +1,5 @@
-import { CommentProps } from "@domain/entities/Comment.js";
-import { UseCase } from "../UseCase.js";
+import { CommentProps } from "@domain/entities/Comment";
+import { UseCase } from "../UseCase";
 
 export interface CreateCommentInterface extends UseCase<CreateCommentInterface.Request, CreateCommentInterface.Response> {
     execute(commentData: CreateCommentInterface.Request): Promise<CreateCommentInterface.Response>;
