@@ -1,22 +1,27 @@
-export type DecodedTokenProps = {
+export type TotpProps = {
+    id: string;
     userId: string;
-    payload?: any;
+    code: string;
     createdAt?: Date;
     expiresAt?: Date;
 };
 
-export class DecodedToken {
+export class Totp {
+    public readonly id: string;
+
+
     public readonly userId: string;
 
-    public readonly payload?: any;
+    public readonly code: string;
 
     public readonly createdAt?: Date;
 
     public readonly expiresAt?: Date;
 
-    constructor(props: DecodedTokenProps) {
+    constructor(props: TotpProps) {
+        this.id = props.id;
         this.userId = props.userId;
-        this.payload = props.payload;
+        this.code = props.code;
         this.createdAt = props.createdAt;
         this.expiresAt = props.expiresAt;
     }

@@ -1,9 +1,10 @@
 import { BaseController } from "@infra/http/controllers/BaseController";
-import { HttpRequest } from "@infra/http/interfaces/http/HttpRequest";
+import { HttpRequest } from "@infra/http/interfaces/http/HttpRequest"
 import { Request, Response } from "express";
 
-export const expressRouterAdapter = (
+export const pageRenderAdapter = (
     controller: BaseController,
+
 ) => async (req: Request, res: Response) => {
     const httpRequest: HttpRequest = {
         body: req.body,
@@ -16,13 +17,21 @@ export const expressRouterAdapter = (
         host: req.get('host'),
         protocole: req.protocol,
     }
+
     const httpResponse = await controller.handle(httpRequest);
 
     if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
-        res.status(httpResponse.statusCode).json(httpResponse.body);
+
+        // ! need to fix this
+        res.render(httpResponse.body.view, { token: httpResponse.body.token });
+        // res.render(httpResponse.body);
+
+        // res.render('reset-password-form/resetpassformView', { token });
+
     } else {
         res.status(httpResponse.statusCode).json({
             error: httpResponse.body?.message,
         })
     }
+
 }

@@ -47,7 +47,6 @@ export class NormalUser {
     this.createdAt = props.createdAt;
     this.updatedAt = props.updatedAt;
     this.isEmailVerified = props.isEmailVerified;
-    // Initialize additional properties
     this.gender = props.gender;
     this.age = props.age;
     this.zone = props.zone;

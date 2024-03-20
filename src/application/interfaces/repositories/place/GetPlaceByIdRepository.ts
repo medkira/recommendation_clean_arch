@@ -9,5 +9,5 @@ export interface GetPlaceByIdRepository {
 
 export namespace GetPlaceByIdRepository {
   export type Request = string;
-  export type Response = Place | PlaceNotFoundError;
+  export type Response = Place | null;
 }

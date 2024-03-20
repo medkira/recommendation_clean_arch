@@ -30,22 +30,6 @@ export class PlaceRepository
 
     return paginateModel(placeModel, params.page, params.paginationLimit, params.query);
 
-
-
-    // const { page, paginationLimit } = params;
-    // const offset = (page - 1) * paginationLimit;
-    // const rawPlaces = await placeModel
-    //   .find({})
-    //   .sort({ createdAt: -1 })
-    //   .skip(offset)
-    //   .limit(paginationLimit)
-    //   .exec()
-    // const places = mapCollection(rawPlaces);
-    // const total = await placeModel.countDocuments({});
-    // const totalPages = Math.ceil(total / paginationLimit);
-    // return {
-    //   data: places, page, total, totalPages,
-    // };
   }
 
 
