@@ -10,10 +10,12 @@ export const expressRouterAdapter = (
         params: req.params,
         query: req.query,
         headers: req.headers,
+        files: req.files,
         userId: req.userId,
         userRole: req.userRole,
     }
-
+    // console.log(req.body);
+    // console.log("from htttp req adapter", httpRequest.files);
 
     const httpResponse = await controller.handle(httpRequest);
 

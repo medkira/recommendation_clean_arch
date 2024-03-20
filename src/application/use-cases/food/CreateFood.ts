@@ -9,5 +9,6 @@ export class CreateFood implements CreateFoodInterface {
     return this.CreateFoodRepository.createFood({
       ...FoodData,
     });
+
   }
 }

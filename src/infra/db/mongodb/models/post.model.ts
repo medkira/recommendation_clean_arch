@@ -13,16 +13,27 @@ const postSchema = new Schema({
     required: true,
   },
   postImage: {
-    type: String,
-    required: true,
+    type: Array,
   },
-  author_id: {
+  userId: {
     type: String,
     required: true,
   },
   likes: {
     type: Number,
     required: true,
+  },
+  location: {
+    type: String,
+    require: false,
+  },
+  url: {
+    type: String,
+    required: false,
+  },
+  totalComments: {
+    type: Number,
+    default: 0,
   },
   createdAt: {
     type: Date,

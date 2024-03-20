@@ -3,17 +3,25 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const commentShema = new Schema({
-  author_id: {
+  userId: {
     type: String,
     required: true,
   },
-  post_id: {
+  postId: {
     type: String,
     required: true,
   },
   text: {
     type: String,
     required: true,
+  },
+  title: {
+    type: String,
+    required: false,
+  },
+  likes: {
+    type: Number,
+    required: false,
   },
   createdAt: {
     type: Date,

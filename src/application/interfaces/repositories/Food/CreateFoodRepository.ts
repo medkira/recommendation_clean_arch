@@ -1,4 +1,4 @@
-import { Food } from "@domain/entities/Food"
+import { Food, FoodProps } from "@domain/entities/Food"
 
 export interface CreateFoodRepository {
     createFood(foodDate: CreateFoodRepository.Request): Promise<CreateFoodRepository.Response>;
@@ -6,7 +6,7 @@ export interface CreateFoodRepository {
 }
 
 export namespace CreateFoodRepository {
-    export type Request = Pick<Food, 'name' | 'price'>;
+    export type Request = Omit<FoodProps, "id" | "menu_id">
     export type Response = string;
 
 }

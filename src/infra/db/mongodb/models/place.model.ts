@@ -23,6 +23,10 @@ const placeSchema = new Schema<PlaceProps>({
     type: String,
     required: true,
   },
+  user_id:{
+    type: String,
+    required: true,
+  },
 
   location: {
     type: String,
