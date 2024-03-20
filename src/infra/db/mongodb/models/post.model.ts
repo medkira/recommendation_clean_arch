@@ -17,7 +17,7 @@ const postSchema = new Schema({
   },
   userId: {
     type: String,
-    required: false,
+    required: true,
   },
   likes: {
     type: Number,
@@ -30,6 +30,10 @@ const postSchema = new Schema({
   url: {
     type: String,
     required: false,
+  },
+  totalComments: {
+    type: Number,
+    default: 0,
   },
   createdAt: {
     type: Date,

@@ -13,16 +13,20 @@ import { Router } from "express";
 export default (router: Router): void => {
   router.post(
     "/posts",
+    authMiddleware,
     multerMiddlewareAdapter(makePostImageMulterMiddleware()),
     expressRouterAdapter(makeCreatePostController())
   );
   router.get("/posts/:id", expressRouterAdapter(makeGetPostByIdController()));
   router.get("/topPosts", expressRouterAdapter(makeGetTopPostsController()));
-  router.get("/post/page", expressRouterAdapter(makeGetLatestPostsController()));
-
+  router.get(
+    "/post/page",
+    expressRouterAdapter(makeGetLatestPostsController())
+  );
 
   router.patch(
     "/posts/:id",
+    authMiddleware,
     multerMiddlewareAdapter(makePostImageMulterMiddleware()),
     expressRouterAdapter(makeUpdatePostController())
   );

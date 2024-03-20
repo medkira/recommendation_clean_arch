@@ -11,6 +11,7 @@ export type PostProps = {
   updatedAt: Date;
   post_type: postType;
   location: string;
+  totalComments: number;
 };
 
 export class Post {
@@ -24,6 +25,7 @@ export class Post {
   public readonly updatedAt: Date;
   public readonly post_type: postType;
   public readonly location: string;
+  public readonly totalComments: number;
 
   constructor(props: PostProps) {
     this.id = props.id;
@@ -36,6 +38,7 @@ export class Post {
     this.updatedAt = props.updatedAt;
     this.post_type = props.post_type;
     this.location = props.location;
+    this.totalComments = props.totalComments;
   }
 }
 

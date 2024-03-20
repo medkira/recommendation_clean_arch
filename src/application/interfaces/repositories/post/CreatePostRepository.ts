@@ -7,6 +7,9 @@ export interface CreatePostRepository {
 }
 
 export namespace CreatePostRepository {
-  export type Request = Omit<Post, "id" | "createdAt" | "updatedAt">;
+  export type Request = Omit<
+    Post,
+    "id" | "createdAt" | "updatedAt" | "totalComments"
+  >;
   export type Response = string;
 }

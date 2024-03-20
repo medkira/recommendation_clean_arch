@@ -9,6 +9,6 @@ export interface CreatePostInterface
 }
 
 export namespace CreatePostInterface {
-  export type Request = Omit<Post, "id" | "createdAt" | "updatedAt">;
+  export type Request = Omit<Post, "id" | "createdAt" | "updatedAt" | "totalComments">;
   export type Response = string;
 }
