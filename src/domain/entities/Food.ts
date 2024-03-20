@@ -4,7 +4,8 @@ export type FoodProps = {
   name: string;
   price: number;
   //price_category: priceCategory;
-  // food_type: foodTypes;
+  food_type: foodTypes;
+  menu_id: string;
 };
 
 export class Food {
@@ -12,16 +13,19 @@ export class Food {
   public readonly place_id: string;
   public readonly name: string;
   public readonly price: number;
+  public readonly menu_id: string;
+
   //public readonly price_category: priceCategory;
 
-  // public readonly food_type: foodTypes;
+  public readonly food_type: foodTypes;
   constructor(props: FoodProps) {
     this.id = props.id;
     this.place_id = props.place_id;
     this.name = props.name;
     this.price = props.price;
+    this.menu_id = props.menu_id;
     //this.price_category = props.price_category;
-    // this.food_type = props.food_type;
+    this.food_type = props.food_type;
   }
 }
 

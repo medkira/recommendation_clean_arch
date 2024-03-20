@@ -8,6 +8,6 @@ export interface CreateMenuInterface
 }
 
 export namespace CreateMenuInterface {
-  export type Request = Pick<MenuProps, "place_id" | "food_ids">;
+  export type Request = Omit<MenuProps, "id">;
   export type Response = string;
 }

@@ -1,4 +1,4 @@
-import { UseCase } from "../UseCase.js";
+import { UseCase } from "../UseCase";
 
 export interface DeleteCommentInterface extends UseCase<DeleteCommentInterface.Request, DeleteCommentInterface.Response> {
     execute(commentId: DeleteCommentInterface.Request): Promise<DeleteCommentInterface.Response>

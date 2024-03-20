@@ -15,9 +15,12 @@ const foodSchema = new Schema({
     type: String,
     required: true,
   },
+  menu_id: {
+    type: String,
+    required: false,
+  },
 });
 
 const foodModel = mongoose.model("food", foodSchema);
 
 export default foodModel;
-

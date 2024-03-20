@@ -20,9 +20,9 @@ export default (router: Router): void => {
 
   router.post("/place", authMiddleware, expressRouterAdapter(makeCreatePlaceController()));
 
-  router.patch("/place/:id", expressRouterAdapter(makeUpdatePlaceController()));
+  router.patch("/place/:id", authMiddleware,expressRouterAdapter(makeUpdatePlaceController()));
 
-  router.delete("/place/:id", expressRouterAdapter(makeDeletePlaceController()));
+  router.delete("/place/:id", authMiddleware,expressRouterAdapter(makeDeletePlaceController()));
 
   // router.get("/place", expressRouterAdapter(makeGetLatestPlacesController()));
 

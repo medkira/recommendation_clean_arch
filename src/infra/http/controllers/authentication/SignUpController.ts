@@ -11,52 +11,52 @@ import { SignInInterface } from "@application/interfaces/use-cases/authenticatio
 import { File } from "@domain/entities/File";
 
 export class SignUpController extends BaseController {
-    constructor(
-        private readonly signUpValidation: Validation,
-        private readonly signUpOwner: SignUpOwnerInterface,
-        private readonly signUpNormalUser: SignUpNormalUserInterface,
-        private readonly signIn: SignInInterface,
-    ) {
-        super(signUpValidation);
+  constructor(
+    private readonly signUpValidation: Validation,
+    private readonly signUpOwner: SignUpOwnerInterface,
+    private readonly signUpNormalUser: SignUpNormalUserInterface,
+    private readonly signIn: SignInInterface,
+  ) {
+    super(signUpValidation);
 
+  }
+
+  async execute(httpRequest: SignUpController.Request): Promise<HttpResponse> {
+    const { role, email, password, image = httpRequest.files } = httpRequest.body!;
+
+
+
+    let idOrError;
+    if (role === UserRole.OWNER) {
+      idOrError = await this.signUpOwner.execute({ ...httpRequest.body, image: httpRequest.files?.profileImage } as SignUpOwnerInterface.Request);
+    } else if (role === UserRole.NORMAL) {
+      idOrError = await this.signUpNormalUser.execute({ ...httpRequest.body, image: httpRequest.files?.profileImage } as SignUpNormalUserInterface.Request);
+    } else {
+      // Handle invalid role scenario acutally no need for this bcs we done it in the validation stagge ;)
+      throw new Error("Invalid user role provided.");
     }
 
-    async execute(httpRequest: SignUpController.Request): Promise<HttpResponse> {
-        const { role, email, password, image = httpRequest.files } = httpRequest.body!;
 
 
+    if (idOrError instanceof EmailInUseError) {
+      return forbidden(idOrError)
+    };
 
-        let idOrError;
-        if (role === UserRole.OWNER) {
-            idOrError = await this.signUpOwner.execute({ ...httpRequest.body, image: httpRequest.files?.profileImage } as SignUpOwnerInterface.Request);
-        } else if (role === UserRole.NORMAL) {
-            idOrError = await this.signUpNormalUser.execute({ ...httpRequest.body, image: httpRequest.files?.profileImage } as SignUpNormalUserInterface.Request);
-        } else {
-            // Handle invalid role scenario acutally no need for this bcs we done it in the validation stagge ;)
-            throw new Error("Invalid user role provided.");
-        }
+    const authenticationTokenOrError = await this.signIn.execute({ email, password });
 
-
-
-        if (idOrError instanceof EmailInUseError) {
-            return forbidden(idOrError)
-        };
-
-        const authenticationTokenOrError = await this.signIn.execute({ email, password });
-
-        if (authenticationTokenOrError instanceof Error) {
-            throw authenticationTokenOrError;
-        }
-        return ok({
-            authenticationToken: authenticationTokenOrError
-        });
+    if (authenticationTokenOrError instanceof Error) {
+      throw authenticationTokenOrError;
     }
+    return ok({
+      authenticationToken: authenticationTokenOrError
+    });
+  }
 }
 
 
 export namespace SignUpController {
-    export type Request = HttpRequest<SignUpNormalUserInterface.Request | SignUpOwnerInterface.Request,
-        undefined, undefined, undefined, { profileImage: File[] }>;
-    export type Response = HttpResponse<{ authenticationToken: string } | EmailInUseError>;
+  export type Request = HttpRequest<SignUpNormalUserInterface.Request | SignUpOwnerInterface.Request,
+    undefined, undefined, undefined, { profileImage: File[] }>;
+  export type Response = HttpResponse<{ authenticationToken: string } | EmailInUseError>;
 }
 
