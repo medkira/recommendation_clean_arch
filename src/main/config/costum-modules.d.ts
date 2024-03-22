@@ -1,6 +1,7 @@
 declare module Express {
-    interface Request {
-        userId?: string;
-        userRole?: UserRole;
-    }
+  interface Request {
+    userId?: string;
+    userRole?: UserRole;
+    user?: GoogleUser;
+  }
 }

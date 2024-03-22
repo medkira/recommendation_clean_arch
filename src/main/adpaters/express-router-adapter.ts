@@ -13,6 +13,7 @@ export const expressRouterAdapter = (
         files: req.files,
         userId: req.userId,
         userRole: req.userRole,
+        user: req.user,
     }
     // console.log(req.body);
     // console.log("from htttp req adapter", httpRequest.files);

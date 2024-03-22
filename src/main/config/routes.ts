@@ -1,6 +1,7 @@
 import authenticationRoutes from "@main/routes/authentication-routes";
 import commentRoutes from "@main/routes/comment-routes";
 import foodRoutes from "@main/routes/food-routes";
+import googleAuthRoutes from "@main/routes/googleAuth-routes";
 import menuRoutes from "@main/routes/menu-routes";
 import normaUserRoutes from "@main/routes/normaUser-routes";
 import placeRoutes from "@main/routes/place-routes";
@@ -22,4 +23,6 @@ export const setupRoutes = (app: Express): void => {
   menuRoutes(router);
   foodRoutes(router);
   normaUserRoutes(router);
+  googleAuthRoutes(router);
 };
+
