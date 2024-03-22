@@ -8,6 +8,6 @@ export interface SignUpNormalUserInterface extends UseCase<SignUpNormalUserInter
 
 
 export namespace SignUpNormalUserInterface {
-    export type Request = Omit<NormalUser, 'id' | 'createdAt' | 'updatedAt'>
+    export type Request = Omit<NormalUser, 'id' | 'createdAt' | 'updatedAt' | 'isEmailVerified'>
     export type Response = Pick<NormalUser, 'id'> | EmailInUseError;
 }

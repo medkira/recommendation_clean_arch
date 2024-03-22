@@ -13,11 +13,12 @@ export const expressRouterAdapter = (
         files: req.files,
         userId: req.userId,
         userRole: req.userRole,
-        user: req.user,
-    }
-    // console.log(req.body);
-    // console.log("from htttp req adapter", httpRequest.files);
 
+        user: req.user,
+        host: req.get('host'),
+        protocole: req.protocol,
+
+    }
     const httpResponse = await controller.handle(httpRequest);
 
     if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {

@@ -10,7 +10,6 @@ export async function paginateModel(
 
     const totalDocuments = await model.find(query).countDocuments();
     const totalPages = Math.ceil(totalDocuments / paginationLimit);
-    console.log(query)
     const data = await model
         .find(query)
         .sort({ createdAt: -1 }) // Adjust sorting based on your schema

@@ -1,7 +1,7 @@
 import { SignInInterface } from "@application/interfaces/use-cases/authentication/SignInInterface";
 import { SignIn } from "@application/use-cases/authentication/SignIn";
-import { BcryptAdapter } from "@infra/cryptography/BcryptAdapter";
-import { JWTAdapter } from "@infra/cryptography/JWTAdapter";
+import { BcryptAdapter } from "@infra/utils/cryptography/BcryptAdapter";
+import { JWTAdapter } from "@infra/utils/cryptography/JWTAdapter";
 import { NormalUserRepository } from "@infra/db/mongodb/repositories/NormalUserRepository";
 import { OwnerRepository } from "@infra/db/mongodb/repositories/OwnerRepository";
 

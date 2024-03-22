@@ -1,6 +1,6 @@
 import { AuthenticateInterface } from "@application/interfaces/use-cases/authentication/AuthenticateInterface";
 import { Authenticate } from "@application/use-cases/authentication/Authenticate";
-import { JWTAdapter } from "@infra/cryptography/JWTAdapter";
+import { JWTAdapter } from "@infra/utils/cryptography/JWTAdapter";
 import dotenv from 'dotenv';
 dotenv.config({ path: 'src/main/config/env/.env' });
 

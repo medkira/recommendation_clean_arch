@@ -7,7 +7,14 @@ import passport from "passport";
 
 export const setupApp = (): Express => {
     const app = express();
-    
+
+
+
+    // ! change this 
+    app.set('view engine', 'ejs');
+    app.set('views', '/home/mohamed/workspace/pfe/src/main/presentation/');
+
+
     // ? put anything that the express will use
     setupSocket(app);
     setupMiddleware(app);

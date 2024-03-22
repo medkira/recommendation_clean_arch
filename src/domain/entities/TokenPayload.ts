@@ -1,6 +1,6 @@
 export type DecodedTokenProps = {
     userId: string;
-    payload?: string;
+    payload?: any;
     createdAt?: Date;
     expiresAt?: Date;
 };
@@ -8,7 +8,7 @@ export type DecodedTokenProps = {
 export class DecodedToken {
     public readonly userId: string;
 
-    public readonly payload?: string;
+    public readonly payload?: any;
 
     public readonly createdAt?: Date;
 

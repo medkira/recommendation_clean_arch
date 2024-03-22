@@ -1,7 +1,7 @@
 import { Food, FoodProps } from "@domain/entities/Food"
 
 export interface CreateFoodRepository {
-    createFood(foodDate: CreateFoodRepository.Request): Promise<CreateFoodRepository.Response>;
+    createFood(foodData: CreateFoodRepository.Request): Promise<CreateFoodRepository.Response>;
 
 }
 

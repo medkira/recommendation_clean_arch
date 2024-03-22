@@ -1,10 +1,34 @@
 
 import ownerModel from "../models/owner.model";
-import { mapDocument, objectIdToString } from "../helpers/mappers";
+import { isValidObjectId, mapDocument, objectIdToString, stringToObjectId } from "../helpers/mappers";
 import { CreateOwnerRepository } from "@application/interfaces/repositories/owner/CreateOwnerRepository";
 import { LoadOwnerByEmailRepository } from "@application/interfaces/repositories/owner/LoadOwnerByEmailRepository";
+import { LoadOwnerByIdlRepository } from "@application/interfaces/repositories/owner/LoadOwnerByIdRepository";
+import { UpdateOwnerPasswordRepository } from "@application/interfaces/repositories/owner/UpdateOwnerPasswordRepository";
 
-export class OwnerRepository implements CreateOwnerRepository, LoadOwnerByEmailRepository {
+export class OwnerRepository implements
+    CreateOwnerRepository, LoadOwnerByEmailRepository, LoadOwnerByIdlRepository, UpdateOwnerPasswordRepository {
+
+    async updateOwnerPassword(params: UpdateOwnerPasswordRepository.Request): Promise<UpdateOwnerPasswordRepository.Response> {
+        const { id, password } = params;
+
+        await ownerModel.findByIdAndUpdate(
+            stringToObjectId(id),
+            { password }
+        )
+
+        return { id };
+    }
+
+
+    async loadUserById(id: string): Promise<LoadOwnerByIdlRepository.response> {
+        if (!isValidObjectId(id)) {
+            return null;
+        }
+
+        const rawuser = await ownerModel.findById(id);
+        return rawuser && mapDocument(rawuser);
+    }
 
     async loadUserByEmail(email: string): Promise<LoadOwnerByEmailRepository.response> {
         const rawuser = await ownerModel.findOne({ email });
