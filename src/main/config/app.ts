@@ -3,9 +3,11 @@ import { setupSocket } from "./socket";
 import { setupRoutes } from "./routes";
 import { setupMiddleware } from "./middleware";
 import bodyParser from "body-parser";
+import passport from "passport";
 
 export const setupApp = (): Express => {
     const app = express();
+
 
 
     // ! change this 

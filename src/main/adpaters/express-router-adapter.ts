@@ -13,8 +13,11 @@ export const expressRouterAdapter = (
         files: req.files,
         userId: req.userId,
         userRole: req.userRole,
+
+        user: req.user,
         host: req.get('host'),
         protocole: req.protocol,
+
     }
     const httpResponse = await controller.handle(httpRequest);
 
