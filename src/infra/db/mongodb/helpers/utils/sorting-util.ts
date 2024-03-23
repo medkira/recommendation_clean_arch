@@ -5,9 +5,9 @@ export async function sortModel(
   sortBy: string,
   limit: number
 ): Promise<{ data: any[] }> {
-  const sortQuery: { [key: string]: SortOrder } = {};
-  sortQuery[sortBy as string] = -1; // Dynamically construct sorting object
+  // const sortQuery: { [key: string]: SortOrder } = {};
+  // sortQuery[sortBy as string] = -1; // Dynamically construct sorting object
 
-  const data = await model.find().sort(sortQuery).limit(limit).exec();
+  const data = await model.find().sort({ [sortBy]: -1 }).limit(limit).exec();
   return { data };
 }
