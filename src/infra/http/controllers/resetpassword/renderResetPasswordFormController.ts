@@ -27,21 +27,13 @@ export class renderResetPasswordFormController extends BaseController {
         }
 
 
-        // const payload = payloadOrError as { otp: string, userId: string };
-        // const { otp, userId } = payloadOrError as { otp: string, userId: string }; // !!!!!
-        const otpOrError = await this.verifyTotp.execute(payloadOrError as { code: string, userId: string });
 
+        const otpOrError = await this.verifyTotp.execute(payloadOrError as { code: string, userId: string });
         if (otpOrError instanceof ForbiddenError) {
-            return forbidden(otpOrError);
+            return ok({ view: 'reset-password-form/resetpassformLinkExpiredView' });
         }
 
 
-        console.log("from renderResetPasswordFormController userID: ", payloadOrError);
-
-
-
-
-        // ? will return from here the page 
 
         return ok({ view: 'reset-password-form/resetpassformView', token });
     }

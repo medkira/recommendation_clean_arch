@@ -24,7 +24,7 @@ export class TotpRepository implements CreateTotpRepository, GetTotpByUserIdRepo
     }
 
     async getTotpByUserId(id: string): Promise<GetTotpByUserIdRepository.Response> {
-        const rawUserTotp = await totpModel.findOne({ userId: id });
+        const rawUserTotp = await totpModel.findOne({ userId: id }).sort({ createdAt: -1 });
 
         return rawUserTotp && mapDocument(rawUserTotp);
     }

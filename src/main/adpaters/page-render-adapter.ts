@@ -21,12 +21,8 @@ export const pageRenderAdapter = (
     const httpResponse = await controller.handle(httpRequest);
 
     if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
-
-        // ! need to fix this
+        // // ! need to fix this
         res.render(httpResponse.body.view, { token: httpResponse.body.token });
-        // res.render(httpResponse.body);
-
-        // res.render('reset-password-form/resetpassformView', { token });
 
     } else {
         res.status(httpResponse.statusCode).json({

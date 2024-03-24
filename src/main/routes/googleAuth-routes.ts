@@ -7,7 +7,7 @@ import { googleAuthMiddleware } from "@main/factories/middlewares/google-middlew
 
 
 export default (router: Router): void => {
-  router.get('/google',googleAuthMiddleware)
+  router.get('/google', googleAuthMiddleware);
   router.get('/loginGoogle', googleAuthMiddleware, expressRouterAdapter(makeSignInGoogleAuthController()));
 
 };

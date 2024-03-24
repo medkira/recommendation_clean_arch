@@ -11,7 +11,6 @@ import { Express, Router } from "express";
 
 export const setupRoutes = (app: Express): void => {
   const router = Router();
-  // ? declare the server routes here
   app.use("/api", router);
 
   authenticationRoutes(router);
@@ -21,7 +20,6 @@ export const setupRoutes = (app: Express): void => {
   commentRoutes(router);
   menuRoutes(router);
   foodRoutes(router);
-  normaUserRoutes(router);
   googleAuthRoutes(router);
 
 };
