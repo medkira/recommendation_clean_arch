@@ -11,23 +11,22 @@ import { UserNotFoundError } from "@application/errors/UserNotFoundError";
 
 
 
-export class SignInGoogleUserController extends BaseController{
-   
+export class SignInGoogleUserController extends BaseController {
+
     constructor(
         private readonly createGoogleUserInterface: CreateGoogleUserInterface,
         private readonly getGoogleUserByEmail: GetGoogleUserByEmailInterface,
-    )
-    {
+    ) {
         super()
     }
 
     async execute(httpRequest: SignInGoogleUserController.Request): Promise<SignInGoogleUserController.Response> {
-        const {name,email,family_name,picture,email_verified} = httpRequest.user!
-        console.log("from controller google user",name, "this is email",email)
+        const { name, email, family_name, picture, email_verified } = httpRequest.user!
+        // console.log("from controller google user",name, "this is email",email)
         const user = await this.getGoogleUserByEmail.execute(email)
-        console.log("this is the user", user)
-        if(!(user instanceof UserNotFoundError)){
-           return notFound(new EmailInUseError())
+        // console.log("this is the user", user)
+        if (!(user instanceof UserNotFoundError)) {
+            return notFound(new EmailInUseError())
         }
         const googleUserId = await this.createGoogleUserInterface.execute({
             email,
@@ -35,15 +34,15 @@ export class SignInGoogleUserController extends BaseController{
             name,
             picture,
             email_verified
-            })
+        })
 
-        return ok({GoogleUserId: googleUserId})
+        return ok({ GoogleUserId: googleUserId })
     }
-    
+
 }
 
 export namespace SignInGoogleUserController {
     export type Request = HttpRequest<CreateGoogleUserInterface.Request>;
-  
+
     export type Response = HttpResponse<{ GoogleUserId: string } | EmailInUseError>;
-  }
+}
