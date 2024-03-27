@@ -1,13 +1,16 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import dotenv from "dotenv";
-dotenv.config({ path: "src/main/config/env/.env" });
+// import { Strategy as FacebookStrategy } from "passport-facebook";
 
 
-passport.serializeUser((user, done) => {
-    console.log("serialized user", user.id);
-    done(null, user.id);
-  });
+
+// passport.serializeUser((user, done) => {
+//     console.log("serialized user", user.id);
+//     done(null, user.id);
+//   });
+
+
+// this better  be configurePassport , we can call it in src/main/config/app.ts as configurePassport
 export const options = passport.use(
   new GoogleStrategy(
     {
