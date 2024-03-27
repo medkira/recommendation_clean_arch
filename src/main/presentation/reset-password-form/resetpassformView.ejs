@@ -94,7 +94,7 @@
   }
 </style>
 <body>
-    <form class="form" action="http://localhost:8080/api/newPassword?token=<%= token %>" method="POST">
+    <form class="form" action="<%= process.env.BASE_URL %>/api/newPassword?token=<%= token %>" method="POST">
     <div class="title">Welcome,<br><span>reset password to continue</span></div>
     <input type="password" placeholder="Password" name="password" class="input">
     <input type="password" placeholder="Repeat Password" name="confirmPassword" class="input">

@@ -4,13 +4,13 @@ import { GetGoogleUserByEmailInterface } from "@application/interfaces/use-cases
 
 
 export class GetGoogleUserByEmail implements GetGoogleUserByEmailInterface {
-    constructor(private readonly getGoogleUserByEmailRepository: GetGoogleUserByEmailRepository) { }
-    async execute(email: string): Promise<GetGoogleUserByEmailInterface.Response> {
-        const user = await this.getGoogleUserByEmailRepository.getGoogleUserByEmail(email);
-        if(!user){
-          return new UserNotFoundError();
-        }
-        return user;    }
-  
+  constructor(private readonly getGoogleUserByEmailRepository: GetGoogleUserByEmailRepository) { }
+  async execute(email: string): Promise<GetGoogleUserByEmailInterface.Response> {
+    const user = await this.getGoogleUserByEmailRepository.getGoogleUserByEmail(email);
+    if (!user) {
+      return new UserNotFoundError();
+    }
+    return user;
   }
-  
+
+}

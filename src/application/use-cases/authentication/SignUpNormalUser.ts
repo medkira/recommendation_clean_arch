@@ -6,6 +6,7 @@ import { LoadNormalUserByEmailRepository } from "@application/interfaces/reposit
 import { UploadImage } from "@application/interfaces/utils/upload/UploadImage";
 import { SignUpNormalUserInterface } from "@application/interfaces/use-cases/authentication/SignUpNormalUserInterface";
 import { File } from "@domain/entities/File";
+import { buffer } from "stream/consumers";
 
 export class SignUpNormalUser implements SignUpNormalUser {
 
@@ -20,7 +21,7 @@ export class SignUpNormalUser implements SignUpNormalUser {
         const { email, password, age, address, gender, image, jobTitle, link, name,
             parent, phoneNumber, role, salary, socialStatus, username, zone } = userData;
 
-
+        console.log("email from sign up user ", email)
         const existingUser = await this.loadUserByEmailRepository.loadUserByEmail(email);
         if (existingUser) {
             return new EmailInUseError()
@@ -28,12 +29,14 @@ export class SignUpNormalUser implements SignUpNormalUser {
 
         const fileImage = image as File[];
         let imageUrl = "";
-        if (image) {
+        if (image instanceof File) {
             const imageBuffer = await this.imageProcess.ProfileImageProcess(fileImage[0].buffer);
             imageUrl = await this.uploadImage.uploadImage(imageBuffer);
+        } else {
+            imageUrl = image as string;
         }
 
-
+        console.log("ROLE from sign up user ", role)
         const hashedPassword = await this.hashGenerator.hash(password);
 
 

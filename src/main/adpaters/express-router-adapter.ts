@@ -14,7 +14,6 @@ export const expressRouterAdapter = (
         userId: req.userId,
         userRole: req.userRole,
 
-        user: req.user,
         host: req.get('host'),
         protocole: req.protocol,
 
