@@ -4,15 +4,16 @@ import { BaseController } from "../BaseController"
 import { SignInInterface } from "@application/interfaces/use-cases/authentication/SignInInterface";
 import { ok, unauthorized } from "@infra/http/helpers/https";
 import { UnauthorizedError } from "@application/errors/UnautorizedError";
+import { Validation } from "@infra/http/interfaces/validation/validations";
 
 export class SignInController extends BaseController {
 
     constructor(
-        // private readonly signInValidation: Validation,
+        private readonly signInValidation: Validation,
         private readonly signIn: SignInInterface,
 
     ) {
-        super();
+        super(signInValidation);
     }
 
     async execute(httpRequest: SignInController.Request): Promise<SignInController.Response> {

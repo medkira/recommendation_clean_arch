@@ -4,13 +4,15 @@ import { BaseController } from "../BaseController";
 import { EmailNotFoundError } from "@application/errors/EmailNotFundError";
 import { notFound, ok } from "@infra/http/helpers/https";
 import { SendEmailResetPasswordInterface } from "@application/interfaces/use-cases/resetpassword/SendEmailResetPasswordInterface";
+import { Validation } from "@infra/http/interfaces/validation/validations";
 
 export class SendEmailResetPasswordController extends BaseController {
 
     constructor(
+        private readonly sendEmailResetPasswordValidation: Validation,
         private readonly sendEmailResetPassword: SendEmailResetPasswordInterface
     ) {
-        super()
+        super(sendEmailResetPasswordValidation)
     }
 
 

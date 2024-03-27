@@ -12,5 +12,5 @@ export interface CreateGoogleUserInterface
 
 export namespace CreateGoogleUserInterface {
   export type Request = Omit<GoogleUserProps, "id" | "role">; // { email: string, password: string };
-  export type Response = Pick<GoogleUserProps, "id">;
+  export type Response = string;
 }

@@ -11,17 +11,18 @@ export const passportMiddlewareAdapter =
     async (req: Request, res: Response, next: NextFunction) => {
       passport.authenticate(
         strategy,
-
+        // {
+        //   successRedirect: '/'
+        // },
         (error: any, user: any, info: any) => {
+          // console.log("from passport middleware Adapter ", user)
           if (error) {
             return next(error);
           }
           if (!user) {
             return res.status(401).json({ message: "Authentication failed" });
           }
-          req.user = user._json;
-
-          // console.log("tetstttt from middleware", req.user);
+          Object.assign(req.body, user._json);
           next();
         }
       )(req, res, next);

@@ -5,8 +5,10 @@ import { HttpResponse } from "@infra/http/interfaces/http/HttpResponse";
 import { GetGoogleUserByEmailRepository } from "@application/interfaces/repositories/googleUser/GetGoogleUserByEmailRepository";
 import { GetGoogleUserByEmailInterface } from "@application/interfaces/use-cases/googleUser/GetGoogleUserByEmailInterface";
 import { EmailInUseError } from "@application/errors/EmailInUseError";
-import { notFound, ok } from "@infra/http/helpers/https";
+import { notFound, ok, unauthorized } from "@infra/http/helpers/https";
 import { UserNotFoundError } from "@application/errors/UserNotFoundError";
+import { UnauthorizedError } from "@application/errors/UnautorizedError";
+import { SignInInterface } from "@application/interfaces/use-cases/authentication/SignInInterface";
 
 
 
@@ -14,29 +16,42 @@ import { UserNotFoundError } from "@application/errors/UserNotFoundError";
 export class SignInGoogleUserController extends BaseController {
 
     constructor(
-        private readonly createGoogleUserInterface: CreateGoogleUserInterface,
+        private readonly createGoogleUser: CreateGoogleUserInterface,
         private readonly getGoogleUserByEmail: GetGoogleUserByEmailInterface,
+        private readonly signIn: SignInInterface,
+
     ) {
         super()
     }
 
     async execute(httpRequest: SignInGoogleUserController.Request): Promise<SignInGoogleUserController.Response> {
-        const { name, email, family_name, picture, email_verified } = httpRequest.user!
-        // console.log("from controller google user",name, "this is email",email)
-        const user = await this.getGoogleUserByEmail.execute(email)
-        // console.log("this is the user", user)
-        if (!(user instanceof UserNotFoundError)) {
-            return notFound(new EmailInUseError())
-        }
-        const googleUserId = await this.createGoogleUserInterface.execute({
-            email,
-            family_name,
-            name,
-            picture,
-            email_verified
-        })
+        const { name, email, family_name, picture, email_verified } = httpRequest.body!
 
-        return ok({ GoogleUserId: googleUserId })
+
+        const user = await this.getGoogleUserByEmail.execute(email);
+
+        if (user instanceof UserNotFoundError) {
+            await this.createGoogleUser.execute({
+                email,
+                family_name,
+                name,
+                picture,
+                email_verified
+            })
+            return ok({ view: 'google-auth/setUserRoleView', token: email });
+        } else {
+            const authenticationTokenOrError = await this.signIn.execute({ email, password: "" });
+
+            if (authenticationTokenOrError instanceof UnauthorizedError) {
+                return unauthorized(authenticationTokenOrError);
+            }
+            return ok({
+                authenticationToken: authenticationTokenOrError
+            });
+        }
+
+
+
     }
 
 }
@@ -44,5 +59,5 @@ export class SignInGoogleUserController extends BaseController {
 export namespace SignInGoogleUserController {
     export type Request = HttpRequest<CreateGoogleUserInterface.Request>;
 
-    export type Response = HttpResponse<{ GoogleUserId: string } | EmailInUseError>;
+    export type Response = HttpResponse<{ authenticationToken: string } | UnauthorizedError | { view: string, token: string }>;
 }
