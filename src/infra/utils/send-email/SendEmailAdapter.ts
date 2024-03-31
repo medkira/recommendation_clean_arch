@@ -15,8 +15,8 @@ export class SendEmailAdapter implements SendEmail {
             port: 587,
             secure: false,
             auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASSWORD,
+                user: process.env.SERVER_EMAIL,
+                pass: process.env.SERVER_EMAIL_PASS,
             },
 
             tls: {
@@ -24,7 +24,7 @@ export class SendEmailAdapter implements SendEmail {
             }
         });
         const message = {
-            from: process.env.EMAIL_USER,
+            from: process.env.SERVER_EMAIL,
             to: email,
             subject: subject,
             text: text,

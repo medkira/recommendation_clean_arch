@@ -2,7 +2,7 @@ export type DecodedTokenProps = {
     userId: string;
     payload?: any;
     createdAt?: Date;
-    expiresAt?: string | number;
+    expiresAt?: Date;
 };
 
 export class DecodedToken {
@@ -12,7 +12,7 @@ export class DecodedToken {
 
     public readonly createdAt?: Date;
 
-    public readonly expiresAt?: string | number;
+    public readonly expiresAt?: Date;
 
     constructor(props: DecodedTokenProps) {
         this.userId = props.userId;

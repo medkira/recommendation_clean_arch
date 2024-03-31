@@ -46,7 +46,7 @@ export class SendEmailResetPassword implements SendEmailResetPasswordInterface {
         const code = this.otpGenerator.generate();
 
         const expirationTime = new Date();
-        expirationTime.setSeconds(expirationTime.getSeconds() + 60);
+        expirationTime.setSeconds(expirationTime.getSeconds() + 300);
 
 
         const hashedCode = await this.hashGenerator.hash(code);

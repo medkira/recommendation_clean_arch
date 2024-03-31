@@ -30,6 +30,7 @@ export class renderResetPasswordFormController extends BaseController {
         // const payload = payloadOrError as { otp: string, userId: string };
         // const { otp, userId } = payloadOrError as { otp: string, userId: string }; // !!!!!
         const otpOrError = await this.verifyTotp.execute(payloadOrError as { code: string, userId: string });
+
         if (otpOrError instanceof ForbiddenError) {
             return forbidden(otpOrError);
         }

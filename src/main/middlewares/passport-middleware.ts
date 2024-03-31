@@ -4,6 +4,10 @@ import dotenv from "dotenv";
 dotenv.config({ path: "src/main/config/env/.env" });
 
 
+passport.serializeUser((user, done) => {
+    console.log("serialized user", user.id);
+    done(null, user.id);
+  });
 export const options = passport.use(
   new GoogleStrategy(
     {

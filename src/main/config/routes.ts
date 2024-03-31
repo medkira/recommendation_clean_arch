@@ -21,6 +21,7 @@ export const setupRoutes = (app: Express): void => {
   commentRoutes(router);
   menuRoutes(router);
   foodRoutes(router);
+  normaUserRoutes(router);
   googleAuthRoutes(router);
 
 };

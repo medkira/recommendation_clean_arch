@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const { Schema } = mongoose;
-  
+
 const chatBotSchema = new Schema({
   client_id: {
     type: String,
