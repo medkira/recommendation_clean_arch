@@ -14,7 +14,7 @@ export class TotpRepository implements CreateTotpRepository, GetTotpByUserIdRepo
     async createTotp(totpData: CreateTotpRepository.Request): Promise<CreateTotpRepository.Response> {
         const userTotp = new totpModel({
             ...totpData,
-            createdAt: new Date,
+            createdAt: new Date(),
         });
 
         const savedTotp = await userTotp.save();

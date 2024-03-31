@@ -9,7 +9,6 @@ export type HttpRequest<TBody = any, TParams = any, TQuery = any, THeaders = any
     files?: TFiles;
     userId?: string;
     userRole?: UserRole;
-
     user?:GoogleUser;
     host?: Thost;
     protocole?: TProtocole;

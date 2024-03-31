@@ -12,7 +12,7 @@ const googleUserSchema = new Schema({
     trim: true,
   },
   email: {
-    type: String,
+    type: Array,
     required: true,
 
     unique: true,

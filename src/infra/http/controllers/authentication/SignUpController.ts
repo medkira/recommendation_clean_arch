@@ -23,7 +23,7 @@ export class SignUpController extends BaseController {
 
   async execute(httpRequest: SignUpController.Request): Promise<HttpResponse> {
     const { role, email, password, image = httpRequest.files } = httpRequest.body!;
-
+    console.log(role);
 
 
     let idOrError;

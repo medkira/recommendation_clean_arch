@@ -1,37 +1,34 @@
 import { BaseController } from "@infra/http/controllers/BaseController";
-import { HttpRequest } from "@infra/http/interfaces/http/HttpRequest"
+import { HttpRequest } from "@infra/http/interfaces/http/HttpRequest";
 import { Request, Response } from "express";
+import * as path from 'path';
 
-export const pageRenderAdapter = (
-    controller: BaseController,
-
-) => async (req: Request, res: Response) => {
+export const pageRenderAdapter =
+  (controller: BaseController) => async (req: Request, res: Response) => {
     const httpRequest: HttpRequest = {
-        body: req.body,
-        params: req.params,
-        query: req.query,
-        headers: req.headers,
-        files: req.files,
-        userId: req.userId,
-        userRole: req.userRole,
-        host: req.get('host'),
-        protocole: req.protocol,
-    }
+      body: req.body,
+      params: req.params,
+      query: req.query,
+      headers: req.headers,
+      files: req.files,
+      userId: req.userId,
+      userRole: req.userRole,
+      host: req.get("host"),
+      protocole: req.protocol,
+    };
 
     const httpResponse = await controller.handle(httpRequest);
 
     if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
+      // ! need to fix this
+      res.render(httpResponse.body.view, { token: httpResponse.body.token });
+      console.log(httpResponse.body.view);
+      //res.render(httpResponse.body);
 
-        // ! need to fix this
-        res.render(httpResponse.body.view, { token: httpResponse.body.token });
-        // res.render(httpResponse.body);
-
-        // res.render('reset-password-form/resetpassformView', { token });
-
+      //res.render('reset-password-form/resetpassformView');
     } else {
-        res.status(httpResponse.statusCode).json({
-            error: httpResponse.body?.message,
-        })
+      res.status(httpResponse.statusCode).json({
+        error: httpResponse.body?.message,
+      });
     }
-
-}
+  };
