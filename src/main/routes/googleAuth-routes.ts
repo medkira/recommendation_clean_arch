@@ -22,7 +22,6 @@ export default (router: Router): void => {
 };
 
 
-
 export const multiPageRenderAdapter = (
   controller: BaseController,
 
@@ -44,16 +43,20 @@ export const multiPageRenderAdapter = (
   if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
     if (httpResponse.body.view == 'google-auth/setUserRoleView') {
       console.log(httpResponse)
-      res.render(httpResponse.body.view, { token: httpResponse.body.token });
+      res.render(httpResponse.body.view, { token: httpResponse.body.token }); // this an email i called it token need to be fixed token {email}
 
     } else {
-      res.status(httpResponse.statusCode).json(httpResponse.body);
+      // res.status(httpResponse.statusCode).json(httpResponse.body);
+
+
+      const expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 30);
+      // console.log(httpResponse.body)
+      res.cookie('TokenCookie', httpResponse.body.authenticationToken, { expires: expirationDate, httpOnly: false, sameSite: true });
+      // Redirect to a URL
+      res.redirect(`${process.env.CLIENT_BASE_URL}/home`);
 
     }
-
-
-
-
 
   } else {
     res.status(httpResponse.statusCode).json({
@@ -91,5 +94,11 @@ const expressRouterAdapterFinsihSetRoleController = async (req: Request, res: Re
   }
 
   const authToken = await signin.execute({ email: user.email, password: "" });
-  res.status(200).send({ authenticationToken: authToken });
+  // res.status(200).send({ authenticationToken: authToken });
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 30);
+  // console.log(httpResponse.body)
+  res.cookie('TokenCookie', authToken, { expires: expirationDate, httpOnly: false, sameSite: true });
+  // Redirect to a URL
+  res.redirect(`${process.env.CLIENT_BASE_URL}/home`);
 }

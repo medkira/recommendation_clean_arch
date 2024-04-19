@@ -50,8 +50,6 @@ export class SignInGoogleUserController extends BaseController {
             });
         }
 
-
-
     }
 
 }
