@@ -26,11 +26,16 @@ export class PlaceRepository
   GetLatestPlacesRepository {
 
   async getLatestPlaces(params: GetLatestPlacesRepository.Request): Promise<GetLatestPlacesRepository.Response> {
-
-
-    return paginateModel(placeModel, params.page, params.paginationLimit, params.query);
-
+    const rawLatestPlaces = await paginateModel(placeModel, params.page, params.paginationLimit, params.query);
+    const transformedData = mapCollection(rawLatestPlaces.data);
+    return {
+      data: transformedData,
+      page: rawLatestPlaces.page,
+      total: rawLatestPlaces.total,
+      totalPages: rawLatestPlaces.totalPages
+    };
   }
+
 
 
 
