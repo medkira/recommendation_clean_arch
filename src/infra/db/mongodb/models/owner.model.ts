@@ -5,32 +5,32 @@ const { Schema } = mongoose;
 const ownerSchema = new Schema({
   name: {
     type: String,
-    required: true,
+    required: false,
   },
   username: {
     type: String,
-    required: true,
+    required: false,
   },
   image: {
     type: Array,
   },
   email: {
     type: String,
-    required: true,
+    required: false,
   },
   password: {
     type: String,
-    required: true,
+    required: false,
   },
   createdAt: {
     type: Date,
     default: Date.now,
-    required: true,
+    required: false,
   },
   updatedAt: {
     type: Date,
     default: Date.now,
-    required: true,
+    required: false,
   },
   isEmailVerified: {
     type: Boolean,
@@ -38,7 +38,7 @@ const ownerSchema = new Schema({
   },
   role: {
     type: String,
-    required: true,
+    required: false,
   },
   places: {
     type: Number,

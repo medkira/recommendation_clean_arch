@@ -27,9 +27,11 @@ export class SignUpOwner implements SignUpOwner {
 
     const fileImage = image as File[];
     let imageUrl = "";
-    if (image) {
+    if (image instanceof File) {
       const imageBuffer = await this.imageProcess.ProfileImageProcess(fileImage[0].buffer);
       imageUrl = await this.uploadImage.uploadImage(imageBuffer);
+    } else {
+      imageUrl = image as string;
     }
 
     const hashedPassword = await this.hashGenerator.hash(password);

@@ -36,7 +36,7 @@ export class SignUpNormalUser implements SignUpNormalUser {
             imageUrl = image as string;
         }
 
-        console.log("ROLE from sign up user ", role)
+        // console.log("ROLE from sign up user ", role)
         const hashedPassword = await this.hashGenerator.hash(password);
 
 

@@ -9,10 +9,10 @@ export const makeSignUpValidation = (): ValidationComposite => {
     const emailValidator = new EmailValidatorAdapter();
 
     return new ValidationComposite([
-        new RequiredFieldValidation('name'),
+        // new RequiredFieldValidation('name'),
         new RequiredFieldValidation('username'),
         // new RequiredFieldValidationByRole(UserRole.OWNER, 'places'),
-        new RequiredFieldValidationByRole(UserRole.NORMAL, 'jobTitle'),
+        // new RequiredFieldValidationByRole(UserRole.NORMAL, 'jobTitle'),
         new RequiredFieldValidation('email'),
         new RequiredFieldValidation('password'),
         new EmailValidation('email', emailValidator),
