@@ -44,7 +44,7 @@ export const multiPageRenderAdapter = (
 
     // ? if no user redirect to selectRole : signup
     if (httpResponse.body.view == 'google-auth/setUserRoleView') {
-      console.log(httpResponse)
+      // console.log(httpResponse)
       res.render(httpResponse.body.view, { token: httpResponse.body.token }); // this an email i called it token need to be fixed token {email}
 
 
@@ -56,10 +56,9 @@ export const multiPageRenderAdapter = (
       const expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 30);
       // console.log(httpResponse.body)
-      res.cookie('TokenCookie', httpResponse.body.authenticationToken, { expires: expirationDate, httpOnly: false, sameSite: "none", secure: true, domain: "deal-discover-vue.vercel.app" });
+      res.cookie('TokenCookie', httpResponse.body.authenticationToken, { expires: expirationDate, httpOnly: false, sameSite: "none", secure: true });
       // Redirect to a URL
-      res.redirect(`${process.env.CLIENT_BASE_URL}/home`);
-
+      res.redirect(`${process.env.CLIENT_BASE_URL}`);
     }
 
   } else {
@@ -102,7 +101,7 @@ const expressRouterAdapterFinsihSetRoleController = async (req: Request, res: Re
   const expirationDate = new Date();
   expirationDate.setDate(expirationDate.getDate() + 30);
   // console.log(httpResponse.body)
-  res.cookie('TokenCookie', authToken, { expires: expirationDate, httpOnly: false, sameSite: true });
+  res.cookie('TokenCookie', authToken, { expires: expirationDate, httpOnly: false, sameSite: "strict", secure: true });
   // Redirect to a URL
   res.redirect(`${process.env.CLIENT_BASE_URL}/home`);
 }

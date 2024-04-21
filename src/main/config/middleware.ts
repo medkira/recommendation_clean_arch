@@ -7,9 +7,11 @@ export const setupMiddleware = (app: Express): void => {
     app.use(jsonparser);
     app.use(urlencodedparser);
     app.use(cors({
-        origin: 'https://deal-discover-vue.vercel.app',
+        origin: true,
+        // origin: 'https://deal-discover-vue.vercel.app',
         credentials: true
     }))
+    // app.set("trust proxy", 1);
 
     // app.use(session({
     //     secret: 'testttt', // Replace with a secret key for session encryption
