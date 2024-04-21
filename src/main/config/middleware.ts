@@ -7,6 +7,7 @@ export const setupMiddleware = (app: Express): void => {
     app.use(jsonparser);
     app.use(urlencodedparser);
     app.use(cors({
+        origin: 'https://deal-discover-vue.vercel.app',
         credentials: true
     }))
 
