@@ -56,7 +56,7 @@ export const multiPageRenderAdapter = (
       const expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 30);
       // console.log(httpResponse.body)
-      res.cookie('TokenCookie', httpResponse.body.authenticationToken, { expires: expirationDate, httpOnly: true, sameSite: true, secure: true });
+      res.cookie('TokenCookie', httpResponse.body.authenticationToken, { expires: expirationDate, httpOnly: false, sameSite: "lax", secure: true });
       // Redirect to a URL
       res.redirect(`${process.env.CLIENT_BASE_URL}/home`);
 
