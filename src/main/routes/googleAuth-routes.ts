@@ -41,10 +41,14 @@ export const multiPageRenderAdapter = (
   const httpResponse = await controller.handle(httpRequest);
 
   if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
+
+    // ? if no user redirect to selectRole : signup
     if (httpResponse.body.view == 'google-auth/setUserRoleView') {
       console.log(httpResponse)
       res.render(httpResponse.body.view, { token: httpResponse.body.token }); // this an email i called it token need to be fixed token {email}
 
+
+      // ? if user exist redirect to signin : render home page with cookie
     } else {
       // res.status(httpResponse.statusCode).json(httpResponse.body);
 
@@ -52,7 +56,7 @@ export const multiPageRenderAdapter = (
       const expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 30);
       // console.log(httpResponse.body)
-      res.cookie('TokenCookie', httpResponse.body.authenticationToken, { expires: expirationDate, httpOnly: false, sameSite: true });
+      res.cookie('TokenCookie', httpResponse.body.authenticationToken, { expires: expirationDate, httpOnly: false, sameSite: true, secure: true });
       // Redirect to a URL
       res.redirect(`${process.env.CLIENT_BASE_URL}/home`);
 
