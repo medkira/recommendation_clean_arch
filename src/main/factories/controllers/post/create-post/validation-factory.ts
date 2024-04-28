@@ -5,7 +5,7 @@ import { ValidationComposite } from "@infra/http/validation/ValidationComposite"
 
 export const makeCreatePostValidation = (): ValidationComposite => {
     return new ValidationComposite([
-        new RequiredFieldValidation('title'),
+        // new RequiredFieldValidation('title'),
         new RequiredFieldValidation('content'),
         new RequiredFieldValidation('post_type'),
     ], 'body');

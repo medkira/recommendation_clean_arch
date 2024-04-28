@@ -5,11 +5,14 @@ import { Validation } from "@infra/http/interfaces/validation/validations";
 import { BaseController } from "../BaseController";
 import { ok } from "@infra/http/helpers/https";
 import { File } from "@domain/entities/File";
+import { LoadUserByIdInterface } from "@application/interfaces/use-cases/users/LoadUserByIdInterface";
+import { UserNotFoundError } from "@application/errors/UserNotFoundError";
 
 export class CreatePostController extends BaseController {
   constructor(
     private readonly createPostValidation: Validation,
-    private readonly createPost: CreatePostInterface
+    private readonly createPost: CreatePostInterface,
+    private readonly loadUserById: LoadUserByIdInterface,
   ) {
     super(createPostValidation);
   }
@@ -17,24 +20,25 @@ export class CreatePostController extends BaseController {
   async execute(
     httpRequest: CreatePostController.Request
   ): Promise<CreatePostController.Response> {
+
+
+
     const userId = httpRequest.userId!;
-    const {
-      title,
-      content,
-      post_type,
-      likes,
-      location,
-      postImage = httpRequest.files?.postImage,
-    } = httpRequest.body!;
-    const postId = await this.createPost.execute({
-      userId,
-      title,
-      content,
-      post_type,
-      postImage,
-      likes,
-      location,
-    });
+
+    const userOrUserNotFoundEroor = await this.loadUserById.execute(userId);
+
+    // add this check to be abel to see all props or user 
+    // if (userOrUserNotFoundEroor instanceof UserNotFoundError) {
+    //   /// suppose to return an error...
+    //   return new UserNotFoundError()
+    // }
+    const { name } = userOrUserNotFoundEroor;
+
+
+    const { title, content, post_type, likes, location, postImage = httpRequest.files?.postImage, } = httpRequest.body!;
+
+
+    const postId = await this.createPost.execute({ userId, title, content, post_type, postImage, likes, location, user_name: name });
 
     return ok({ postId, message: "post created successfully" });
   }

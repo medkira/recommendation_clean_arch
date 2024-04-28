@@ -1,11 +1,13 @@
 import { GetGoogleUserByEmailRepository } from "@application/interfaces/repositories/googleUser/GetGoogleUserByEmailRepository";
 import googleUserModel from "../models/googleUser.model";
-import { mapDocument, objectIdToString } from "../helpers/mappers";
+import { isValidObjectId, mapDocument, objectIdToString } from "../helpers/mappers";
 import { CreateGoogleUserRepository } from "@application/interfaces/repositories/googleUser/CreateGoogleUserRepository";
+import { GetGoogleUserByIdRepository } from "@application/interfaces/repositories/googleUser/GetGoogleUserByIdRepository";
 
 
 
-export class GoogleUserRepository implements GetGoogleUserByEmailRepository, CreateGoogleUserRepository {
+export class GoogleUserRepository implements GetGoogleUserByEmailRepository, CreateGoogleUserRepository, GetGoogleUserByIdRepository {
+
     async createGoogleUser(userData: CreateGoogleUserRepository.Request): Promise<CreateGoogleUserRepository.Response> {
         // console.log(userData);
         const user = new googleUserModel({
@@ -25,4 +27,14 @@ export class GoogleUserRepository implements GetGoogleUserByEmailRepository, Cre
         return rawuser && mapDocument(rawuser);
     }
 
+    async getGoogleUserById(id: string): Promise<any> {
+        if (!isValidObjectId(id)) {
+            return null;
+        }
+
+
+        const rawuser = await googleUserModel.findById(id);
+
+        return rawuser && mapDocument(rawuser);
+    }
 }

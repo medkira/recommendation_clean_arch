@@ -6,6 +6,7 @@ export type PostProps = {
   content: string;
   postImage: File[] | string[];
   userId: string;
+  user_name: string;
   likes: number;
   createdAt: Date;
   updatedAt: Date;
@@ -20,6 +21,7 @@ export class Post {
   public readonly content: string;
   public readonly postImage: File[] | string[];
   public readonly userId: string;
+  public readonly user_name: string;
   public readonly likes: number;
   public readonly createdAt: Date;
   public readonly updatedAt: Date;
@@ -33,6 +35,7 @@ export class Post {
     this.content = props.content;
     this.postImage = props.postImage;
     this.userId = props.userId;
+    this.user_name = props.user_name;
     this.likes = props.likes;
     this.createdAt = props.createdAt;
     this.updatedAt = props.updatedAt;

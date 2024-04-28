@@ -5,23 +5,27 @@ const { Schema } = mongoose;
 const postSchema = new Schema({
   title: {
     type: String,
-    trim: true,
-    required: true,
+    trim: false,
+    required: false,
   },
   content: {
     type: String,
-    required: true,
+    required: false,
   },
   postImage: {
     type: Array,
   },
   userId: {
     type: String,
-    required: true,
+    required: false,
+  },
+  user_name: {
+    type: String,
+
   },
   likes: {
     type: Number,
-    required: true,
+    required: false,
   },
   location: {
     type: String,

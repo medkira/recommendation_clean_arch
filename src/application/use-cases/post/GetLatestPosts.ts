@@ -4,7 +4,7 @@ import { GetLatesPostsInterface } from "@application/interfaces/use-cases/posts/
 export class GetLatesPosts implements GetLatesPostsInterface {
   constructor(
     private readonly getLatesrPostsRepository: GetLatestPostsRepository
-  ) {}
+  ) { }
   async execute(
     params: GetLatesPostsInterface.Request
   ): Promise<GetLatesPostsInterface.Response> {

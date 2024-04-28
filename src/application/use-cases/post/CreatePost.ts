@@ -1,7 +1,7 @@
-import { PostImageProcess } from "@application/interfaces/image-processing/PostImageProcess";
 import { CreatePostRepository } from "@application/interfaces/repositories/post/CreatePostRepository";
-import { UploadImage } from "@application/interfaces/upload/UploadImage";
 import { CreatePostInterface } from "@application/interfaces/use-cases/posts/CreatePostInterface";
+import { PostImageProcess } from "@application/interfaces/utils/image-processing/PostImageProcess";
+import { UploadImage } from "@application/interfaces/utils/upload/UploadImage";
 import { File } from "@domain/entities/File";
 
 export class CreatePost implements CreatePostInterface {
@@ -9,10 +9,10 @@ export class CreatePost implements CreatePostInterface {
     private readonly createPostRepository: CreatePostRepository,
     private readonly uploadImage: UploadImage,
     private readonly imageProcess: PostImageProcess
-  ) {}
+  ) { }
 
   async execute(postData: CreatePostInterface.Request): Promise<string> {
-    const { postImage, content, post_type, title, location, userId } = postData;
+    const { postImage, content, post_type, title, location, userId, user_name } = postData;
     const fileImage = postImage as File[];
     const imageUrls: string[] = [];
 
@@ -33,6 +33,7 @@ export class CreatePost implements CreatePostInterface {
       location,
       likes: 0,
       postImage: imageUrls,
+      user_name
     });
   }
 }
