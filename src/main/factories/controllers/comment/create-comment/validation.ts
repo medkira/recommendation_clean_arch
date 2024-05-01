@@ -7,7 +7,7 @@ export const makeCreateCommentValidation = (): ValidationComposite => {
       new RequiredFieldValidation("title"),
       new RequiredFieldValidation("text"),
       new RequiredFieldValidation("postId"),
-      new RequiredFieldValidation("userId"),
+      // new RequiredFieldValidation("userId"),
     ],
     "body"
   );

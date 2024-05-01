@@ -27,7 +27,6 @@ export class CreateCommentController extends BaseController {
         const userId = httpRequest.userId!;
         const { postId, title, text, likes } = httpRequest.body!;
         const postOrError = await this.getPostById.execute(postId);
-
         if (postOrError instanceof PostNotFoundError) {
             return notFound(postOrError);
         }

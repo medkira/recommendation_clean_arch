@@ -24,7 +24,6 @@ export class CreatePostController extends BaseController {
 
 
     const userId = httpRequest.userId!;
-
     const userOrUserNotFoundEroor = await this.loadUserById.execute(userId);
 
     // add this check to be abel to see all props or user 

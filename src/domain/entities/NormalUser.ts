@@ -11,6 +11,9 @@ export type NormalUserProps = UserProps & {
   salary: number;
   socialStatus: string;
   parent: boolean;
+  isItOwner: boolean;
+
+
 };
 
 export class NormalUser {

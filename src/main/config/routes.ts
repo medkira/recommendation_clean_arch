@@ -5,6 +5,7 @@ import googleAuthRoutes from "@main/routes/googleAuth-routes";
 import menuRoutes from "@main/routes/menu-routes";
 import placeRoutes from "@main/routes/place-routes";
 import postRoutes from "@main/routes/post-routes";
+import rateRoutes from "@main/routes/rate-routes";
 import resetPassRoutes from "@main/routes/reset-password-routes";
 
 import { Express, Router } from "express";
@@ -20,6 +21,7 @@ export const setupRoutes = (app: Express): void => {
   commentRoutes(router);
   menuRoutes(router);
   foodRoutes(router);
+  rateRoutes(router);
   googleAuthRoutes(router);
 
 };
