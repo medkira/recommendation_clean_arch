@@ -1,4 +1,4 @@
-import { PlaceProps } from "@domain/entities/Place";
+import { Place, PlaceProps } from "@domain/entities/Place";
 
 export interface CreatePlaceRepository {
   createPlace(
@@ -8,5 +8,5 @@ export interface CreatePlaceRepository {
 
 export namespace CreatePlaceRepository {
   export type Request = Omit<PlaceProps, "id">;
-  export type Response = Pick<PlaceProps, "id">;
+  export type Response = string;
 }

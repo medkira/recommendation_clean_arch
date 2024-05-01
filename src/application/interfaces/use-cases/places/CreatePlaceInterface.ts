@@ -10,5 +10,5 @@ export interface CreatePlaceInterface
 
 export namespace CreatePlaceInterface {
   export type Request = Omit<PlaceProps, "id">; // { email: string, password: string };
-  export type Response = Pick<PlaceProps, "id">;
+  export type Response = string;
 }

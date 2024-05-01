@@ -54,7 +54,7 @@ export class PlaceRepository
     });
     const savedPlace = await place.save();
     const placeId = objectIdToString(savedPlace._id);
-    return { id: placeId };
+    return placeId;
   }
 
   async getPlaceById(
