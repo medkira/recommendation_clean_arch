@@ -8,6 +8,9 @@ export type RateProps = {
   rated_name: rated_name;
   topCount: number; //this is used in the getTopRatedUsecase to set the wanted topCount
   review: string;
+  user_name: string;
+
+
 };
 
 export class Rate {
@@ -20,6 +23,8 @@ export class Rate {
   public readonly rated_name: rated_name;
   // public readonly topCount: number;
   public readonly review: string;
+  public readonly user_name: string;
+
 
 
   constructor(props: RateProps) {
@@ -32,6 +37,8 @@ export class Rate {
     this.rated_name = props.rated_name;
     // this.topCount = props.topCount;
     this.review = props.review;
+    this.user_name = props.user_name;
+
   }
 }
 

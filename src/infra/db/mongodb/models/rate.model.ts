@@ -12,6 +12,9 @@ const rateSchema = new Schema({
         type: String,
         required: true,
     },
+    user_name: {
+        type: String,
+    },
     rated_id: {
         type: String,
         required: true,

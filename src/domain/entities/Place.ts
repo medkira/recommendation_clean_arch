@@ -6,6 +6,7 @@ export type PlaceProps = {
   location: string;
   description: string;
   url: string;
+  placeImage: string;
 };
 
 export class Place {
@@ -16,6 +17,7 @@ export class Place {
   public readonly location: string;
   public readonly description: string;
   public readonly url: string;
+  public readonly placeImage: string;
 
   constructor(props: PlaceProps) {
     this.id = props.id;
@@ -25,6 +27,7 @@ export class Place {
     this.location = props.location;
     this.description = props.description;
     this.url = props.url;
+    this.placeImage = props.placeImage;
   }
 }
 

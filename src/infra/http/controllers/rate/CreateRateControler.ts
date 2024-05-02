@@ -16,6 +16,8 @@ export class CreateRateController extends BaseController {
         private readonly createRateValidation: Validation,
         private readonly createRate: CreateRateInterface,
         private readonly getPlaceById: GetPlaceByIdInterface,
+        private readonly loadUserById: LoadUserByIdInterface,
+
     ) {
         super(createRateValidation);
     }
@@ -26,15 +28,14 @@ export class CreateRateController extends BaseController {
 
 
         const userId = httpRequest.userId!;
-        // const userOrUserNotFoundError = await this.loadUserById.execute(userId);
 
         // add this check to be abel to see all props or user 
         // if (userOrUserNotFoundEroor instanceof UserNotFoundError) {
         //   /// suppose to return an error...
         //   return new UserNotFoundError()
         // }
-        // const { name } = userOrUserNotFoundError;
-
+        const userOrUserNotFoundError = await this.loadUserById.execute(userId);
+        const { name } = userOrUserNotFoundError;
 
         const { rate, rated_id, review, rated_name, } = httpRequest.body!;
         const placeOrError = await this.getPlaceById.execute(rated_id);
@@ -42,7 +43,7 @@ export class CreateRateController extends BaseController {
             return notFound(placeOrError);
         }
 
-        const RateId = await this.createRate.execute({ rate, rated_id, review, rated_name, user_id: userId });
+        const RateId = await this.createRate.execute({ rate, rated_id, review, rated_name, user_id: userId, user_name: name });
 
         return ok({ RateId, message: "Rate created successfully" });
     }

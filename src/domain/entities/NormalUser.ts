@@ -1,3 +1,4 @@
+import { Place } from "./Place";
 import { UserProps, UserRole } from "./User";
 import { File } from "@domain/entities/File";
 
@@ -12,6 +13,7 @@ export type NormalUserProps = UserProps & {
   socialStatus: string;
   parent: boolean;
   isItOwner: boolean;
+  favoritList: Place[];
 
 
 };
@@ -37,6 +39,7 @@ export class NormalUser {
   public readonly salary: number;
   public readonly socialStatus: string;
   public readonly parent: boolean;
+  public readonly favoritList: Place[];
 
   constructor(props: NormalUserProps) {
     this.role = props.role;
@@ -59,5 +62,6 @@ export class NormalUser {
     this.salary = props.salary;
     this.socialStatus = props.socialStatus;
     this.parent = props.parent;
+    this.favoritList = props.favoritList;
   }
 }

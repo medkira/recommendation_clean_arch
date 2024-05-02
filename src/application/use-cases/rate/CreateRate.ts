@@ -11,15 +11,14 @@ export class CreateRate implements CreateRateInterface {
     ) { }
 
     async execute(RateData: CreateRateInterface.Request): Promise<string> {
-        const { rate, rated_id, review, rated_name, user_id } = RateData;
-
-
+        const { rate, rated_id, review, rated_name, user_id, user_name } = RateData;
         return this.createRateRepository.createRate({
             rate,
             rated_id,
             review,
             rated_name,
-            user_id
+            user_id,
+            user_name
         });
     }
 }

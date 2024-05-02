@@ -1,5 +1,6 @@
 // entities/User.ts
 import { File } from "@domain/entities/File";
+import { Place } from "./Place";
 
 export type UserProps = {
   id: string;
