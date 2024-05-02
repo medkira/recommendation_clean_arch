@@ -13,7 +13,7 @@ export type NormalUserProps = UserProps & {
   socialStatus: string;
   parent: boolean;
   isItOwner: boolean;
-  favoritList: Place[];
+  favouritePlaces: Place[];
 
 
 };
@@ -39,7 +39,7 @@ export class NormalUser {
   public readonly salary: number;
   public readonly socialStatus: string;
   public readonly parent: boolean;
-  public readonly favoritList: Place[];
+  public readonly favouritePlaces: Place[];
 
   constructor(props: NormalUserProps) {
     this.role = props.role;
@@ -62,6 +62,6 @@ export class NormalUser {
     this.salary = props.salary;
     this.socialStatus = props.socialStatus;
     this.parent = props.parent;
-    this.favoritList = props.favoritList;
+    this.favouritePlaces = props.favouritePlaces;
   }
 }

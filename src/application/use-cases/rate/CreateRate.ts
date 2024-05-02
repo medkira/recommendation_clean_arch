@@ -1,4 +1,3 @@
-
 import { CreateRateRepository } from "@application/interfaces/repositories/rates/CreateRateRepository";
 import { CreateRateInterface } from "@application/interfaces/use-cases/rates/CreateRateInterface";
 import { UploadImage } from "@application/interfaces/utils/upload/UploadImage";

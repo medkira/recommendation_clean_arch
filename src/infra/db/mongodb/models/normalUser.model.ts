@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { gender } from "../const/gender";
+import { Place } from "@domain/entities/Place";
 
 const { Schema } = mongoose;
 
@@ -12,8 +13,8 @@ const normalUserSchema = new Schema({
     type: String,
     trim: true,
   },
-  favoritePlaces: {
-    type: Number,
+  favouritePlaces: {
+    type: Array<Place>
   },
   email: {
     type: String,
@@ -84,6 +85,7 @@ const normalUserSchema = new Schema({
     type: Boolean,
     default: false,
   },
+
 });
 
 const normalUserModel = mongoose.model("normalUser", normalUserSchema);

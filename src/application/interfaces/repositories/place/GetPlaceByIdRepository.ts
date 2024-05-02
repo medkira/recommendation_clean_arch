@@ -1,5 +1,4 @@
-import { PlaceNotFoundError } from "@application/errors/PlaceNotFoundError";
-import { Place, PlaceProps } from "@domain/entities/Place";
+import { Place } from "@domain/entities/Place";
 
 export interface GetPlaceByIdRepository {
   getPlaceById(

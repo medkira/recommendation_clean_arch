@@ -5,9 +5,38 @@ import { LoadNormalUserByEmailRepository } from "@application/interfaces/reposit
 import { LoadOwnerByIdlRepository } from "@application/interfaces/repositories/owner/LoadOwnerByIdRepository";
 import { UpdateNormalUserPasswordRepository } from "@application/interfaces/repositories/normalUser/updateNormalUserPasswordRepository";
 import { LoadNormalUserByIdRepository } from "@application/interfaces/repositories/normalUser/LoadNormalUserByIdRepository";
+import { AddPlaceToFavouriteRepository } from "@application/interfaces/repositories/users/AddPlaceToFavouriteRepository";
+import { GetFavouritePlacesByIdRepository } from "@application/interfaces/repositories/users/GetFavouritePlacesByIdRepository";
 
 export class NormalUserRepository implements
-    CreateNormalUserRepository, LoadNormalUserByEmailRepository, LoadNormalUserByIdRepository, UpdateNormalUserPasswordRepository {
+    CreateNormalUserRepository, LoadNormalUserByEmailRepository,
+    LoadNormalUserByIdRepository, UpdateNormalUserPasswordRepository,
+    AddPlaceToFavouriteRepository, GetFavouritePlacesByIdRepository {
+
+    async getFavouritePlacesById(id: string): Promise<GetFavouritePlacesByIdRepository.Response> {
+        if (!isValidObjectId(id)) {
+            return null;
+        }
+        const rawFavouritePlaces = await normalUserModel.findById(id, { favouritePlaces: 1 });
+
+
+        // const rawFavouritePlaces = await normalUserModel.findById(id, { favouritePlaces: 1, _id: 0 });
+        // const rawFavouritePlaces = await normalUserModel.findById(id).select('favouritePlaces');
+        // const rawFavouritePlaces = await normalUserModel.findOne({ _id: stringToObjectId(id) }, { favouritePlaces: 1 });
+        // console.log(rawFavouritePlaces)
+        return rawFavouritePlaces && mapDocument(rawFavouritePlaces);
+    }
+
+
+    async addPlaceToFavourite(params: AddPlaceToFavouriteRepository.Request): Promise<void> {
+        const { placeId, userId } = params;
+        await normalUserModel.findByIdAndUpdate(
+            stringToObjectId(userId),
+            { $push: { favouritePlaces: placeId } }
+        )
+    }
+
+
 
     async updateNormalUserPassword(params: UpdateNormalUserPasswordRepository.Request): Promise<UpdateNormalUserPasswordRepository.Response> {
         const { id, password } = params;
