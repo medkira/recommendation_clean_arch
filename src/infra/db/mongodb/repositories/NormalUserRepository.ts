@@ -7,11 +7,13 @@ import { UpdateNormalUserPasswordRepository } from "@application/interfaces/repo
 import { LoadNormalUserByIdRepository } from "@application/interfaces/repositories/normalUser/LoadNormalUserByIdRepository";
 import { AddPlaceToFavouriteRepository } from "@application/interfaces/repositories/users/AddPlaceToFavouriteRepository";
 import { GetFavouritePlacesByIdRepository } from "@application/interfaces/repositories/users/GetFavouritePlacesByIdRepository";
+import { RemovePlaceFromFavouriteRepository } from "@application/interfaces/repositories/users/RemovePlaceFromFavouriteRepository";
 
 export class NormalUserRepository implements
     CreateNormalUserRepository, LoadNormalUserByEmailRepository,
     LoadNormalUserByIdRepository, UpdateNormalUserPasswordRepository,
-    AddPlaceToFavouriteRepository, GetFavouritePlacesByIdRepository {
+    AddPlaceToFavouriteRepository, GetFavouritePlacesByIdRepository, RemovePlaceFromFavouriteRepository {
+
 
     async getFavouritePlacesById(id: string): Promise<GetFavouritePlacesByIdRepository.Response> {
         if (!isValidObjectId(id)) {
@@ -33,6 +35,14 @@ export class NormalUserRepository implements
         await normalUserModel.findByIdAndUpdate(
             stringToObjectId(userId),
             { $push: { favouritePlaces: placeId } }
+        )
+    }
+
+    async removePlaceFromFavourite(params: RemovePlaceFromFavouriteRepository.Request): Promise<void> {
+        const { placeId, userId } = params;
+        await normalUserModel.findByIdAndUpdate(
+            stringToObjectId(userId),
+            { $pull: { favouritePlaces: placeId } }
         )
     }
 

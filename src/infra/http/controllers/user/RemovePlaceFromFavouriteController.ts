@@ -1,23 +1,23 @@
-import { AddPlaceToFavouriteInterface } from "@application/interfaces/use-cases/users/AddPlaceToFavouriteInterface";
 import { BaseController } from "../BaseController";
 import { HttpRequest } from "@infra/http/interfaces/http/HttpRequest";
 import { HttpResponse } from "@infra/http/interfaces/http/HttpResponse";
 import { notFound, ok } from "@infra/http/helpers/https";
 import { PlaceNotFoundError } from "@application/errors/PlaceNotFoundError";
 import { GetPlaceByIdInterface } from "@application/interfaces/use-cases/places/GetPlaceByIdInterface";
+import { RemovePlaceFromFavouriteInterface } from "@application/interfaces/use-cases/users/RemovePlaceFromFavouriteInterface";
 
 
-export class AddPlaceToFavouriteController extends BaseController {
+export class RemovePlaceFromFavouriteController extends BaseController {
 
     constructor(
         private readonly getPlaceById: GetPlaceByIdInterface,
-        private readonly addPlaceToFavourite: AddPlaceToFavouriteInterface,
+        private readonly removePLaceFromFavourite: RemovePlaceFromFavouriteInterface,
 
     ) {
         super();
     }
 
-    async execute(httpRequest: AddPlaceToFavouriteControllert.Request): Promise<AddPlaceToFavouriteControllert.Response> {
+    async execute(httpRequest: RemovePlaceFromFavouriteControllert.Request): Promise<RemovePlaceFromFavouriteControllert.Response> {
         const { placeId } = httpRequest.body!;
         const userId = httpRequest.userId!;
 
@@ -26,15 +26,15 @@ export class AddPlaceToFavouriteController extends BaseController {
             return notFound(getPlaceByIdOrError);
         }
 
-        await this.addPlaceToFavourite.execute({ placeId, userId })
+        await this.removePLaceFromFavourite.execute({ placeId, userId })
 
-        return ok({ "message": "Place Added successfully" });
+        return ok({ "message": "Place removed successfully" });
     }
 
 }
 
 
-export namespace AddPlaceToFavouriteControllert {
+export namespace RemovePlaceFromFavouriteControllert {
     export type Request = HttpRequest<{ placeId: string }>;
     export type Response = HttpResponse<undefined | PlaceNotFoundError>
 
