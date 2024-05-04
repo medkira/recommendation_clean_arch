@@ -21,14 +21,17 @@ export class CreatePlaceController extends BaseController {
     const user_id = httpRequest.userId!;
     const user_role = httpRequest.userRole!;
 
-    if (user_role != UserRole.OWNER && user_role != UserRole.ADMIN) {
-      return forbidden(new ForbiddenError())
-    }
+    // if (user_role != UserRole.OWNER && user_role != UserRole.ADMIN) {
+    //   return forbidden(new ForbiddenError())
+    // }
 
 
-    const { name, type, location, description, url, placeImage = httpRequest.files?.postImage } = httpRequest.body!;
+    const { name, type, location, description, url, is_verified, placeImage = httpRequest.files?.postImage } = httpRequest.body!;
+    const verified = user_role == UserRole.ADMIN;
+
 
     const placeId = await this.createPlace.execute({
+      is_verified: verified,
       user_id,
       name,
       type,

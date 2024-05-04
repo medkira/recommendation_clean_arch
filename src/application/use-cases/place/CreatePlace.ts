@@ -13,7 +13,7 @@ export class CreatePlace implements CreatePlaceInterface {
     placeData: CreatePlaceInterface.Request
   ): Promise<CreatePlaceInterface.Response> {
 
-    const { description, location, name, placeImage, type, url, user_id } = placeData;
+    const { description, location, name, placeImage, type, url, user_id, is_verified } = placeData;
     const fileImage = placeImage as File[];
     const imageUrls: string[] = [];
 
@@ -36,7 +36,8 @@ export class CreatePlace implements CreatePlaceInterface {
       placeImage: imageUrls,
       type,
       url,
-      user_id
+      user_id,
+      is_verified
     });
   }
 }

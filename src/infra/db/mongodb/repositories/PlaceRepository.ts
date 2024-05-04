@@ -17,6 +17,8 @@ import { paginateModel } from "../helpers/utils/pagination-util";
 import { Document } from 'mongoose';
 import { Place } from "@domain/entities/Place";
 import { AddImageToPlaceByIdRepository } from "@application/interfaces/repositories/place/AddImageToPlaceRepository";
+import { ValidateAddImageContributionRepository } from "@application/interfaces/repositories/imageContribution/ValidateAddImageContributionRepository";
+import { ValidationPlaceContributionByIdRepository } from "@application/interfaces/repositories/place/ValidationPlaceContributionByIdIRepository";
 export class PlaceRepository
   implements
   CreatePlaceRepository,
@@ -25,7 +27,17 @@ export class PlaceRepository
   GetPlaceByTypeRepository,
   DeletePlaceRepository,
   GetLatestPlacesRepository,
-  AddImageToPlaceByIdRepository {
+  AddImageToPlaceByIdRepository,
+  ValidationPlaceContributionByIdRepository {
+
+  async validationPlaceContributionById(id: string): Promise<void> {
+    await placeModel.findByIdAndUpdate(
+      stringToObjectId(id),
+      { is_verified: true }
+    )
+  }
+
+
 
 
   async addImageToPlace(params: AddImageToPlaceByIdRepository.Request): Promise<void> {

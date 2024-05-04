@@ -1,4 +1,3 @@
-import { ImageContribution } from "@domain/entities/ImageContribution";
 import { UseCase } from "../UseCase";
 import { ImageContributionNotFoundError } from "@application/errors/ImageContributionNotFoundError";
 

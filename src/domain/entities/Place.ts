@@ -8,6 +8,8 @@ export type PlaceProps = {
   description: string;
   url: string;
   placeImage: File[] | string[];
+  is_verified: boolean;
+
 };
 
 export class Place {
@@ -19,6 +21,7 @@ export class Place {
   public readonly description: string;
   public readonly url: string;
   public readonly placeImage: File[] | string[];
+  public readonly is_verified: boolean;
 
   constructor(props: PlaceProps) {
     this.id = props.id;
@@ -29,6 +32,8 @@ export class Place {
     this.description = props.description;
     this.url = props.url;
     this.placeImage = props.placeImage;
+    this.is_verified = props.is_verified;
+
   }
 }
 

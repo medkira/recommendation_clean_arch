@@ -6,15 +6,15 @@ export class GetLatesPlaces implements GetLatesPlacesInterface {
         private readonly getLatesrPlacesRepository: GetLatestPlacesRepository
     ) { }
     async execute(params: GetLatesPlacesInterface.Request): Promise<GetLatesPlacesInterface.Response> {
-        const { page = 1, type, location } = params;
+        const { page = 1, type, location, is_verified = true } = params;
         const paginationLimit = 10;
 
         return this.getLatesrPlacesRepository.getLatestPlaces({
             page, paginationLimit,
             query: {
                 ...type && { type },
-                ...location && { location }
-
+                ...location && { location },
+                ...is_verified && { is_verified }
                 // ...(type ? { type } : {}),
                 // ...(location ? { location } : {})
             }

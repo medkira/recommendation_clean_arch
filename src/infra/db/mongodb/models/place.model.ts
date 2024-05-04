@@ -44,7 +44,12 @@ const placeSchema = new Schema({
   },
   placeImage: {
     type: Array
-  }
+  },
+  is_verified: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 const placeModel = mongoose.model("place", placeSchema);

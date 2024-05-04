@@ -16,5 +16,5 @@ export default (router: Router): void => {
 
     router.get("/imageContribution/page", expressRouterAdapter(makeGetLatestImageContributionController()));
 
-    router.post("/imageContribution/validate", expressRouterAdapter(makeValidateImageContributionByIdController()));
+    router.post("/imageContribution/validate", authMiddleware, expressRouterAdapter(makeValidateImageContributionByIdController()));
 }

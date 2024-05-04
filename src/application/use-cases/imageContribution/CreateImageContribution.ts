@@ -13,7 +13,7 @@ export class CreateImageContribution implements CreateImageContributionInterface
     ) { }
 
     async execute(imageContributionData: CreateImageContributionInterface.Request): Promise<string> {
-        const { image, is_verified, place_id, user_id, user_name } = imageContributionData;
+        const { image, place_id, user_id, user_name } = imageContributionData;
         const fileImage = image as File[];
         const imageUrls: string[] = [];
 
@@ -28,7 +28,6 @@ export class CreateImageContribution implements CreateImageContributionInterface
         }
         return this.createImageContributionRepository.createImageContribution({
             image: imageUrls,
-            is_verified,
             place_id,
             user_id,
             user_name,

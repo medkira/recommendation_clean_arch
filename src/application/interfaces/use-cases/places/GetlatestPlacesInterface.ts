@@ -6,6 +6,6 @@ export interface GetLatesPlacesInterface extends UseCase<GetLatesPlacesInterface
 }
 
 export namespace GetLatesPlacesInterface {
-    export type Request = { page?: number, type?: placeTypes, location: string };
+    export type Request = { page?: number, type?: placeTypes, location: string, is_verified: boolean };
     export type Response = { data: Place[], page: number, total: number, totalPages: number };
 }

@@ -8,6 +8,7 @@ import { makeGetLatestPlacesController } from "@main/factories/controllers/place
 import { makeGetPlaceByIdController } from "@main/factories/controllers/place/get-place-by-id/controller-factory";
 import { makeGetPlaceByTypeController } from "@main/factories/controllers/place/get-place-by-type/controller-factory";
 import { makeUpdatePlaceController } from "@main/factories/controllers/place/update-place/controller-factory";
+import { makeValidatePlaceContributionByIdController } from "@main/factories/controllers/place/validate-place-contribution/controller-factory";
 import { makeAddPlaceToFavouriteController } from "@main/factories/controllers/user/add-place-favourit/controller-factory";
 import { makeGetFavouritePlacesByIdController } from "@main/factories/controllers/user/get-favourite-places-by-id/controller-factory";
 import { makeRemovePlaceFromFavouriteController } from "@main/factories/controllers/user/remove-place-from-favourite/controller-factory";
@@ -36,6 +37,7 @@ export default (router: Router): void => {
 
   router.get('/place/favorites/get', authMiddleware, expressRouterAdapter(makeGetFavouritePlacesByIdController()));
 
+  router.post('/place/validate', authMiddleware, expressRouterAdapter(makeValidatePlaceContributionByIdController()))
   // router.get("/place", expressRouterAdapter(makeGetLatestPlacesController()));
 
 
