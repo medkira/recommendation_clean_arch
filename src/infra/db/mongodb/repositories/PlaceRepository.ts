@@ -61,7 +61,6 @@ export class PlaceRepository
   async createPlace(
     placeData: CreatePlaceRepository.Request
   ): Promise<CreatePlaceRepository.Response> {
-    console.log(placeData);
     const place = new placeModel({
       ...placeData,
     });

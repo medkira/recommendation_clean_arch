@@ -1,6 +1,7 @@
 import { AuthMiddleware } from "@infra/http/middlewares/authentication/AuthMiddleware";
 import { expressMiddlewareAdaptor } from "@main/adpaters/express-middleware-adapter";
 import { expressRouterAdapter } from "@main/adpaters/express-router-adapter";
+import { multerMiddlewareAdapter } from "@main/adpaters/multer-middleware-adapter";
 import { makeCreatePlaceController } from "@main/factories/controllers/place/create-place/controller-factory";
 import { makeDeletePlaceController } from "@main/factories/controllers/place/delete-place/controller-factory";
 import { makeGetLatestPlacesController } from "@main/factories/controllers/place/get-latest-place/controller-factory";
@@ -10,6 +11,7 @@ import { makeUpdatePlaceController } from "@main/factories/controllers/place/upd
 import { makeAddPlaceToFavouriteController } from "@main/factories/controllers/user/add-place-favourit/controller-factory";
 import { makeGetFavouritePlacesByIdController } from "@main/factories/controllers/user/get-favourite-places-by-id/controller-factory";
 import { makeRemovePlaceFromFavouriteController } from "@main/factories/controllers/user/remove-place-from-favourite/controller-factory";
+import { makePostImageMulterMiddleware } from "@main/factories/middlewares/postImage-multer-middleware-factory copy";
 import { authMiddleware } from "@main/middlewares/auth-middleware";
 import { Router } from "express";
 
@@ -21,7 +23,8 @@ export default (router: Router): void => {
 
   router.get("/place/type/:type", expressRouterAdapter(makeGetPlaceByTypeController()));
 
-  router.post("/place", authMiddleware, expressRouterAdapter(makeCreatePlaceController()));
+  router.post("/place", authMiddleware, multerMiddlewareAdapter(makePostImageMulterMiddleware()),
+    expressRouterAdapter(makeCreatePlaceController()));
 
   router.patch("/place/:id", authMiddleware, expressRouterAdapter(makeUpdatePlaceController()));
 
