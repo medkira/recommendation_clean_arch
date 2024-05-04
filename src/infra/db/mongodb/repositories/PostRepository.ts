@@ -8,6 +8,7 @@ import {
   objectIdToString,
   mapDocument,
   stringToObjectId,
+  mapCollection,
 } from "../helpers/mappers";
 import postModel from "../models/post.model";
 import { paginateModel } from "../helpers/utils/pagination-util";
@@ -18,20 +19,19 @@ import { UpdatePostTotalCommentsRepository } from "@application/interfaces/repos
 
 export class PostRepository
   implements
-    CreatePostRepository,
-    GetPostByIdRepository,
-    UpdatePostRepository,
-    DeletePostRepository,
-    GetLatestPostsRepository,
-    GetTopPostsRepository,
-    UpdatePostTotalCommentsRepository
-{
-   async updatePostTotalComments(params: UpdatePostTotalCommentsRepository.Request): Promise<Post> {
+  CreatePostRepository,
+  GetPostByIdRepository,
+  UpdatePostRepository,
+  DeletePostRepository,
+  GetLatestPostsRepository,
+  GetTopPostsRepository,
+  UpdatePostTotalCommentsRepository {
+  async updatePostTotalComments(params: UpdatePostTotalCommentsRepository.Request): Promise<Post> {
     let { postId, totalComments } = params;
     const rawUpdatedComment = await postModel.findOneAndUpdate(
-        stringToObjectId(postId),
-        { $set: { totalComments } },
-        { upsert: true, returnDocument: 'after' },
+      stringToObjectId(postId),
+      { $set: { totalComments } },
+      { upsert: true, returnDocument: 'after' },
     );
     return mapDocument(rawUpdatedComment);
   }
@@ -40,11 +40,18 @@ export class PostRepository
   ): Promise<GetTopPostsRepository.Response> {
     return sortModel(postModel, params.sortBy, params.limit);
   }
-  getLatestPosts(
+  async getLatestPosts(
     params: GetLatestPostsRepository.Request
   ): Promise<GetLatestPostsRepository.Response> {
     const { page, paginationLimit, query } = params;
-    return paginateModel(postModel, page, paginationLimit, query);
+    const rawdata = await paginateModel(postModel, page, paginationLimit, query);
+    const transformedData = mapCollection(rawdata.data);
+    return {
+      data: transformedData,
+      page: rawdata.page,
+      total: rawdata.total,
+      totalPages: rawdata.totalPages
+    };
   }
 
 

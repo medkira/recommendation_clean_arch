@@ -34,7 +34,7 @@ export class CreatePlaceController extends BaseController {
       type,
       location,
       description,
-      url,
+      url
     });
     return ok({ placeId, message: "place created successfuly!" });
   }
