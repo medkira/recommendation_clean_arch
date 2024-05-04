@@ -16,6 +16,7 @@ import { paginateModel } from "../helpers/utils/pagination-util";
 
 import { Document } from 'mongoose';
 import { Place } from "@domain/entities/Place";
+import { AddImageToPlaceByIdRepository } from "@application/interfaces/repositories/place/AddImageToPlaceRepository";
 export class PlaceRepository
   implements
   CreatePlaceRepository,
@@ -23,7 +24,18 @@ export class PlaceRepository
   UpdatePlaceRepository,
   GetPlaceByTypeRepository,
   DeletePlaceRepository,
-  GetLatestPlacesRepository {
+  GetLatestPlacesRepository,
+  AddImageToPlaceByIdRepository {
+
+
+  async addImageToPlace(params: AddImageToPlaceByIdRepository.Request): Promise<void> {
+    const { imageUrl, placeId } = params;
+    // console.log(imageUrl)
+    await placeModel.findByIdAndUpdate(
+      stringToObjectId(placeId),
+      { $push: { placeImage: imageUrl } }
+    )
+  }
 
   async getLatestPlaces(params: GetLatestPlacesRepository.Request): Promise<GetLatestPlacesRepository.Response> {
     const rawLatestPlaces = await paginateModel(placeModel, params.page, params.paginationLimit, params.query);
@@ -49,6 +61,7 @@ export class PlaceRepository
   async createPlace(
     placeData: CreatePlaceRepository.Request
   ): Promise<CreatePlaceRepository.Response> {
+    console.log(placeData);
     const place = new placeModel({
       ...placeData,
     });

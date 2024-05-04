@@ -4,7 +4,7 @@ import { PlaceProps } from "@domain/entities/Place";
 
 const { Schema } = mongoose;
 
-const placeSchema = new Schema<PlaceProps>({
+const placeSchema = new Schema({
 
   type: {
     type: String,
@@ -23,7 +23,7 @@ const placeSchema = new Schema<PlaceProps>({
     type: String,
     required: true,
   },
-  user_id:{
+  user_id: {
     type: String,
     required: true,
   },
@@ -42,6 +42,9 @@ const placeSchema = new Schema<PlaceProps>({
     type: String,
     required: true,
   },
+  placeImage: {
+    type: Array
+  }
 });
 
 const placeModel = mongoose.model("place", placeSchema);

@@ -1,14 +1,37 @@
 import { CreateImageContributionRepository } from "@application/interfaces/repositories/imageContribution/CreateImageContributionRepository";
 import ImageContributionModel from "../models/imageContribution.model";
-import { mapCollection, objectIdToString } from "../helpers/mappers";
+import { mapCollection, mapDocument, objectIdToString, stringToObjectId } from "../helpers/mappers";
 import { GetLatestImageContributionRepository } from "@application/interfaces/repositories/imageContribution/GetLatestImageContributionRepository";
 import { paginateModel } from "../helpers/utils/pagination-util";
+import { GetImageContributionByIdRepository } from "@application/interfaces/repositories/imageContribution/GetImageContributionByIdRepository";
+import { isValidObjectId } from "mongoose";
+import { ValidateAddImageContributionRepository } from "@application/interfaces/repositories/imageContribution/ValidateAddImageContributionRepository";
 
-export class ImageContributionRepository implements CreateImageContributionRepository, GetLatestImageContributionRepository {
+export class ImageContributionRepository implements CreateImageContributionRepository,
+    GetLatestImageContributionRepository, GetImageContributionByIdRepository, ValidateAddImageContributionRepository {
+
+
+    async validateAddImageContribution(id: string): Promise<void> {
+        await ImageContributionModel.findByIdAndUpdate(
+            stringToObjectId(id),
+            { is_verified: true }
+        )
+    }
+
+    async GetImageContributionById(contributionById: string): Promise<GetImageContributionByIdRepository.Response> {
+        if (!isValidObjectId(contributionById)) {
+            return null;
+        }
+        // console.log(contributionById)
+        const rawData = await ImageContributionModel.findById(contributionById);
+
+        return rawData && mapDocument(rawData);
+    }
 
 
     async getLatestImageContribution(params: GetLatestImageContributionRepository.Request): Promise<GetLatestImageContributionRepository.Response> {
         const { paginationLimit, query, page } = params;
+        query.is_verified = false;
         const rawLatestImageContribution = await paginateModel(ImageContributionModel, page, paginationLimit, query);
         const transformedData = mapCollection(rawLatestImageContribution.data);
         return {

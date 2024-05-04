@@ -28,9 +28,9 @@ export class UpdatePlaceController extends BaseController {
     if (placeOrError instanceof Error) {
       return notFound(placeOrError);
     }
-    if (placeOrError!.user_id !== user_id) {
-      return forbidden(new PermissionError());
-    }
+    // if (placeOrError!.user_id !== user_id) {
+    //   return forbidden(new PermissionError());
+    // }
 
     const updatedPlace = await this.updatePlace.execute({
       placeId: id,

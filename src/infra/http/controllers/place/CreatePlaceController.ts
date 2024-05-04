@@ -26,7 +26,7 @@ export class CreatePlaceController extends BaseController {
     }
 
 
-    const { name, type, location, description, url } = httpRequest.body!;
+    const { name, type, location, description, url, placeImage } = httpRequest.body!;
 
     const placeId = await this.createPlace.execute({
       user_id,
@@ -34,7 +34,8 @@ export class CreatePlaceController extends BaseController {
       type,
       location,
       description,
-      url
+      url,
+      placeImage
     });
     return ok({ placeId, message: "place created successfuly!" });
   }
