@@ -29,14 +29,14 @@ export class CreateRateController extends BaseController {
 
         const userId = httpRequest.userId!;
 
-        // add this check to be abel to see all props or user 
-        // if (userOrUserNotFoundEroor instanceof UserNotFoundError) {
-        //   /// suppose to return an error...
-        //   return new UserNotFoundError()
-        // }
         const userOrUserNotFoundError = await this.loadUserById.execute(userId);
-        const { name } = userOrUserNotFoundError;
 
+        const { name } = userOrUserNotFoundError;
+        // add this check to be abel to see all props or user 
+        if (userOrUserNotFoundError instanceof UserNotFoundError) {
+            /// suppose to return an error...
+            return notFound(userOrUserNotFoundError)
+        }
         const { rate, rated_id, review, rated_name, } = httpRequest.body!;
         const placeOrError = await this.getPlaceById.execute(rated_id);
         if (placeOrError instanceof PlaceNotFoundError) {
@@ -56,5 +56,5 @@ export namespace CreateRateController {
         undefined
     >;
 
-    export type Response = HttpResponse<{ RateId: string } | PlaceNotFoundError>;
+    export type Response = HttpResponse<{ RateId: string } | PlaceNotFoundError | UserNotFoundError>;
 }

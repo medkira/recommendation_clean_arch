@@ -2,6 +2,7 @@ import authenticationRoutes from "@main/routes/authentication-routes";
 import commentRoutes from "@main/routes/comment-routes";
 import foodRoutes from "@main/routes/food-routes";
 import googleAuthRoutes from "@main/routes/googleAuth-routes";
+import imageContributionRoutes from "@main/routes/image-contribution-routes";
 import menuRoutes from "@main/routes/menu-routes";
 import placeRoutes from "@main/routes/place-routes";
 import postRoutes from "@main/routes/post-routes";
@@ -23,6 +24,9 @@ export const setupRoutes = (app: Express): void => {
   foodRoutes(router);
   rateRoutes(router);
   googleAuthRoutes(router);
+  imageContributionRoutes(router);
 
 };
+
+
 
