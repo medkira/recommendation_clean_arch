@@ -37,8 +37,9 @@ export default (router: Router): void => {
 
   router.get('/place/favorites/get', authMiddleware, expressRouterAdapter(makeGetFavouritePlacesByIdController()));
 
-  router.post('/place/validate', authMiddleware, expressRouterAdapter(makeValidatePlaceContributionByIdController()))
-  // router.get("/place", expressRouterAdapter(makeGetLatestPlacesController()));
+  router.post('/place/validate/:id', authMiddleware, expressRouterAdapter(makeValidatePlaceContributionByIdController()));
+
+  router.delete("/place/refuse/:id", authMiddleware, expressRouterAdapter(makeDeletePlaceController()));
 
 
 };

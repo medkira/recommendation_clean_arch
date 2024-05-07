@@ -6,6 +6,7 @@ import { GetPlaceByIdInterface } from "@application/interfaces/use-cases/places/
 import { forbidden, notFound, ok } from "@infra/http/helpers/https";
 import { PlaceNotFoundError } from "@application/errors/PlaceNotFoundError";
 import { PermissionError } from "@infra/http/errors/PermissionError";
+import { UserRole } from "@domain/entities/User";
 
 export class DeletePlaceController extends BaseController {
   constructor(
@@ -18,15 +19,15 @@ export class DeletePlaceController extends BaseController {
   async execute(
     httpRequest: DeletePlaceController.Request
   ): Promise<DeletePlaceController.Response> {
+    const role = httpRequest.userRole
     const user_id = httpRequest.userId!;
     const { id } = httpRequest.params!;
-
     const placeOrError = await this.getplaceById.execute(id);
     if (placeOrError instanceof Error) {
       return notFound(placeOrError);
     }
 
-    if (placeOrError!.user_id !== user_id) {
+    if (placeOrError!.user_id !== user_id && role !== UserRole.ADMIN) {
       return forbidden(new PermissionError());
     }
 

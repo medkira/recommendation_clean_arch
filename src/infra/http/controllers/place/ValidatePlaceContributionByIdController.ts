@@ -15,7 +15,7 @@ export class ValidatePlaceContributionByIdController extends BaseController {
     }
 
     async execute(httpRequest: ValidatePlaceContributionByIdController.Request): Promise<ValidatePlaceContributionByIdController.Response> {
-        const { id } = httpRequest.body!;
+        const { id } = httpRequest.params!;
         // console.log(httpRequest.body)
         await this.ValidatePlaceContributionById.execute(id);
 
@@ -25,6 +25,6 @@ export class ValidatePlaceContributionByIdController extends BaseController {
 }
 
 export namespace ValidatePlaceContributionByIdController {
-    export type Request = HttpRequest<{ id: string }>
+    export type Request = HttpRequest<undefined, { id: string }>
     export type Response = HttpResponse<ValidationPlaceContributionByIdInterface.Response>;
 }
