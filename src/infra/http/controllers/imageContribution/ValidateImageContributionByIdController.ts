@@ -13,7 +13,7 @@ export class ValidateImageContributionByIdController extends BaseController {
     }
 
     async execute(httpRequest: ValidateImageContributionByIdController.Request): Promise<ValidateImageContributionByIdController.Response> {
-        const { id } = httpRequest.body!;
+        const { id } = httpRequest.params!;
         // console.log(httpRequest.body)
         await this.validateImageContributionById.execute(id);
 
@@ -23,6 +23,6 @@ export class ValidateImageContributionByIdController extends BaseController {
 }
 
 export namespace ValidateImageContributionByIdController {
-    export type Request = HttpRequest<{ id: string }>
+    export type Request = HttpRequest<undefined, { id: string }>
     export type Response = HttpResponse<ValidateImageContributionByIdInterface.Response>;
 }

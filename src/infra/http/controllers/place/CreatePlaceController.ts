@@ -26,7 +26,7 @@ export class CreatePlaceController extends BaseController {
     // }
 
 
-    const { name, type, location, description, url, is_verified, placeImage = httpRequest.files?.postImage } = httpRequest.body!;
+    const { name, type, location, description, url, is_verified, placeImage = httpRequest.files?.placeImage } = httpRequest.body!;
     const verified = user_role == UserRole.ADMIN;
 
 

@@ -6,9 +6,15 @@ import { paginateModel } from "../helpers/utils/pagination-util";
 import { GetImageContributionByIdRepository } from "@application/interfaces/repositories/imageContribution/GetImageContributionByIdRepository";
 import { isValidObjectId } from "mongoose";
 import { ValidateAddImageContributionRepository } from "@application/interfaces/repositories/imageContribution/ValidateAddImageContributionRepository";
+import { RefuseImageContributionByIdRepository } from "@application/interfaces/repositories/imageContribution/RefuseImageContributionByIdRepository";
 
 export class ImageContributionRepository implements CreateImageContributionRepository,
-    GetLatestImageContributionRepository, GetImageContributionByIdRepository, ValidateAddImageContributionRepository {
+    GetLatestImageContributionRepository, GetImageContributionByIdRepository,
+    ValidateAddImageContributionRepository, RefuseImageContributionByIdRepository {
+
+    async RefuseImageContribution(id: string): Promise<void> {
+        await ImageContributionModel.findByIdAndDelete(id);
+    }
 
 
     async validateAddImageContribution(id: string): Promise<void> {
