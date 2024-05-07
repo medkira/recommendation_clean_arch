@@ -6,6 +6,7 @@ export type ImageContributionProps = {
     user_name: string;
     image: File[] | string[];
     place_id: string | null;
+    place_name: string;
     is_verified: boolean;
     createdAt: Date;
 };
@@ -16,6 +17,7 @@ export class ImageContribution {
     public readonly user_name: string;
     public readonly image: File[] | string[];
     public readonly place_id: string | null;
+    private readonly place_name: string;
     public readonly is_verified: boolean;
     public readonly createdAt: Date;
 
@@ -25,6 +27,7 @@ export class ImageContribution {
         this.user_name = props.user_name;
         this.image = props.image;
         this.place_id = props.place_id;
+        this.place_name = props.place_name;
         this.is_verified = props.is_verified;
         this.createdAt = props.createdAt;
     }

@@ -21,7 +21,7 @@ export class SignUpNormalUser implements SignUpNormalUser {
         const { email, password, age, address, gender, image, jobTitle, link, name,
             parent, phoneNumber, role, salary, socialStatus, username, zone } = userData;
 
-        console.log("email from sign up user ", email)
+        // console.log("email from sign up user ", email)
         const existingUser = await this.loadUserByEmailRepository.loadUserByEmail(email);
         if (existingUser) {
             return new EmailInUseError()
@@ -38,7 +38,6 @@ export class SignUpNormalUser implements SignUpNormalUser {
 
         // console.log("ROLE from sign up user ", role)
         const hashedPassword = await this.hashGenerator.hash(password);
-
 
 
         return this.createNormalUserRepository.createNormalUser({

@@ -42,7 +42,7 @@ export class PlaceRepository
 
   async addImageToPlace(params: AddImageToPlaceByIdRepository.Request): Promise<void> {
     const { imageUrl, placeId } = params;
-    // console.log(imageUrl)
+
     await placeModel.findByIdAndUpdate(
       stringToObjectId(placeId),
       { $push: { placeImage: imageUrl } }

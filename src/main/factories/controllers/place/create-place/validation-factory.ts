@@ -8,7 +8,7 @@ export const createPlaceValidation = (): ValidationComposite => {
       new RequiredFieldValidation("type"),
       new RequiredFieldValidation("location"),
       new RequiredFieldValidation("description"),
-      new RequiredFieldValidation("url"),
+      // new RequiredFieldValidation("url"),
     ],
     "body"
   );

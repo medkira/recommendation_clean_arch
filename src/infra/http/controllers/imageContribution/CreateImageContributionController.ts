@@ -43,7 +43,7 @@ export class CreateImageContributionController extends BaseController {
 
 export namespace CreateImageContributionController {
     export type Request = HttpRequest<
-        Omit<CreateImageContributionInterface.Request, "user_id" | "user_name">,
+        Omit<CreateImageContributionInterface.Request, "user_id" | "user_name" | "place_name">,
         undefined,
         undefined,
         { image: File[] }

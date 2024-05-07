@@ -5,6 +5,10 @@ import { Place } from "@domain/entities/Place";
 const { Schema } = mongoose;
 
 const normalUserSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+  },
   Firstname: {
     type: String,
     trim: true,

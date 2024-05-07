@@ -6,6 +6,6 @@ export interface CreateNormalUserRepository {
 }
 
 export namespace CreateNormalUserRepository {
-    export type Request = Omit<NormalUserProps, 'id' | 'createdAt' | 'updatedAt' | 'isEmailVerified'>
+    export type Request = Omit<NormalUserProps, 'id' | 'createdAt' | 'updatedAt' | 'isEmailVerified' | 'favouritePlaces' | 'isItOwner'>
     export type Response = Pick<NormalUserProps, 'id'>;
 }

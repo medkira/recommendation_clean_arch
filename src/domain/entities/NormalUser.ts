@@ -41,6 +41,7 @@ export class NormalUser {
   public readonly parent: boolean;
   public readonly favouritePlaces: Place[];
 
+
   constructor(props: NormalUserProps) {
     this.role = props.role;
     this.id = props.id;

@@ -40,7 +40,7 @@ const placeSchema = new Schema({
 
   url: {
     type: String,
-    required: true,
+    required: false,
   },
   placeImage: {
     type: Array

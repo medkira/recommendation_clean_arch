@@ -21,6 +21,9 @@ const imageContributionSchema = new Schema({
         type: String,
         required: false,
     },
+    place_name: {
+        type: String,
+    },
     is_verified: {
         type: Boolean,
         required: true,

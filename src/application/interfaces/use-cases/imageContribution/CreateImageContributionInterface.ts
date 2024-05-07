@@ -1,3 +1,4 @@
+import { PlaceNotFoundError } from "@application/errors/PlaceNotFoundError";
 import { UseCase } from "../UseCase";
 import { ImageContributionProps } from "@domain/entities/ImageContribution";
 
@@ -9,6 +10,6 @@ export interface CreateImageContributionInterface
 }
 
 export namespace CreateImageContributionInterface {
-    export type Request = Omit<ImageContributionProps, "id" | "createdAt" | "is_verified">;
-    export type Response = string;
+    export type Request = Omit<ImageContributionProps, "id" | "createdAt" | "is_verified" | "place_name">;
+    export type Response = string | PlaceNotFoundError;
 }
