@@ -1,5 +1,5 @@
 import normalUserModel from "../models/normalUser.model";
-import { isValidObjectId, mapDocument, objectIdToString, stringToObjectId } from "../helpers/mappers";
+import { isValidObjectId, mapCollection, mapDocument, objectIdToString, stringToObjectId } from "../helpers/mappers";
 import { CreateNormalUserRepository } from "@application/interfaces/repositories/normalUser/CreateNoramlUserRepository";
 import { LoadNormalUserByEmailRepository } from "@application/interfaces/repositories/normalUser/LoadNormalUserByEmailRepository";
 import { LoadOwnerByIdlRepository } from "@application/interfaces/repositories/owner/LoadOwnerByIdRepository";
@@ -8,11 +8,31 @@ import { LoadNormalUserByIdRepository } from "@application/interfaces/repositori
 import { AddPlaceToFavouriteRepository } from "@application/interfaces/repositories/users/AddPlaceToFavouriteRepository";
 import { GetFavouritePlacesByIdRepository } from "@application/interfaces/repositories/users/GetFavouritePlacesByIdRepository";
 import { RemovePlaceFromFavouriteRepository } from "@application/interfaces/repositories/users/RemovePlaceFromFavouriteRepository";
+import { GetUsersRepository } from "@application/interfaces/repositories/users/GetUsersRepository";
+import { paginateModel } from "../helpers/utils/pagination-util";
+import { DeleteUserRepository } from "@application/interfaces/repositories/users/DeletUserRepository";
 
 export class NormalUserRepository implements
     CreateNormalUserRepository, LoadNormalUserByEmailRepository,
     LoadNormalUserByIdRepository, UpdateNormalUserPasswordRepository,
-    AddPlaceToFavouriteRepository, GetFavouritePlacesByIdRepository, RemovePlaceFromFavouriteRepository {
+    AddPlaceToFavouriteRepository, GetFavouritePlacesByIdRepository,
+    RemovePlaceFromFavouriteRepository, GetUsersRepository,
+    DeleteUserRepository {
+
+    async deletUser(userId: string): Promise<void> {
+        await normalUserModel.findOneAndDelete(stringToObjectId(userId))
+    }
+
+    async getUsers(params: GetUsersRepository.Request): Promise<GetUsersRepository.Response> {
+        const rawData = await paginateModel(normalUserModel, params.page, params.paginationLimit, params.query);
+        const transformedData = mapCollection(rawData.data);
+        return {
+            data: transformedData,
+            page: rawData.page,
+            total: rawData.total,
+            totalPages: rawData.totalPages
+        };
+    }
 
 
     async getFavouritePlacesById(id: string): Promise<GetFavouritePlacesByIdRepository.Response> {

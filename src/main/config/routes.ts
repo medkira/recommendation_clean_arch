@@ -8,6 +8,7 @@ import placeRoutes from "@main/routes/place-routes";
 import postRoutes from "@main/routes/post-routes";
 import rateRoutes from "@main/routes/rate-routes";
 import resetPassRoutes from "@main/routes/reset-password-routes";
+import userRoutes from "@main/routes/user-routes";
 
 import { Express, Router } from "express";
 
@@ -25,6 +26,7 @@ export const setupRoutes = (app: Express): void => {
   rateRoutes(router);
   googleAuthRoutes(router);
   imageContributionRoutes(router);
+  userRoutes(router);
 
 };
 
