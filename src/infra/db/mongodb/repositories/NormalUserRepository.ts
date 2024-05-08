@@ -11,13 +11,24 @@ import { RemovePlaceFromFavouriteRepository } from "@application/interfaces/repo
 import { GetUsersRepository } from "@application/interfaces/repositories/users/GetUsersRepository";
 import { paginateModel } from "../helpers/utils/pagination-util";
 import { DeleteUserRepository } from "@application/interfaces/repositories/users/DeletUserRepository";
+import { UpdateUserRoleByIdRepository } from "@application/interfaces/repositories/normalUser/UpdateUserRoleByIdRepository";
 
 export class NormalUserRepository implements
     CreateNormalUserRepository, LoadNormalUserByEmailRepository,
     LoadNormalUserByIdRepository, UpdateNormalUserPasswordRepository,
     AddPlaceToFavouriteRepository, GetFavouritePlacesByIdRepository,
     RemovePlaceFromFavouriteRepository, GetUsersRepository,
-    DeleteUserRepository {
+    DeleteUserRepository, UpdateUserRoleByIdRepository {
+
+    async updateUserRole(params: UpdateUserRoleByIdRepository.Request): Promise<void> {
+        const { id, role } = params;
+
+        await normalUserModel.findByIdAndUpdate(
+            stringToObjectId(id),
+            { role }
+
+        )
+    }
 
     async deletUser(userId: string): Promise<void> {
         await normalUserModel.findOneAndDelete(stringToObjectId(userId))
