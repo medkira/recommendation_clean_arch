@@ -12,13 +12,14 @@ export class GetLatestPlacesController extends BaseController {
   async execute(
     httpRequest: GetLatestPlacesController.Request
   ): Promise<GetLatestPlacesController.Response> {
-    const { page, type, location, is_verified } = httpRequest.query!;
+    const { page, type, location, is_verified, user_id } = httpRequest.query!;
 
     const response = await this.getLatestPlaces.execute({
       is_verified,
       page,
       type,
       location,
+      user_id
     });
 
     return ok(response);

@@ -11,6 +11,7 @@ export const makeUpdatePlaceValidation = (): ValidationComposite => {
         "location",
         "description",
         "url",
+        "placeImage"
       ]),
     ],
     "body"

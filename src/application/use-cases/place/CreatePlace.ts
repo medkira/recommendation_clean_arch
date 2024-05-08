@@ -8,12 +8,15 @@ export class CreatePlace implements CreatePlaceInterface {
   constructor(
     private readonly CreatePlaceRepository: CreatePlaceRepository,
     private readonly uploadImage: UploadImage,
-    private readonly imageProcess: PostImageProcess) { }
+    private readonly imageProcess: PostImageProcess
+  ) { }
   async execute(
     placeData: CreatePlaceInterface.Request
   ): Promise<CreatePlaceInterface.Response> {
 
-    const { description, location, name, placeImage, type, url, user_id, is_verified } = placeData;
+    const { description, location, name, placeImage,
+      type, url, user_id, is_verified } = placeData;
+
     const fileImage = placeImage as File[];
     const imageUrls: string[] = [];
 

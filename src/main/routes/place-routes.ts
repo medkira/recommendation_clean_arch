@@ -27,7 +27,7 @@ export default (router: Router): void => {
   router.post("/place", authMiddleware, multerMiddlewareAdapter(makePostImageMulterMiddleware()),
     expressRouterAdapter(makeCreatePlaceController()));
 
-  router.patch("/place/:id", authMiddleware, expressRouterAdapter(makeUpdatePlaceController()));
+  router.patch("/place/:id", authMiddleware, multerMiddlewareAdapter(makePostImageMulterMiddleware()), expressRouterAdapter(makeUpdatePlaceController()));
 
   router.delete("/place/:id", authMiddleware, expressRouterAdapter(makeDeletePlaceController()));
 

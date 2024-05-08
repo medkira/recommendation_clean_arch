@@ -7,7 +7,7 @@ export type PlaceProps = {
   location: string;
   description: string;
   url: string;
-  placeImage: File[] | string[];
+  placeImage?: File[] | string[];
   is_verified: boolean;
 
 };
@@ -20,7 +20,7 @@ export class Place {
   public readonly location: string;
   public readonly description: string;
   public readonly url: string;
-  public readonly placeImage: File[] | string[];
+  public readonly placeImage?: File[] | string[];
   public readonly is_verified: boolean;
 
   constructor(props: PlaceProps) {

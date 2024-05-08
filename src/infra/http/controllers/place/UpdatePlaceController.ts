@@ -15,14 +15,14 @@ export class UpdatePlaceController extends BaseController {
     private readonly getPlaceById: GetPlaceByIdInterface,
     private readonly updatePlace: UpdatePlaceInterface
   ) {
-    super(UpdatePlaceValidation);
+    super();
   }
 
   async execute(
     httpRequest: UpdatePlaceController.Request
   ): Promise<UpdatePlaceController.Response> {
     const user_id = httpRequest.userId!;
-    const { name, type, location, description, url } = httpRequest.body!;
+    const { name, type, location, description, url, is_verified, placeImage = httpRequest.files?.placeImage } = httpRequest.body!;
     const { id } = httpRequest.params!;
     const placeOrError = await this.getPlaceById.execute(id);
     if (placeOrError instanceof Error) {
@@ -34,7 +34,7 @@ export class UpdatePlaceController extends BaseController {
 
     const updatedPlace = await this.updatePlace.execute({
       placeId: id,
-      placeData: { name, type, location, description, url },
+      placeData: { name, type, location, description, url, is_verified, placeImage },
     });
 
     return ok(updatedPlace);

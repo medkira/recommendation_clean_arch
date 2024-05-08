@@ -26,7 +26,6 @@ export class DeletePlaceController extends BaseController {
     if (placeOrError instanceof Error) {
       return notFound(placeOrError);
     }
-
     if (placeOrError!.user_id !== user_id && role !== UserRole.ADMIN) {
       return forbidden(new PermissionError());
     }
