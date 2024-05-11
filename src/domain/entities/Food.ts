@@ -1,3 +1,5 @@
+import { File } from "./File";
+
 export type FoodProps = {
   id: string;
   place_id: string;
@@ -6,6 +8,7 @@ export type FoodProps = {
   //price_category: priceCategory;
   food_type: foodTypes;
   menu_id: string;
+  foodImage?: File[] | string[];
 };
 
 export class Food {
@@ -14,7 +17,7 @@ export class Food {
   public readonly name: string;
   public readonly price: number;
   public readonly menu_id: string;
-
+  public readonly foodImage?: File[] | string[];
   //public readonly price_category: priceCategory;
 
   public readonly food_type: foodTypes;
@@ -26,6 +29,7 @@ export class Food {
     this.menu_id = props.menu_id;
     //this.price_category = props.price_category;
     this.food_type = props.food_type;
+    this.foodImage = props.foodImage;
   }
 }
 

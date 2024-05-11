@@ -27,20 +27,20 @@ export class CreateFoodController extends BaseController {
       return forbidden(new ForbiddenError());
     }
 
-    const { name, price, food_type, place_id } = httpRequest.body!;
+    const { name, price, food_type, place_id, foodImage = httpRequest.files?.foodImage } = httpRequest.body!;
     const placeOrError = await this.getPlaceById.execute(place_id);
 
     if (placeOrError instanceof PlaceNotFoundError) {
       return notFound(placeOrError);
     }
-
-    const FoodId = await this.createFood.execute({
+    const foodId = await this.createFood.execute({
+      foodImage,
       place_id,
       name,
       price,
       food_type,
     });
-    return ok({ FoodId, message: "Food created successfuly!" });
+    return ok({ foodId, message: "Food created successfuly!" });
   }
 }
 

@@ -17,48 +17,47 @@ import { BaseController } from "../BaseController";
 
 
 export class UpdateFoodController extends BaseController {
-    constructor(
-      private readonly UpdateFoodValidation: Validation,
-      private readonly getFoodById: GetFoodByIdInterface,
-      private readonly updateFood: UpdateFoodInterface,
-      private readonly getPlaceByFoodId: GetPlaceByFoodIdInterface,
-    ) {
-      super(UpdateFoodValidation);
-    }
-  
-    async execute(
-      httpRequest: UpdateFoodController.Request
-    ): Promise<UpdateFoodController.Response> {
-      const user_id = httpRequest.userId!;
-      const { name,price, food_type  } = httpRequest.body!;
-      const { id } = httpRequest.params!;
-      const foodOrError = await this.getFoodById.execute(id);
-      if (foodOrError instanceof Error) {
-        return notFound(foodOrError);
-      }
-      const place = await this.getPlaceByFoodId.execute(foodOrError.id)
-      if (!(place instanceof Error)) {
-        if (place.user_id !== user_id) {
-          return forbidden(new PermissionError());
-        }
-      }
-  
-      const updatedFood = await this.updateFood.execute({
-        FoodId: id,
-        FoodData: { name,price,food_type},
-      });
-  
-      return ok(updatedFood);
-    }
+  constructor(
+    private readonly UpdateFoodValidation: Validation,
+    private readonly getFoodById: GetFoodByIdInterface,
+    private readonly updateFood: UpdateFoodInterface,
+    private readonly getPlaceByFoodId: GetPlaceByFoodIdInterface,
+  ) {
+    super(UpdateFoodValidation);
   }
-  
-  export namespace UpdateFoodController {
-    export type Request = HttpRequest<
-      UpdateFoodInterface.FoodDataType,
-      { id: string }
-    >;
-    export type Response = HttpResponse<
-      Food | FoodNotFoundError | PermissionError
-    >;
+
+  async execute(
+    httpRequest: UpdateFoodController.Request
+  ): Promise<UpdateFoodController.Response> {
+    const user_id = httpRequest.userId!;
+    const { name, price, food_type, foodImage = httpRequest.files?.foodImage } = httpRequest.body!;
+    const { id } = httpRequest.params!;
+    const foodOrError = await this.getFoodById.execute(id);
+    if (foodOrError instanceof Error) {
+      return notFound(foodOrError);
+    }
+    const place = await this.getPlaceByFoodId.execute(foodOrError.id)
+    if (!(place instanceof Error)) {
+      if (place.user_id !== user_id) {
+        return forbidden(new PermissionError());
+      }
+    }
+
+    const updatedFood = await this.updateFood.execute({
+      FoodId: id,
+      FoodData: { name, price, food_type, foodImage },
+    });
+
+    return ok(updatedFood);
   }
-  
+}
+
+export namespace UpdateFoodController {
+  export type Request = HttpRequest<
+    UpdateFoodInterface.FoodDataType,
+    { id: string }
+  >;
+  export type Response = HttpResponse<
+    Food | FoodNotFoundError | PermissionError
+  >;
+}

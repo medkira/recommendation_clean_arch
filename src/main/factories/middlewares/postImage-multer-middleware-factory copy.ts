@@ -11,6 +11,10 @@ export const makePostImageMulterMiddleware = () => {
       maxCount: 5,
     },
     {
+      name: "foodImage",
+      maxCount: 5,
+    },
+    {
       name: "image",
       maxCount: 2,
     },
