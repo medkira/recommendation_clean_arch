@@ -2,6 +2,7 @@ import { GetFoodByIdRepository } from "@application/interfaces/repositories/Food
 import foodModel from "../models/food.model";
 import {
   isValidObjectId,
+  mapCollection,
   mapDocument,
   objectIdToString,
   stringToObjectId,
@@ -10,14 +11,30 @@ import { CreateFoodRepository } from "@application/interfaces/repositories/Food/
 import { DeleteFoodRepository } from "@application/interfaces/repositories/Food/DeleteFoodRepository";
 import { UpdateFoodRepository } from "@application/interfaces/repositories/Food/UpdateFoodRepository";
 import { Food } from "@domain/entities/Food";
+import { GetLatestFoodsRepository } from "@application/interfaces/repositories/Food/GetLatestFoodRepository";
+import { paginateModel } from "../helpers/utils/pagination-util";
 
 export class FoodRepository
   implements
-    GetFoodByIdRepository,
-    CreateFoodRepository,
-    DeleteFoodRepository,
-    UpdateFoodRepository
-{
+  GetFoodByIdRepository,
+  CreateFoodRepository,
+  DeleteFoodRepository,
+  UpdateFoodRepository,
+
+
+  GetLatestFoodsRepository {
+  async getLatestFoods(params: GetLatestFoodsRepository.Request): Promise<GetLatestFoodsRepository.Response> {
+    const rawData = await paginateModel(foodModel, params.page, params.paginationLimit, params.query);
+    const transformedData = mapCollection(rawData.data);
+    return {
+      data: transformedData,
+      page: rawData.page,
+      total: rawData.total,
+      totalPages: rawData.totalPages
+    };
+  }
+
+
   async updateFood(params: UpdateFoodRepository.Request): Promise<Food> {
     let { FoodId, FoodData } = params;
     const rawUpdatedFood = await foodModel.findByIdAndUpdate(
