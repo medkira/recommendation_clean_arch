@@ -8,13 +8,13 @@ export class GetPlaceByFoodId implements GetPlaceByFoodIdInterface {
   constructor(
     private readonly getFoodByIdRepository: GetFoodByIdRepository,
     private readonly GetPlaceByIdRepository: GetPlaceByIdRepository
-  ) {}
+  ) { }
 
   async execute(
     foodId: GetPlaceByFoodIdInterface.Request
   ): Promise<GetPlaceByFoodIdInterface.Response> {
     const food = await this.getFoodByIdRepository.getFoodById(foodId);
-    console.log(food)
+    // console.log(food)
     if (!food) {
       return new FoodNotFoundError();
     }

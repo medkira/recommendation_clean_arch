@@ -1,14 +1,16 @@
+import { File } from "./File";
+
 export type MenuProps = {
     id: string
     food_ids: string[];
     place_id: string;
-    menuImage?: string;
+    menuImage?: File[] | string[];
 };
 
 export class Menu {
     public readonly food_ids: string[];
     public readonly place_id: string;
-    public readonly menuImage?: string;
+    public readonly menuImage?: File[] | string[];
     public readonly id: string;
 
     constructor(props: MenuProps) {

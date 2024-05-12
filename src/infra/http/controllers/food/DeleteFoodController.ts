@@ -17,42 +17,41 @@ import { GetPlaceByFoodIdInterface } from "@application/interfaces/use-cases/foo
 
 
 export class DeleteFoodController extends BaseController {
-    constructor(
-      private readonly getFoodById: GetFoodByIdInterface,
-      private readonly deleteFoodInterface: DeleteFoodInterface,
-      private readonly getplaceByFoodId: GetPlaceByFoodIdInterface,
-    ) {
-      super();
-    }
-  
-    async execute(
-      httpRequest: DeleteFoodController.Request
-    ): Promise<DeleteFoodController.Response> {
-      const { id } = httpRequest.params!;
-      const user_id = httpRequest.userId!;
-      console.log("user id",user_id)
-  
-      const foodOrError = await this.getFoodById.execute(id);
-      if (foodOrError instanceof Error) {
-        return notFound(foodOrError);
-      }
-      const place = await this.getplaceByFoodId.execute(foodOrError.id)
-      if (!(place instanceof Error)) {
-        if (place.user_id !== user_id) {
-          return forbidden(new PermissionError());
-        }
-      }
+  constructor(
+    private readonly getFoodById: GetFoodByIdInterface,
+    private readonly deleteFoodInterface: DeleteFoodInterface,
+    private readonly getplaceByFoodId: GetPlaceByFoodIdInterface,
+  ) {
+    super();
+  }
 
-      await this.deleteFoodInterface.execute(id);
-  
-      return ok({ message: "Food deleted succcessfuly!" });
+  async execute(
+    httpRequest: DeleteFoodController.Request
+  ): Promise<DeleteFoodController.Response> {
+    const { id } = httpRequest.params!;
+    const user_id = httpRequest.userId!;
+    // console.log("user id",user_id)
+
+    const foodOrError = await this.getFoodById.execute(id);
+    if (foodOrError instanceof Error) {
+      return notFound(foodOrError);
     }
+    const place = await this.getplaceByFoodId.execute(foodOrError.id)
+    if (!(place instanceof Error)) {
+      if (place.user_id !== user_id) {
+        return forbidden(new PermissionError());
+      }
+    }
+
+    await this.deleteFoodInterface.execute(id);
+
+    return ok({ message: "Food deleted succcessfuly!" });
   }
-  
-  export namespace DeleteFoodController {
-    export type Request = HttpRequest<DeleteFoodInterface.Request>;
-    export type Response = HttpResponse<
-      undefined | FoodNotFoundError | PermissionError | PlaceNotFoundError
-    >;
-  }
-  
+}
+
+export namespace DeleteFoodController {
+  export type Request = HttpRequest<DeleteFoodInterface.Request>;
+  export type Response = HttpResponse<
+    undefined | FoodNotFoundError | PermissionError | PlaceNotFoundError
+  >;
+}

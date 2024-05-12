@@ -6,6 +6,7 @@ import { makeCreateFood } from "@main/factories/use-case/food/create-food-factor
 import { makeGetPlaceById } from "@main/factories/use-case/place/get-place-by-id-factory";
 import { makeGetFoodById } from "@main/factories/use-case/food/get-food-by-id-factory";
 import { makeUpdateFood } from "@main/factories/use-case/food/update-food-factory";
+import { OCRAdapter } from "@infra/utils/OCR-GOOGLE/ocr-adapter";
 
 export const makeCreateMenuController = (): BaseController => {
   const validation = createMenuValidation();
@@ -20,6 +21,7 @@ export const makeCreateMenuController = (): BaseController => {
     createMenuUseCase,
     createFoodUseCase,
     updatefoodUseCase,
-    getFoodByIdUseCase
+    getFoodByIdUseCase,
+    new OCRAdapter // this wrong, need to be in use case favtory
   );
 };

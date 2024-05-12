@@ -7,14 +7,15 @@ export class GetLatesFoods implements GetLatesFoodsInterface {
         private readonly getLatesrFoodsRepository: GetLatestFoodsRepository
     ) { }
     async execute(params: GetLatesFoodsInterface.Request): Promise<GetLatesFoodsInterface.Response> {
-        const { page = 1, type, user_id, price } = params;
-        const paginationLimit = 10;
+        const { page = 1, type, user_id, price, place_id } = params;
+        const paginationLimit = 50;
         return this.getLatesrFoodsRepository.getLatestFoods({
             page, paginationLimit,
             query: {
                 ...type && { type },
                 ...user_id && { user_id },
-                ...price && { price }
+                ...price && { price },
+                ...place_id && { place_id }
                 // ...(type ? { type } : {}),
                 // ...(location ? { location } : {})
             }

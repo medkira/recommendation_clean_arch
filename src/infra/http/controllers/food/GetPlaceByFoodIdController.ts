@@ -19,7 +19,7 @@ export class GetPlaceByFoodIdController extends BaseController {
     httpRequest: GetPlaceByFoodIdController.Request
   ): Promise<GetPlaceByFoodIdController.Response> {
     const { id } = httpRequest.params!;
-    console.log("this is the id",id)
+    // console.log("this is the id",id)
     const PlaceOrError = await this.getPlaceByFoodIdInterface.execute(id);
     if (PlaceOrError instanceof PlaceNotFoundError) {
       return notFound(PlaceOrError);

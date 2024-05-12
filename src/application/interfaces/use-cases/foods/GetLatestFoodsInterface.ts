@@ -7,6 +7,6 @@ export interface GetLatesFoodsInterface extends UseCase<GetLatesFoodsInterface.R
 }
 
 export namespace GetLatesFoodsInterface {
-    export type Request = { page?: number, type?: foodTypes, is_verified?: boolean, user_id?: string, price: number };
+    export type Request = { paginationLimit?: number, page?: number, type?: foodTypes, is_verified?: boolean, user_id?: string, price: number, place_id: string };
     export type Response = { data: Food[], page: number, total: number, totalPages: number };
 }

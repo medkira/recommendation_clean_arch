@@ -16,7 +16,7 @@ export class CreateFoodController extends BaseController {
     private readonly getPlaceById: GetPlaceByIdInterface,
     private readonly createFood: CreateFoodInterface
   ) {
-    super(createFoodValidation);
+    super();
   }
 
   async execute(

@@ -12,14 +12,15 @@ export class GetLatestFoodsController extends BaseController {
     async execute(
         httpRequest: GetLatestFoodsController.Request
     ): Promise<GetLatestFoodsController.Response> {
-        const { page, type, is_verified, user_id, price } = httpRequest.query!;
+        const { page, type, is_verified, user_id, price, place_id } = httpRequest.query!;
 
         const response = await this.getLatestFoods.execute({
             is_verified,
             page,
             type,
             price,
-            user_id
+            user_id,
+            place_id
         });
 
         return ok(response);

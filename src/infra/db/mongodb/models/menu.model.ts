@@ -11,7 +11,7 @@ const menuSchema = new Schema({
     required: true,
   },
   menuImage: {
-    type: String,
+    type: Array
   },
 });
 
