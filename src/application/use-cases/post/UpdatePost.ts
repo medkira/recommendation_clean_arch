@@ -1,9 +1,9 @@
 import { PostNotFoundError } from "@application/errors/PostNotFoundError";
-import { PostImageProcess } from "@application/interfaces/image-processing/PostImageProcess";
 import { GetPostByIdRepository } from "@application/interfaces/repositories/post/GetPostByIdRepository";
 import { UpdatePostRepository } from "@application/interfaces/repositories/post/UpdatePostRepository";
-import { UploadImage } from "@application/interfaces/upload/UploadImage";
 import { UpdatePostInterface } from "@application/interfaces/use-cases/posts/UpdatePostInterface";
+import { PostImageProcess } from "@application/interfaces/utils/image-processing/PostImageProcess";
+import { UploadImage } from "@application/interfaces/utils/upload/UploadImage";
 import { File } from "@domain/entities/File";
 
 export class UpdatePost implements UpdatePostInterface {
@@ -12,7 +12,7 @@ export class UpdatePost implements UpdatePostInterface {
     private readonly updatePostRepository: UpdatePostRepository,
     private readonly uploadImage: UploadImage,
     private readonly imageProcess: PostImageProcess
-  ) {}
+  ) { }
 
   async execute(
     params: UpdatePostInterface.Request

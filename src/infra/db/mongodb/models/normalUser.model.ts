@@ -9,13 +9,15 @@ const normalUserSchema = new Schema({
     type: String,
     required: true,
   },
-  Firstname: {
+  firstName: {
     type: String,
     trim: true,
+    default: "",
   },
-  Lastname: {
+  lastName: {
     type: String,
     trim: true,
+    default: "",
   },
   favouritePlaces: {
     type: Array<Place>
@@ -42,53 +44,66 @@ const normalUserSchema = new Schema({
   },
   role: {
     type: String,
-    required: true,
+    required: false,
+    default: "",
   },
   jobTitle: {
     type: String,
     required: false,
     trim: true,
     lowercase: true,
+    default: "",
   },
   address: {
     type: String,
     required: false,
-    trim: true,
+    // trim: true,
+    default: "",
   },
 
   profileImage: {
     type: String,
     required: false,
+    default: "",
   },
 
-  mobileNumber: {
+  phoneNumber: {
     type: String,
     required: false,
   },
   age: {
-    type: Number,
+    type: String,
     require: false,
+    default: "",
   },
   gender: {
     type: String,
-    enum: [gender.Male, gender.female],
+    // enum: [gender.Male, gender.female],
+    default: "",
   },
   salary: {
     type: String,
     required: false,
+    default: "",
   },
   parent: {
     type: Boolean,
     require: false,
+    default: "",
   },
   socialStatus: {
     type: String,
     required: false,
+    default: "",
   },
   isEmailVerified: {
     type: Boolean,
     default: false,
   },
+  country: {
+    type: String,
+    default: "",
+  }
 
 });
 

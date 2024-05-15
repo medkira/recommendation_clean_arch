@@ -22,19 +22,19 @@ export class SignUpController extends BaseController {
   }
 
   async execute(httpRequest: SignUpController.Request): Promise<HttpResponse> {
-    const { role, email, password, image = httpRequest.files } = httpRequest.body!;
+    const { email, password, image = httpRequest.files } = httpRequest.body!;
 
 
 
     let idOrError;
-    if (role === UserRole.OWNER) {
-      idOrError = await this.signUpOwner.execute({ ...httpRequest.body, image: httpRequest.files?.profileImage } as SignUpOwnerInterface.Request);
-    } else if (role === UserRole.NORMAL) {
-      idOrError = await this.signUpNormalUser.execute({ ...httpRequest.body, image: httpRequest.files?.profileImage } as SignUpNormalUserInterface.Request);
-    } else {
-      // Handle invalid role scenario acutally no need for this bcs we done it in the validation stagge ;)
-      throw new Error("Invalid user role provided.");
-    }
+    // if (role === UserRole.OWNER) {
+    idOrError = await this.signUpOwner.execute({ ...httpRequest.body, image: httpRequest.files?.profileImage } as SignUpOwnerInterface.Request);
+    // } else if (role === UserRole.NORMAL) {
+    idOrError = await this.signUpNormalUser.execute({ ...httpRequest.body, image: httpRequest.files?.profileImage } as SignUpNormalUserInterface.Request);
+    // } else {
+    //   // Handle invalid role scenario acutally no need for this bcs we done it in the validation stagge ;)
+    //   throw new Error("Invalid user role provided.");
+    // }
 
 
 

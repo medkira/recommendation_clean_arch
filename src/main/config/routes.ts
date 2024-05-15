@@ -27,7 +27,6 @@ export const setupRoutes = (app: Express): void => {
   googleAuthRoutes(router);
   imageContributionRoutes(router);
   userRoutes(router);
-
 };
 
 

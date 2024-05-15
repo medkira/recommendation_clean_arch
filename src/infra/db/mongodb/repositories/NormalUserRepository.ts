@@ -12,13 +12,30 @@ import { GetUsersRepository } from "@application/interfaces/repositories/users/G
 import { paginateModel } from "../helpers/utils/pagination-util";
 import { DeleteUserRepository } from "@application/interfaces/repositories/users/DeletUserRepository";
 import { UpdateUserRoleByIdRepository } from "@application/interfaces/repositories/normalUser/UpdateUserRoleByIdRepository";
+import { UpdateUserInformationByIdRepository } from "@application/interfaces/repositories/users/UpdateUserInformationByIdRepository";
+import { NormalUser } from "@domain/entities/NormalUser";
 
 export class NormalUserRepository implements
     CreateNormalUserRepository, LoadNormalUserByEmailRepository,
     LoadNormalUserByIdRepository, UpdateNormalUserPasswordRepository,
     AddPlaceToFavouriteRepository, GetFavouritePlacesByIdRepository,
     RemovePlaceFromFavouriteRepository, GetUsersRepository,
-    DeleteUserRepository, UpdateUserRoleByIdRepository {
+    DeleteUserRepository, UpdateUserRoleByIdRepository,
+    UpdateUserInformationByIdRepository {
+
+    async UpdateUserInformation(params: UpdateUserInformationByIdRepository.Request): Promise<NormalUser> {
+        const { UserData, userId } = params;
+
+        const rawUpdateUser = await normalUserModel.findOneAndUpdate(
+            stringToObjectId(userId),
+            { ...UserData, updatedAt: new Date() },
+            {
+                new: true,
+            }
+        );
+        return rawUpdateUser && mapDocument(rawUpdateUser);
+
+    }
 
     async updateUserRole(params: UpdateUserRoleByIdRepository.Request): Promise<void> {
         const { id, role } = params;

@@ -18,7 +18,7 @@ export class SignUpNormalUser implements SignUpNormalUser {
         private readonly imageProcess: ProfileImageProcess,
     ) { }
     async execute(userData: SignUpNormalUserInterface.Request): Promise<SignUpNormalUserInterface.Response> {
-        const { email, password, age, address, gender, image, jobTitle, link, name,
+        const { email, password, age, address, gender, image, jobTitle, link, firstName, country, lastName,
             parent, phoneNumber, role, salary, socialStatus, username, zone } = userData;
 
         // console.log("email from sign up user ", email)
@@ -48,15 +48,17 @@ export class SignUpNormalUser implements SignUpNormalUser {
             gender,
             jobTitle,
             link,
-            name,
+            firstName,
             parent,
             phoneNumber,
             role,
             salary,
             socialStatus,
-            username,
             zone,
             image: imageUrl,
+            country,
+            lastName,
+            username,
         });
     }
 }
