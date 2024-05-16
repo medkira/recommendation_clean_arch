@@ -19,6 +19,7 @@ export class UpdateUserInformationById implements UpdateUserInformationByIdInter
         const { UserData, userId } = params;
         let { address, age, email, favouritePlaces, gender, jobTitle, profileImage } = UserData;
         const imageUrls: string[] = [];
+        // console.log(profileImage)
         if (profileImage) {
             const fileImage = profileImage as File[];
             for (let i = 0; i < fileImage.length; i++) {

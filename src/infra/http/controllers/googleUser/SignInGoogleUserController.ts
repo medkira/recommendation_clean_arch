@@ -2,13 +2,13 @@ import { CreateGoogleUserInterface } from "@application/interfaces/use-cases/goo
 import { BaseController } from "../BaseController";
 import { HttpRequest } from "@infra/http/interfaces/http/HttpRequest";
 import { HttpResponse } from "@infra/http/interfaces/http/HttpResponse";
-import { GetGoogleUserByEmailRepository } from "@application/interfaces/repositories/googleUser/GetGoogleUserByEmailRepository";
 import { GetGoogleUserByEmailInterface } from "@application/interfaces/use-cases/googleUser/GetGoogleUserByEmailInterface";
-import { EmailInUseError } from "@application/errors/EmailInUseError";
-import { notFound, ok, unauthorized } from "@infra/http/helpers/https";
+import { ok, unauthorized } from "@infra/http/helpers/https";
 import { UserNotFoundError } from "@application/errors/UserNotFoundError";
 import { UnauthorizedError } from "@application/errors/UnautorizedError";
 import { SignInInterface } from "@application/interfaces/use-cases/authentication/SignInInterface";
+import { SignUpNormalUserInterface } from "@application/interfaces/use-cases/authentication/SignUpNormalUserInterface";
+import { UserRole } from "@domain/entities/User";
 
 
 
@@ -19,7 +19,7 @@ export class SignInGoogleUserController extends BaseController {
         private readonly createGoogleUser: CreateGoogleUserInterface,
         private readonly getGoogleUserByEmail: GetGoogleUserByEmailInterface,
         private readonly signIn: SignInInterface,
-
+        private readonly signUp: SignUpNormalUserInterface
     ) {
         super()
     }
@@ -27,8 +27,8 @@ export class SignInGoogleUserController extends BaseController {
     async execute(httpRequest: SignInGoogleUserController.Request): Promise<SignInGoogleUserController.Response> {
         const { name, email, family_name, picture, email_verified } = httpRequest.body!
 
-
         const user = await this.getGoogleUserByEmail.execute(email);
+
 
         if (user instanceof UserNotFoundError) {
             await this.createGoogleUser.execute({
@@ -37,8 +37,14 @@ export class SignInGoogleUserController extends BaseController {
                 name,
                 picture,
                 email_verified
-            })
-            return ok({ view: 'google-auth/setUserRoleView', token: email });
+            });
+            await this.signUp.execute({ role: UserRole.NORMAL, email: email, password: "", profileImage: picture, username: name } as SignUpNormalUserInterface.Request);
+            const authenticationTokenOrError = await this.signIn.execute({ email, password: "" });
+
+            return ok({
+                authenticationToken: authenticationTokenOrError
+            });
+            // return ok({ view: 'google-auth/setUserRoleView', token: email });
         } else {
             const authenticationTokenOrError = await this.signIn.execute({ email, password: "" });
 

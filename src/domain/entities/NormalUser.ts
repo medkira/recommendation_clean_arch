@@ -3,17 +3,17 @@ import { UserProps, UserRole } from "./User";
 import { File } from "@domain/entities/File";
 
 export type NormalUserProps = UserProps & {
-  gender: boolean;
-  age: string;
-  address: string;
-  zone: string;
-  jobTitle: string;
-  link: string;
-  salary: number;
-  socialStatus: string;
-  parent: boolean;
-  isItOwner: boolean;
-  favouritePlaces: Place[];
+  gender?: boolean;
+  age?: string;
+  address?: string;
+  zone?: string;
+  jobTitle?: string;
+  link?: string;
+  salary?: number;
+  socialStatus?: string;
+  parent?: boolean;
+  isItOwner?: boolean;
+  favouritePlaces?: Place[];
 
 
 };
@@ -31,16 +31,16 @@ export class NormalUser {
   public readonly createdAt: Date;
   public readonly updatedAt: Date;
   public readonly isEmailVerified: boolean;
-  public readonly gender: boolean;
-  public readonly age: string;
-  public readonly zone: string;
-  public readonly address: string;
-  public readonly jobTitle: string;
-  public readonly link: string;
-  public readonly salary: number;
-  public readonly socialStatus: string;
-  public readonly parent: boolean;
-  public readonly favouritePlaces: Place[];
+  public readonly gender?: boolean;
+  public readonly age?: string;
+  public readonly zone?: string;
+  public readonly address?: string;
+  public readonly jobTitle?: string;
+  public readonly link?: string;
+  public readonly salary?: number;
+  public readonly socialStatus?: string;
+  public readonly parent?: boolean;
+  public readonly favouritePlaces?: Place[];
   public readonly country: string;
 
 

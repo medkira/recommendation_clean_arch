@@ -15,7 +15,7 @@ export class UpdateUserInformationByIdCntroller
         private readonly updateUserById: UpdateUserInformationByIdInterface
 
     ) {
-        super(updateUserInforamtionValidation);
+        super();
     }
 
     async execute(

@@ -18,7 +18,7 @@ export class SignUpNormalUser implements SignUpNormalUser {
         private readonly imageProcess: ProfileImageProcess,
     ) { }
     async execute(userData: SignUpNormalUserInterface.Request): Promise<SignUpNormalUserInterface.Response> {
-        const { email, password, age, address, gender, image, jobTitle, link, firstName, country, lastName,
+        const { email, password, age, address, gender, profileImage, jobTitle, link, firstName, country, lastName,
             parent, phoneNumber, role, salary, socialStatus, username, zone } = userData;
 
         // console.log("email from sign up user ", email)
@@ -27,13 +27,13 @@ export class SignUpNormalUser implements SignUpNormalUser {
             return new EmailInUseError()
         }
 
-        const fileImage = image as File[];
+        const fileImage = profileImage as File[];
         let imageUrl = "";
-        if (image instanceof File) {
+        if (profileImage instanceof File) {
             const imageBuffer = await this.imageProcess.ProfileImageProcess(fileImage[0].buffer);
             imageUrl = await this.uploadImage.uploadImage(imageBuffer);
         } else {
-            imageUrl = image as string;
+            imageUrl = profileImage as string;
         }
 
         // console.log("ROLE from sign up user ", role)
@@ -55,10 +55,11 @@ export class SignUpNormalUser implements SignUpNormalUser {
             salary,
             socialStatus,
             zone,
-            image: imageUrl,
+            profileImage: imageUrl,
             country,
             lastName,
             username,
+
         });
     }
 }

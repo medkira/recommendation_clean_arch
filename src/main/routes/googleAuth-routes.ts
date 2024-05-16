@@ -52,7 +52,6 @@ export const multiPageRenderAdapter = (
     } else {
       // res.status(httpResponse.statusCode).json(httpResponse.body);
 
-
       const expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 30);
       // console.log(httpResponse.body)
@@ -93,7 +92,7 @@ const expressRouterAdapterFinsihSetRoleController = async (req: Request, res: Re
     await signUp.execute({ role, email: user.email, password: "", image: user.picture, name: user.name } as SignUpOwnerInterface.Request);
   } else if (role === UserRole.NORMAL) {
     const signUp = makeSignUpNormalUser();
-    await signUp.execute({ role, email: user.email, password: "", image: user.picture, name: user.name } as SignUpNormalUserInterface.Request);
+    await signUp.execute({ role, email: user.email, password: "", profileImage: user.picture, username: user.name } as SignUpNormalUserInterface.Request);
   }
 
   const authToken = await signin.execute({ email: user.email, password: "" });
