@@ -30,6 +30,10 @@ const commentShema = new Schema({
   updatedAt: {
     type: Date,
   },
+  username: {
+    type: String,
+    required: true,
+  }
 });
 
 const CommentModel = mongoose.model("comment", commentShema);

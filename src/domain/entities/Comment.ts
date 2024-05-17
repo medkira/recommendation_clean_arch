@@ -7,6 +7,7 @@ export type CommentProps = {
   likes: number;
   createdAt: Date;
   updatedAt: Date;
+  username: string;
 };
 
 export class Comment {
@@ -25,6 +26,8 @@ export class Comment {
 
   public readonly updatedAt?: Date;
 
+  public readonly username: String;
+
   constructor(props: CommentProps) {
     this.id = props.id;
     this.userId = props.userId;
@@ -34,5 +37,6 @@ export class Comment {
     this.text = props.text;
     this.createdAt = props.createdAt;
     this.updatedAt = props.updatedAt;
+    this.username = props.username;
   }
 }

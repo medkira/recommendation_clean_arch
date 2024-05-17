@@ -19,6 +19,7 @@ export default (router: Router): void => {
   );
   router.get("/posts/:id", expressRouterAdapter(makeGetPostByIdController()));
   router.get("/topPosts", expressRouterAdapter(makeGetTopPostsController()));
+
   router.get(
     "/post/page",
     expressRouterAdapter(makeGetLatestPostsController())

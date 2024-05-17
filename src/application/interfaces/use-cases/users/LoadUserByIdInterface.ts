@@ -11,5 +11,5 @@ export interface LoadUserByIdInterface extends UseCase<LoadUserByIdInterface.Req
 
 export namespace LoadUserByIdInterface {
     export type Request = string;
-    export type Response = Owner | NormalUser | UserNotFoundError;
+    export type Response = NormalUser | UserNotFoundError;
 }
