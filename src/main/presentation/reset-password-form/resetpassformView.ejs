@@ -94,10 +94,36 @@
   }
 </style>
 <body>
-    <form class="form" action="<%= process.env.BASE_URL %>/api/newPassword?token=<%= token %>" method="POST">
+    <form id="passwordForm"   class="form" action="<%= process.env.BASE_URL %>/api/newPassword?token=<%= token %>" method="POST">
     <div class="title">Welcome,<br><span>reset password to continue</span></div>
-    <input type="password" placeholder="Password" name="password" class="input">
-    <input type="password" placeholder="Repeat Password" name="confirmPassword" class="input">
+    <input type="password" required placeholder="Password" name="password" id="passwordInput" class="input">
+    <input type="password" required placeholder="Repeat Password" name="confirmPasswordInput" id="confirmPasswordInput" class="input">
     <button class="button-confirm">Let's go →</button>
   </form>
+
+  <script>
+    const passwordForm = document.getElementById('passwordForm');
+    passwordForm.addEventListener('submit', (event) => {
+      const password = document.getElementById('passwordInput').value;
+      const confirmPassword = document.getElementById('confirmPasswordInput').value;
+
+ 
+      if (password === '' || confirmPassword === '') {
+        alert('Please fill in both password fields');
+        event.preventDefault();
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        event.preventDefault();
+        return;
+      }
+
+
+    });
+</script>
 </body>
+
+
+
