@@ -36,7 +36,7 @@ export class SendEmailAdapter implements SendEmail {
                 console.error(error);
             } else {
                 // ? for test
-                console.log('Email sent successfully!');
+                // console.log('Email sent successfully!');
             }
         });
         return true;

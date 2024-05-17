@@ -41,10 +41,18 @@ export class renderSetNewPasswordController extends BaseController {
         this.resetUserPassword.execute({ id: payloadOrError.userId, password: httpRequest.body!.password })
 
         // ? for test
-        console.log("password changed")
+        // console.log("password changed")
+
         // ? will return from here the page 
 
-        return ok({ view: 'test/home', token });
+        // res.cookie('TokenCookie', authToken, { expires: expirationDate, httpOnly: false, sameSite: "strict", secure: true });
+        // // Redirect to a URL
+        // res.redirect(`${process.env.CLIENT_BASE_URL}/home`);
+
+        // return ok({ view: 'test/home', token });
+
+        return ok({ view: `${process.env.CLIENT_BASE_URL}/` });
+
     }
 
 }

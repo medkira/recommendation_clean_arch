@@ -1,0 +1,40 @@
+import { BaseController } from "@infra/http/controllers/BaseController";
+import { HttpRequest } from "@infra/http/interfaces/http/HttpRequest";
+import { Request, Response } from "express";
+
+export const pageRedirectAdapter = (
+    controller: BaseController,
+) => async (req: Request, res: Response) => {
+
+    const httpRequest: HttpRequest = {
+        body: req.body,
+        params: req.params,
+        query: req.query,
+        headers: req.headers,
+        files: req.files,
+        userId: req.userId,
+        userRole: req.userRole,
+        host: req.get('host'),
+        protocole: req.protocol,
+    }
+
+    const httpResponse = await controller.handle(httpRequest);
+
+
+    if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
+        // console.log(httpRequest.body)
+        // if (httpRequest.body.token) {
+        //     const expirationDate = new Date();
+        //     expirationDate.setDate(expirationDate.getDate() + 30);
+        //     res.cookie('TokenCookie', httpRequest.body.token, { expires: expirationDate, httpOnly: false, sameSite: "strict", secure: true });
+        // }
+        res.redirect(httpResponse.body.view);
+
+    } else {
+        res.status(httpResponse.statusCode).json({
+            error: httpResponse.body?.message,
+        })
+    }
+
+
+}
