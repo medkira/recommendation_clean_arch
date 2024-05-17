@@ -30,8 +30,11 @@ export class CreateRateController extends BaseController {
         const userId = httpRequest.userId!;
 
         const userOrUserNotFoundError = await this.loadUserById.execute(userId);
+        if (userOrUserNotFoundError instanceof UserNotFoundError) {
+            return notFound(userOrUserNotFoundError)
+        }
 
-        const { name } = userOrUserNotFoundError;
+        const { username } = userOrUserNotFoundError;
         // add this check to be abel to see all props or user 
         if (userOrUserNotFoundError instanceof UserNotFoundError) {
             /// suppose to return an error...
@@ -43,7 +46,7 @@ export class CreateRateController extends BaseController {
             return notFound(placeOrError);
         }
 
-        const RateId = await this.createRate.execute({ rate, rated_id, review, rated_name, user_id: userId, user_name: name });
+        const RateId = await this.createRate.execute({ rate, rated_id, review, rated_name, user_id: userId, user_name: username });
 
         return ok({ RateId, message: "Rate created successfully" });
     }
