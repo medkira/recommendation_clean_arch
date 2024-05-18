@@ -45,7 +45,7 @@ export class CreateCommentController extends BaseController {
 
         await this.updatePostTotalComments.execute(postId);
 
-        return ok({ id });
+        return ok({ commentId: id });
     }
 
 }
