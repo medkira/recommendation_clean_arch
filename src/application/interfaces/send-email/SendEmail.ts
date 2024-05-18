@@ -1,5 +1,5 @@
-import { MailOptionsProps } from "@domain/entities/MailOptions";
+// import { MailOptionsProps } from "@domain/entities/MailOptions";
 
-export interface SendEmail {
-  sendEmail(options: MailOptionsProps): Promise<string>;
-}
+// export interface SendEmail {
+//   sendEmail(options: MailOptionsProps): Promise<string>;
+// }

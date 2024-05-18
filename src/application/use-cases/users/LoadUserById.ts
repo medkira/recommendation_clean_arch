@@ -18,13 +18,13 @@ export class LoadUserById implements LoadUserByIdInterface {
 
 
 
-        let user: NormalUser | Owner | null = null;
+        let user: NormalUser | null = null;
 
         user = await this.loadNormalUserByIdRepository.loadUserById(id);
 
-        if (!user) {
-            user = await this.loadOwnerByIdlRepository.loadUserById(id);
-        }
+        // if (!user) {
+        //     user = await this.loadOwnerByIdlRepository.loadUserById(id);
+        // }
 
         if (!user) {
             user = await this.loadGoogleUserByIdRepository.getGoogleUserById(id);
