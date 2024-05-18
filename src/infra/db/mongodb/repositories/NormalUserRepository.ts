@@ -14,6 +14,7 @@ import { DeleteUserRepository } from "@application/interfaces/repositories/users
 import { UpdateUserRoleByIdRepository } from "@application/interfaces/repositories/normalUser/UpdateUserRoleByIdRepository";
 import { UpdateUserInformationByIdRepository } from "@application/interfaces/repositories/users/UpdateUserInformationByIdRepository";
 import { NormalUser } from "@domain/entities/NormalUser";
+import { VerfifyUserEmailByIdRepository } from "@application/interfaces/repositories/users/VerifyUserEmailRepository";
 
 export class NormalUserRepository implements
     CreateNormalUserRepository, LoadNormalUserByEmailRepository,
@@ -21,7 +22,14 @@ export class NormalUserRepository implements
     AddPlaceToFavouriteRepository, GetFavouritePlacesByIdRepository,
     RemovePlaceFromFavouriteRepository, GetUsersRepository,
     DeleteUserRepository, UpdateUserRoleByIdRepository,
-    UpdateUserInformationByIdRepository {
+    UpdateUserInformationByIdRepository, VerfifyUserEmailByIdRepository {
+
+    async verfifyUserEmailById(id: VerfifyUserEmailByIdRepository.Request): Promise<void> {
+        await normalUserModel.findByIdAndUpdate(
+            stringToObjectId(id),
+            { isEmailVerified: true }
+        )
+    }
 
     async UpdateUserInformation(params: UpdateUserInformationByIdRepository.Request): Promise<NormalUser> {
         const { UserData, userId } = params;

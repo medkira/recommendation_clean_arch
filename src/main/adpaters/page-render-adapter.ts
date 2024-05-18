@@ -21,8 +21,8 @@ export const pageRenderAdapter = (
     const httpResponse = await controller.handle(httpRequest);
 
     if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
-        // // ! need to fix this
-        res.render(httpResponse.body.view, { token: httpResponse.body.token, test: "mohamed" });
+
+        res.render(httpResponse.body.view, { token: httpResponse.body.token });
 
     } else {
         res.status(httpResponse.statusCode).json({
