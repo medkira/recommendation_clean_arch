@@ -2,6 +2,7 @@ import { AuthMiddleware } from "@infra/http/middlewares/authentication/AuthMiddl
 import { expressMiddlewareAdaptor } from "@main/adpaters/express-middleware-adapter";
 import { expressRouterAdapter } from "@main/adpaters/express-router-adapter";
 import { multerMiddlewareAdapter } from "@main/adpaters/multer-middleware-adapter";
+import { makeAutoCompletePlaceSearchController } from "@main/factories/controllers/place/auto-complete-place-search/controller-factory";
 import { makeCreatePlaceController } from "@main/factories/controllers/place/create-place/controller-factory";
 import { makeDeletePlaceController } from "@main/factories/controllers/place/delete-place/controller-factory";
 import { makeGetLatestPlacesController } from "@main/factories/controllers/place/get-latest-place/controller-factory";
@@ -41,5 +42,6 @@ export default (router: Router): void => {
 
   router.delete("/place/refuse/:id", authMiddleware, expressRouterAdapter(makeDeletePlaceController()));
 
+  router.get("/place/search/autocomplete", expressRouterAdapter(makeAutoCompletePlaceSearchController()));
 
 };

@@ -8,7 +8,7 @@ export class GetLatesPlaces implements GetLatesPlacesInterface {
     async execute(params: GetLatesPlacesInterface.Request): Promise<GetLatesPlacesInterface.Response> {
         const { page = 1, type, location, is_verified = true, user_id } = params;
         const paginationLimit = 10;
-        return this.getLatesrPlacesRepository.getLatestPlaces({
+        return await this.getLatesrPlacesRepository.getLatestPlaces({
             page, paginationLimit,
             query: {
                 ...type && { type },

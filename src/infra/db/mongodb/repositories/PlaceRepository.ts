@@ -19,6 +19,9 @@ import { Place } from "@domain/entities/Place";
 import { AddImageToPlaceByIdRepository } from "@application/interfaces/repositories/place/AddImageToPlaceRepository";
 import { ValidateAddImageContributionRepository } from "@application/interfaces/repositories/imageContribution/ValidateAddImageContributionRepository";
 import { ValidationPlaceContributionByIdRepository } from "@application/interfaces/repositories/place/ValidationPlaceContributionByIdIRepository";
+import { query } from "express";
+import path from "path";
+import { AutoCompletePlaceSearchRepository } from "@application/interfaces/repositories/place/AutoCompletePlaceSearchRepository";
 export class PlaceRepository
   implements
   CreatePlaceRepository,
@@ -28,7 +31,61 @@ export class PlaceRepository
   DeletePlaceRepository,
   GetLatestPlacesRepository,
   AddImageToPlaceByIdRepository,
-  ValidationPlaceContributionByIdRepository {
+  ValidationPlaceContributionByIdRepository,
+  AutoCompletePlaceSearchRepository {
+  async autoCompletePlaceSearch(params: AutoCompletePlaceSearchRepository.Request): Promise<AutoCompletePlaceSearchRepository.Response> {
+    const rawData = await placeModel.aggregate([
+      {
+        $search: {
+          index: "autocomplete",
+          compound: {
+            should: [
+              {
+                autocomplete: {
+                  query: params.query,
+                  path: "name",
+                  fuzzy: {
+                    maxEdits: 2
+                  },
+                  tokenOrder: "sequential"
+                }
+              },
+              {
+                autocomplete: {
+                  query: params.query,
+                  path: "type",
+                  fuzzy: {
+                    maxEdits: 2
+                  },
+                  tokenOrder: "sequential"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        $project: {
+          name: 1,
+          type: 1,
+          placeImage: 1,
+          _id: 1,
+        }
+      },
+      {
+        $limit: 10
+      }
+    ]);
+    const transformedData = rawData.map((document) => {
+      const { _id: objectId, ...rest } = document;
+      const id = objectIdToString(objectId);
+      return { id, ...rest };
+
+    })
+    // const transformedData = mapCollection(rawData);
+
+    return transformedData;
+  }
 
   async validationPlaceContributionById(id: string): Promise<void> {
     await placeModel.findByIdAndUpdate(
@@ -58,6 +115,7 @@ export class PlaceRepository
       total: rawLatestPlaces.total,
       totalPages: rawLatestPlaces.totalPages
     };
+
   }
 
 
