@@ -36,10 +36,10 @@ export class CreatePostController extends BaseController {
 
     const { username } = userOrUserNotFoundEroor;
 
-    const { title, content, post_type, likes, location, postImage = httpRequest.files?.postImage, } = httpRequest.body!;
+    const { title, content, post_type, likes, rate, location, postImage = httpRequest.files?.postImage, } = httpRequest.body!;
 
 
-    const postId = await this.createPost.execute({ userId, title, content, post_type, postImage, likes, location, user_name: username });
+    const postId = await this.createPost.execute({ userId, title, content, post_type, postImage, likes, rate, location, user_name: username });
 
     return ok({ postId, message: "post created successfully" });
   }

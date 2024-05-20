@@ -46,6 +46,10 @@ const postSchema = new Schema({
   updatedAt: {
     type: Date,
   },
+  rate: {
+    type: Number,
+    required: true,
+  },
 });
 
 const postModel = mongoose.model("post", postSchema);

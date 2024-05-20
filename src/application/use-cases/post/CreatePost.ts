@@ -12,7 +12,7 @@ export class CreatePost implements CreatePostInterface {
   ) { }
 
   async execute(postData: CreatePostInterface.Request): Promise<string> {
-    const { postImage, content, post_type, title, location, userId, user_name } = postData;
+    const { postImage, content, post_type, title, location, userId, user_name, rate } = postData;
     const fileImage = postImage as File[];
     const imageUrls: string[] = [];
 
@@ -33,7 +33,8 @@ export class CreatePost implements CreatePostInterface {
       location,
       likes: 0,
       postImage: imageUrls,
-      user_name
+      user_name,
+      rate
     });
   }
 }

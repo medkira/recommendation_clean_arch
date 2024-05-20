@@ -13,6 +13,8 @@ export type PostProps = {
   post_type: postType;
   location: string;
   totalComments: number;
+  rate: number;
+
 };
 
 export class Post {
@@ -28,6 +30,7 @@ export class Post {
   public readonly post_type: postType;
   public readonly location: string;
   public readonly totalComments: number;
+  public readonly rate: number;
 
   constructor(props: PostProps) {
     this.id = props.id;
@@ -42,6 +45,8 @@ export class Post {
     this.post_type = props.post_type;
     this.location = props.location;
     this.totalComments = props.totalComments;
+    this.rate = props.rate;
+
   }
 }
 
