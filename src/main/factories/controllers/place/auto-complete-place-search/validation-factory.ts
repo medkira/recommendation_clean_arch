@@ -7,6 +7,6 @@ export const autoCompletePlaceSearchValidation = (): ValidationComposite => {
       new RequiredFieldValidation("query"),
 
     ],
-    "body"
+    "query"
   );
 };

@@ -7,7 +7,6 @@ export const objectIdToString = (objectId: ObjectId): string => objectId.toHexSt
 export const stringToObjectId = (string: string): ObjectId => new ObjectId(string);
 
 export const mapDocument = (document: any): any => {
-    console.log({ ...document })
     const { _id: objectId, ...rest } = document._doc;
 
     const id = objectIdToString(objectId);

@@ -16,7 +16,7 @@ export class AutoCompletePlaceSearchController extends BaseController {
     }
 
     async execute(httpRequest: AutoCompletePlaceSearchController.Request): Promise<AutoCompletePlaceSearchController.Response> {
-        const { query } = httpRequest.body!;
+        const { query } = httpRequest.query!;
         const response = await this.autoCompletePlaceSearch.execute({ query });
 
         return ok(response);
@@ -26,7 +26,7 @@ export class AutoCompletePlaceSearchController extends BaseController {
 
 
 export namespace AutoCompletePlaceSearchController {
-    export type Request = HttpRequest<AutoCompletePlaceSearchInterface.Request>;
+    export type Request = HttpRequest<undefined, undefined, AutoCompletePlaceSearchInterface.Request>;
     export type Response = HttpResponse<AutoCompletePlaceSearchInterface.Response>;
 
 }
