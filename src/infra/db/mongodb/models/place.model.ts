@@ -8,34 +8,34 @@ const placeSchema = new Schema({
 
   type: {
     type: String,
-    required: true,
-    enum: [
-      placeTypes.cafe,
-      placeTypes.cafeRestaurant,
-      placeTypes.restaurant,
-      placeTypes.adventure,
-      placeTypes.hotel,
-    ],
+    required: false,
+    // enum: [
+    //   placeTypes.cafe,
+    //   placeTypes.cafeRestaurant,
+    //   placeTypes.restaurant,
+    //   placeTypes.adventure,
+    //   placeTypes.hotel,
+    // ],
     default: placeTypes.restaurant,
   },
 
   name: {
     type: String,
-    required: true,
+    required: false,
   },
   user_id: {
     type: String,
-    required: true,
+    required: false,
   },
 
   location: {
     type: String,
-    required: true,
+    required: false,
   },
 
   description: {
     type: String,
-    required: true,
+    required: false,
   },
 
   url: {
@@ -45,9 +45,16 @@ const placeSchema = new Schema({
   placeImage: {
     type: Array
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  updatedAt: {
+    type: Date,
+  },
   is_verified: {
     type: Boolean,
-    required: true,
+    required: false,
     default: false,
   },
 });

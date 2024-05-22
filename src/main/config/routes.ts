@@ -10,6 +10,7 @@ import rateRoutes from "@main/routes/rate-routes";
 import resetPassRoutes from "@main/routes/reset-password-routes";
 import userRoutes from "@main/routes/user-routes";
 import verifyEmailRoutes from "@main/routes/verify-email-routes";
+import dataScrappingRoutes from "@main/routes/data-scrapping-route";
 import { Express, Router } from "express";
 
 export const setupRoutes = (app: Express): void => {
@@ -28,6 +29,7 @@ export const setupRoutes = (app: Express): void => {
   googleAuthRoutes(router);
   imageContributionRoutes(router);
   userRoutes(router);
+  dataScrappingRoutes(router)
 };
 
 

@@ -21,7 +21,6 @@ export class GetLatestPlacesController extends BaseController {
       location,
       user_id
     });
-
     return ok(response);
   }
 }

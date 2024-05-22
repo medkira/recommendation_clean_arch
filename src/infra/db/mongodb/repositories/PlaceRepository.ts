@@ -133,6 +133,7 @@ export class PlaceRepository
   ): Promise<CreatePlaceRepository.Response> {
     const place = new placeModel({
       ...placeData,
+      createdAt: new Date(),
     });
     const savedPlace = await place.save();
     const placeId = objectIdToString(savedPlace._id);
