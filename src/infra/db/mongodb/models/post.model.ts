@@ -50,6 +50,10 @@ const postSchema = new Schema({
     type: Number,
     required: true,
   },
+  post_type: {
+    type: String,
+
+  }
 });
 
 const postModel = mongoose.model("post", postSchema);
